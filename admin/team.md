@@ -53,6 +53,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/alberto.jpg" alt="Alberto Valencia" width="200" height="250">
 
@@ -70,6 +71,7 @@
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; my Christian faith. I am excited to be working with my team and learning   <br />
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; more about web development.   <br />
 <br />
+#
 
 <img align="left" src="./pictures/chengcheng.jpeg" alt="Chengcheng Zhang" width="200" height="250">
 
@@ -87,6 +89,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/fucheng.jpg" alt="Fucheng Shang" width="200" height="250">
 
@@ -104,6 +107,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/Genevieve.jpg" alt="Genevieve Dietz" width="200" height="250">
 
@@ -121,6 +125,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/me.jpg" alt="Jack Multani" width="200" height="250">
 
@@ -138,6 +143,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/ruoqian.jpg" alt="Ruoqian Huang" width="200" height="250">
 
@@ -155,6 +161,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/samhita.png" alt="Samhita Kadali" width="200" height="250">
 
@@ -172,6 +179,7 @@
 <br />
 <br />
 <br />
+#
 
 <img align="left" src="./pictures/ziyan.jpg" alt="Ziyan Zhu" width="200" height="250">
 
