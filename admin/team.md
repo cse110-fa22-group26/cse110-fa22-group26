@@ -66,7 +66,7 @@
 &nbsp; &nbsp; **Bio:** Hello, my name is Alberto Valencia. I am a third-year, majoring in  <br /> 
 &nbsp; &nbsp; Mathematics-Computer Science. In my free time, I enjoy being active whether   <br />
 &nbsp; &nbsp; that be a sport or hiking. I also enjoy attending church and practicing my   <br />
-&nbsp; &nbsp; my Christian faith. I am excited to be working with my team and learning   <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; my Christian faith. I am excited to be working with my team and learning   <br />
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; more about web development.   <br />
 <br />
 
