@@ -93,7 +93,7 @@
 \
 &nbsp; &nbsp; **Team Role**: \
 \
-&nbsp; &nbsp; **Major:** Computer Engineering\
+&nbsp; &nbsp; **Major:** Computer Science\
 \
 &nbsp; &nbsp; **Social(s):** [GitHub](https://github.com/shangfucheng)\
 \
