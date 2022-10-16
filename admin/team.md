@@ -151,7 +151,7 @@
 \
 &nbsp; &nbsp; **Team Role**: \
 \
-&nbsp; &nbsp; **Major:** \
+&nbsp; &nbsp; **Major:** Mathematics-Computer Science\
 \
 &nbsp; &nbsp; **Social(s):** [GitHub](https://github.com/RuoqianHuang) \
 \
