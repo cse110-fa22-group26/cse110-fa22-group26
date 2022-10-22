@@ -23,10 +23,10 @@ Oct 20th, Thursday 8:30 p.m. to 9:30 p.m. Zoom
 - Go over the ideas in mind map and give feedbacks
 
 **Roles Assigned**
-- meeting minutes: Chengcheng Zhang
+- meeting minutes: Chengcheng
 - problem/constraints section: Samhita
-- solution section: Fucheng & Ziyan
-- rabbit holes section: Chengcheng
+- solution section: Alberto & Jack
+- rabbit holes section: Fucheng & Ziyan
 - limitations section: Genevieve and Ruoqian
 
 **To-do**
