@@ -10,7 +10,7 @@ Code cowboys
 Brainstorm
 
 **Attendence:**
-(7/10) Weiwen Dong, Sepehr Heravi, Fucheng Shang, Genevieve Dietz, Ruoqian Huang, Ziyan Zhu, Chengcheng Zhang
+(10/10) Alberto Valencia, Chengcheng Zhang, Fucheng Shang, Genevieve Dietz, Jack Multani, Ruoqian Huang, Samhita Kadali, Sepehr Heravi, Weiwen Dong, Ziyan Zhu
 
 **Time & Place:**
 Oct 20th, Thursday 8:30 p.m. to 9:30 p.m. Zoom
