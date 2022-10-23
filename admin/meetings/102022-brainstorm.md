@@ -13,14 +13,14 @@ Brainstorm
 (10/10) Alberto Valencia, Chengcheng Zhang, Fucheng Shang, Genevieve Dietz, Jack Multani, Ruoqian Huang, Samhita Kadali, Sepehr Heravi, Weiwen Dong, Ziyan Zhu
 
 **Time & Place:**
-Oct 20th, Thursday 8:30 p.m. to 9:30 p.m. Zoom
+Oct 20th, Thursday 8:30 p.m. to 10:30 p.m. Zoom
 
 **Agenda**
-- Assign work to each member for pitch statement(problem/constraints, solution, rabbit holes, and limitations)
 - Meeting & Attendance logistics 
 - Pick the Meeting recorder
 - Brainstorm and discuss ideas for the project
 - Go over the ideas in mind map and give feedbacks
+- Assign work to each member for pitch statement(problem/constraints, solution, rabbit holes, and limitations)
 
 **Roles Assigned**
 - meeting minutes: Chengcheng
