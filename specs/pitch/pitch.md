@@ -28,6 +28,35 @@ Users will most likely be motivated by a need to stay on top of their tasks - a 
 The team only has 5 weeks to complete this, which significantly constrains the solution - this will affect both quality and the number of features that can be included.
 
 ## Solution
-![UI design](../brainstorm/ui-design.png)
-![System Diagram](../brainstorm/systemDiagram-1.drawio.png)
+UI Design:
 
+![UI design]()
+
+System Diagram: 
+
+![System Diagram]()
+
+## Risk and Rabbit Holes
+1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential dealay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress.
+​
+2. While design the project, it can not have complicated or too many features since there are limited time to work on it.
+​
+3. Weekly meetings are essential, lack of meetings or lack of participation can also cause delays. 
+​
+4. Improper task assignment may lead to unefficient work.
+​
+5. Unclear design or insufficient plan detail can also make progress slow.
+​
+6. Procrastination is a significant factor in low project completion. Start late or rush through the work will leads to bad product.
+
+## Things to avoid / Limitations
+
+1. ability to share/post to-do lists
+2. calender set-up
+3. implementing deadlines
+4. focusing too much on how the web app looks
+5. making the web app secure
+6. too many features
+7. poor navigation
+8. unclear/confusing user interface
+9. too many steps or instructions
