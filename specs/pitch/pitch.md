@@ -28,5 +28,6 @@ Users will most likely be motivated by a need to stay on top of their tasks - a 
 The team only has 5 weeks to complete this, which significantly constrains the solution - this will affect both quality and the number of features that can be included.
 
 ## Solution
-![ UI design ](/specs/brainstorm/ui-design.png)
+![UI design](../brainstorm/ui-design.png)
+![System Diagram](../brainstorm/systemDiagram-1.drawio.png)
 
