@@ -30,11 +30,11 @@ The team only has 5 weeks to complete this, which significantly constrains the s
 ## Solution
 UI Design:
 
-![UI design]()
+![UI design](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/ui-design.png?raw=true)
 
 System Diagram: 
 
-![System Diagram]()
+![System Diagram](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/systemDiagram-1.drawio.png?raw=true)
 
 ## Risk and Rabbit Holes
 1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential dealay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress.
