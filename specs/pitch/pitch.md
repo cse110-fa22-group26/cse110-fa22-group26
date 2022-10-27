@@ -37,7 +37,7 @@ System Diagram:
 ![System Diagram]()
 
 ## Risk and Rabbit Holes
-1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential dealay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress.
+1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential dealay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress. 
 ​
 2. While design the project, it can not have complicated or too many features since there are limited time to work on it.
 ​
@@ -48,6 +48,22 @@ System Diagram:
 5. Unclear design or insufficient plan detail can also make progress slow.
 ​
 6. Procrastination is a significant factor in low project completion. Start late or rush through the work will leads to bad product.
+​
+7. If no plugin allowed, then we need to build calender selection with pure javascript, and we need to handle invalid date selection by limits the range of selection.
+​
+8. Since we are using local based database, we may lost all the data if the machine broken, so we need to backup regularly.
+​
+9. if two user are sign up account with same user name at the same time, may cause conflicts, so we need to set random dealy when sign up new account.
+​
+10. We need to limits user input with valid characters, otherwise something may crash.
+​
+11. Everytime user modify their to-do list, we need to update the database, and there might be some latency on either user end or local database, and we may need to delay app close time to make sure everything is saved.
+​
+12. We will not develop the users interaction or social features for MVP due to the limited time.
+​
+13. Developing a sophisticated database to store and query the user data may take extra time. We will probably consider to limit the number of user, or the number of task per day. 
+​
+14. We restrict the task to be daily or weekly task for MVP.
 
 ## Things to avoid / Limitations
 
