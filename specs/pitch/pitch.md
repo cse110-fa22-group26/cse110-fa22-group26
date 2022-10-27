@@ -31,13 +31,16 @@ The team only has 5 weeks to complete this, which significantly constrains the s
 UI Design:
 
 ![UI design](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/ui-design.png?raw=true)
+*We are simplifying project so the non-official updated version would be something looks like this:*
+![UI design](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/UI%20-%20for%20simplified%20version.jpeg?raw=true)
 
 System Diagram: 
 
 ![System Diagram](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/systemDiagram-1.drawio.png?raw=true)
 
 ## Risk and Rabbit Holes
-1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential dealay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress. 
+
+1. Communication in the group project is very crucial, report progress and obstacles on time can avoid potential delay. If one member stuck at some point and did not report on time, then it could slow donw the entire progress.
 ​
 2. While design the project, it can not have complicated or too many features since there are limited time to work on it.
 ​
@@ -64,6 +67,7 @@ System Diagram:
 13. Developing a sophisticated database to store and query the user data may take extra time. We will probably consider to limit the number of user, or the number of task per day. 
 ​
 14. We restrict the task to be daily or weekly task for MVP.
+
 
 ## Things to avoid / Limitations
 
