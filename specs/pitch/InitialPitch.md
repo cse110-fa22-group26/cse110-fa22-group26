@@ -27,46 +27,16 @@ Users will most likely be motivated by a need to stay on top of their tasks - a 
 ## Time
 The team only has 5 weeks to complete this, which significantly constrains the solution - this will affect both quality and the number of features that can be included.
 
----
-
-## Problem
-Most to-do list apps are just a list of tasks, sometimes ordered by date, but usually just a big list. Users may be able to separate tasks by categorizing them into different lists, but they are often not separated by week, or even month. These apps can be overwhelming - with the ability to plan tasks weeks or months into the future. However, to-do lists were originally used with the intent of jotting down quick tasks to be completed in a short span of time.
-
-
-## Constraints:
-
--  Must be a local-first web application that has CRUD operation.
-- No framework and firebase allowed
-- Focus on HTML, CSS, JavaScript
-- Only have 5 weeks to complete
-
-
 ## Solution
+UI Design:
 
- - Our objective is to create a web-based to-do list app with a weekly view, short enough so that users do not get overwhelmed, but enough to stay focused on future tasks.
-- Users can categorize and mark tasks as completed and/or delete the tasks from the list. The application should create a weekly list of tasks, where they user can view their plans, check off completed tasks, update their schedule when plans have changed, and delete certain tasks for whatever reasons.
-- After log in, they will land on their planner/page to see their todo list and add tasks to each day of the week and modify their tasks
- 
----
-## App Diagram
-<br/>
+![UI design](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/ui-design.png?raw=true)
+*We are simplifying project so the non-official updated version would be something looks like this:*
+![UI design](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/UI%20-%20for%20simplified%20version.jpeg?raw=true)
 
-![diagram](../brainstorm/diagrams/updatedDiagram.png)
+System Diagram: 
 
-<br/>
-
-## UI Design
-
-![image1](../interface/wireframes/login2.png)
-![image2](../interface/wireframes/login.png)
-![image3](../interface/wireframes/signup.png)
-![image4](../interface/wireframes/empty.png)
-![image5](../interface/wireframes/planner.png)
-![image6](../interface/wireframes/taskadd.png)
-![image7](../interface/wireframes/add.png)
-![image8](../interface/wireframes/delete.png)
-
----
+![System Diagram](https://github.com/cse110-fa22-group26/cse110-fa22-group26/blob/main/specs/brainstorm/systemDiagram-1.drawio.png?raw=true)
 
 ## Risk and Rabbit Holes
 
@@ -84,7 +54,7 @@ Most to-do list apps are just a list of tasks, sometimes ordered by date, but us
 ​
 7. Developing a sophisticated database to store and query the user data may take extra time. We will probably consider to limit the details user can add to task, number of user, or the number of task per day.
 
----
+
 
 ## Things to avoid / Limitations
 
