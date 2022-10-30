@@ -106,5 +106,7 @@ Users will most likely be motivated by a need to stay on top of their tasks - a 
 15. user predictability (the app suggesting tasks to add to to-do list)
 16. celebration (ex: confetti) when the user finishes a task (assuming users can check off tasks)
 17. autocorrection on text
-18. user's ability to set priority amongst tasks
+18. **user's ability to set priority amongst tasks (Tags for importance)**
 19. user's ability to create folders of different to-do lists
+20. When a week past, create blank weekly planner & allow user to check tasks in previous week
+21. **Tags to specific type of task / theme for weekly planner**
