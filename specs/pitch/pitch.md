@@ -87,7 +87,7 @@ Users will most likely be motivated by a need to stay on top of their tasks - a 
 
 ---
 
-## Things to avoid / Limitations / Simplfications
+## Things to avoid / Limitations /simplification 
 
 1. ability to share/post to-do lists on social media
 2. calender set-up
