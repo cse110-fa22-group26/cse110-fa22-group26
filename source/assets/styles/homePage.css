@@ -12,8 +12,7 @@
 /*.list{
 
 }*/
-/*Not sure if we use camel only for Javascript or for all documents. 
-But using '-' is a common practice for css code*/
+
 .task-board{
     display: none;
     overflow: hidden;
