@@ -1,61 +1,85 @@
+@font-face {
+  /* imports Lato as page's font */
+  font-family: "BIZUDPGothic";
+  src: url("/source/assets/fonts/BIZUDPGothic-Bold.ttf"),
+    url("/source/assets/fonts/BIZUDPGothic-Regular.ttf") format("truetype");
+}
+
+* {
+  /* sets all tags in webpage to use Lato as font */
+  font-family: "BIZUDPGothic", sans-serif;
+}
+
 body {
-    background-color: rgb(255, 245, 190);
-    text-align: center;
+  background-color: rgb(255, 245, 190);
+  display: flex;
+  justify-content: center;
 }
 
-#mainEle{
-    display:grid;
-    grid-template-columns: 1fr;
-    grid-row: 5;
+#mainEle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  padding: 50px;
+  width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-
-#usernameTxt, #passwordTxt{
-    background-color: rgb(234, 231, 231);
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
 }
 
-/*
-#welcomeHeading, #welcomeMessage{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    text-align: center;
+label {
+  color: #03324a;
+  font-size: 12px;
 }
 
-#usernameTxt, #passwordTxt{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;    
-}           
-#signUpMessage{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 3;
-    grid-row-end: 4; 
+#username,
+#password {
+  background-color: #dbdbb8;
+  margin: 6px 0px 5px;
+  width: 200px;
+  height: 35px;
+  border-style: none;
+  border-radius: 5px;
+  padding: 0px 10px;
+}
+#password:focus,
+#username:focus {
+  outline: none;
+
+  box-shadow: 0 0 5px;
 }
 
-#submitButton{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 4;
-    grid-row-end: 5; 
-}
-*/
-
-h1, h2{
-    color: #03324A;
+#welcomeHeading {
+  color: #03324a;
 }
 
-#submitButton{
-    color: hotpink;
+#welcomeMessage {
+  color: #03324a;
+  font-size: 20px;
 }
 
-@font-face { /* imports Lato as page's font */
-    font-family: "myFont";
-    src: url("/BIZ_UDGothic/BIZUDGothic-Bold.ttf");
-  }
-  * { /* sets all tags in webpage to use Lato as font */
-    font-family: "myFont";
-  }
+.login-button {
+  background-color: #03324a;
+  margin: 30px 0 10px;
+  color: #eae2b7;
+  width: 90px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+#signUpMessage {
+  color: #03324a;
+  font-size: 12px;
+}
+
+p > a {
+  color: rgb(57, 102, 186);
+  text-decoration: none;
+}
