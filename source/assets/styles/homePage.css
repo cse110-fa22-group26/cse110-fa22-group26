@@ -1,0 +1,27 @@
+/*General Styles to entire webpage*/
+*{
+    /*feel free to change based on your design*/
+    font-family: 'Playfair Display', serif;
+}
+/*feel free to change based on your design*/
+#board{
+    width: 80%;
+    margin: auto;
+}
+
+/*.list{
+
+}*/
+
+.task-board{
+    display: none;
+    overflow: hidden;
+}
+
+/*.task{
+
+}*/
+
+.collapsible{
+    width:100%;
+}
