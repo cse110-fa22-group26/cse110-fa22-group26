@@ -72,6 +72,7 @@ label {
   width: 90px;
   height: 30px;
   border-radius: 10px;
+  border-color: #03324a;
 }
 
 #signUpMessage {
