@@ -1,8 +1,29 @@
-/*General Styles to entire webpage*/
-*{
-    /*feel free to change based on your design*/
-    font-family: 'Playfair Display', serif;
+@font-face {
+  /* imports Lato as page's font */
+  font-family: "BIZUDPGothic";
+  src: url("/source/assets/fonts/BIZUDPGothic-Bold.ttf"),
+    url("/source/assets/fonts/BIZUDPGothic-Regular.ttf") format("truetype");
 }
+
+* {
+  /* sets all tags in webpage to use Lato as font */
+  font-family: "BIZUDPGothic", sans-serif;
+}
+
+.top-nav{
+    margin: auto;
+    width: 98%;
+}
+/*align text to the right*/
+.right{
+    float: right;
+}
+/*align title to center*/
+#title{
+    text-align: center;
+}
+
+
 /*feel free to change based on your design*/
 #board{
     width: 80%;
@@ -14,14 +35,28 @@
 }*/
 
 .task-board{
-    display: none;
     overflow: hidden;
+}
+
+/*style for collapsible control elements*/
+.collapsible{
+    width:100%;
+    font-size: larger;
+}
+
+/*Implement Collapsible function with two state*/
+/*task list is shrinked, user can't view exact task*/
+.shrink{
+    display: none;
+}
+
+/*task list expands, user can view exact task*/
+.expand{
+    display:block; 
 }
 
 /*.task{
 
 }*/
 
-.collapsible{
-    width:100%;
-}
+
