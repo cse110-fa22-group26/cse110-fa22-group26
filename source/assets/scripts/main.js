@@ -33,6 +33,20 @@ function addCollapsibleControls(){
             }
         });
     });
+
+    // add new task to each week days
+    let addButton = document.getElementById("addButtonMonday");
+    addButton.addEventListener('click', createNewTask);
+    // function to create new task.
+    function createNewTask(){
+       let newTask = document.createElement('div');
+       newTask.innerHTML += `
+       <input type="checkbox">
+       <input type="text" name="taskName" id="" class="input">
+       <button type="submit">Confirm</button>
+       `
+       document.getElementById("Monday").appendChild(newTask);
+     }
 }
 
 /**
