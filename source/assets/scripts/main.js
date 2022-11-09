@@ -2,7 +2,7 @@
 
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
-
+var mondayTaskId = 0;
 // Starts the program, all function calls trace back here
 function init() {
     // add collapsible function to list titles
@@ -37,17 +37,26 @@ function addCollapsibleControls(){
     // add new task to each week days
     let addButton = document.getElementById("addButtonMonday");
     addButton.addEventListener('click', createNewTask);
+
     // function to create new task.
     function createNewTask(){
        let newTask = document.createElement('div');
+       newTask.id = mondayTaskId;
        newTask.innerHTML += `
        <input type="checkbox">
-       <input type="text" name="taskName" id="" class="input">
-       <button type="submit">Confirm</button>
+       <input type="text" name="taskName" id="mondayInput${mondayTaskId}" class="input" >
+       <i id="${mondayTaskId}" onClick="deleteTask(this)" class="fa fa-trash icon"></i>
+       <i id="${mondayTaskId}" onClick="editTask(this)" class="fas fa-edit icon"></i>
+       <button onClick="confirmButton(this)" id=${mondayTaskId} type="submit">Confirm</button>
        `
        document.getElementById("Monday").appendChild(newTask);
+       mondayTaskId += 1;
      }
+
+
+    
 }
+
 
 /**
  * This is for your reference to write method header of functions
