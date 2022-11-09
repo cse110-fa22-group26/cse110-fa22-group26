@@ -34,16 +34,6 @@
             <div class="list">
                 <button type="button" class="collapsible">Monday</button>
                 <div id="Monday" class="task-board shrink">
-                    <div id="task">
-                        <input type="checkbox">
-                        <span>Each Lunch</span>
-                        <button type="submit">Confirm</button>
-                    </div>
-                    <div id="task">
-                        <input type="checkbox">
-                        <input type="text" name="taskName" id="Monday2" class="input">
-                        <button type="submit">Confirm</button>
-                    </div>
                     <script>
                         function deleteTask(t){
                             let id = t.id;
@@ -63,8 +53,9 @@
                             inputRef.disabled = true;
                         }
                     </script>
+                    <button id="addButtonMonday"><img src="assets/icons/add.png" alt="addTask"></button>
+
                 </div>
-                <button id="addButtonMonday"><img src="assets/icons/add.png" alt="addTask"></button>
             </div>
         </div>
     </main>
