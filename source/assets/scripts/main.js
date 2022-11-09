@@ -7,6 +7,7 @@ var mondayTaskId = 0;
 function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
+    addTasks();
 }
 /**
  * Add collapsible controls to the element with collapsible class.
@@ -34,6 +35,9 @@ function addCollapsibleControls(){
         });
     });
 
+}
+
+function addTasks(){
     // add new task to each week days
     let addButton = document.getElementById("addButtonMonday");
     addButton.addEventListener('click', createNewTask);
@@ -49,15 +53,10 @@ function addCollapsibleControls(){
        <i id="${mondayTaskId}" onClick="editTask(this)" class="fas fa-edit icon"></i>
        <button onClick="confirmButton(this)" id=${mondayTaskId} type="submit">Confirm</button>
        `
-       document.getElementById("Monday").appendChild(newTask);
+       addButton.parentNode.insertBefore(newTask,addButton);
        mondayTaskId += 1;
      }
-
-
-    
 }
-
-
 /**
  * This is for your reference to write method header of functions
  * @param {Array<Object>} recipes An array of recipes
