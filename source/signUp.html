@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="assets/styles/signUpStyling.css">
-    <title></title>
+    <link rel="stylesheet" href="assets/styles/signUp.css">
+    <title>Sign Up Page</title>
   </head>
   <body>
     <main id="mainEle">
-        <h1 id="signUpHeading">Sign Up</h1> 
+      <h1 id="signUpHeading">Sign Up</h1>
+      <h2 id="signUpMessage">Create a username and password</h2>
+      <div class="signup-form">
         <form>
-            <label for="usernameText">Username: </label>
-            <input type="text" id="usernameTxt"/>
-            <br></br>
-            <label for="passwordTxt">Password: </label>
-            <input type="text" id="passwordTxt"/>
-            <br></br>
-            <label for="confirmPasswordTxt">Confirm Password: </label>
-            <input type="text" id="confirmPasswordTxt"/>
+          <label for="username">Username</label><br />
+          <input type="text" name="username" id="username" />
+          <br /><br />
+          <label for="password">Password</label><br />
+          <input type="password" name="password" id="password" />
+          <br /><br />
+          <label for="password">Confirm Password</label><br />
+          <input type="password" name="confirmPassword" id="confirmPassword" />
         </form>
-    </main> 
-    <button id="submitButton">Sign Up</button>
+        <button class="signUp-button">Create</button>
+      </div>
+    </main>
   </body>
 </html>
