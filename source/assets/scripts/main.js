@@ -36,8 +36,3 @@ function addCollapsibleControls(){
 
 }
 
-/**
- * This is for your reference to write method header of functions
- * @param {Array<Object>} recipes An array of recipes
- * @return {Array<Object>}  An array of recipes found in localStorage
- */
