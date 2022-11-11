@@ -89,6 +89,12 @@ function addTasks(){
     for(const [key,value] of dayToTask){
         document.getElementById(key).addEventListener('click', function(){createNewTask(value,key.substring(9,key.length))}, false);
     }
+    
+    /**
+     * EventListener function to add new task everytime click add button.
+     * @param string taskCount and dayOfWeek
+     * @return new task div block in week days.
+     */
     function createNewTask(taskCount, dayOfWeek){
         let addButton = document.getElementById("addButton"+dayOfWeek);
         console.log(dayOfWeek);
@@ -103,7 +109,6 @@ function addTasks(){
         `
         addButton.parentNode.insertBefore(newTask,addButton);
         dayTaskCount.set(taskCount, dayTaskCount.get(taskCount) + 1);
-        // console.log(dayTaskCount.get(taskCount))
       }
 }
 
