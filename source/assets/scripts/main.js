@@ -50,6 +50,7 @@ function addTasks(){
     function createNewTask(){
        let newTask = document.createElement('div');
        newTask.id = mondayTaskId;
+       newTask.id = mondayTaskId;
        newTask.innerHTML += `
        <input type="checkbox">
        <input type="text" name="taskName" id="mondayInput${mondayTaskId}" class="input" >
