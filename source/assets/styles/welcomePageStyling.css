@@ -68,13 +68,26 @@
   .login-button {
     background-color: #03324a;
     margin: 30px 0 10px;
+    margin-left: 30%;
     color: #eae2b7;
     width: 90px;
     height: 30px;
     border-radius: 10px;
     border-color: #03324a;
   }
-  
+
+  .login-button:active{
+    transform: scale(0.98);
+    background-color: rgb(57, 102, 186);
+  }
+
+  #warningMessage{
+    font-size: 0.5rem;
+    color: red;
+    padding: 0%;
+    margin: 0%;
+  }
+
   #signUpMessage {
     color: #03324a;
     font-size: 12px;

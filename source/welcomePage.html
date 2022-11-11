@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="assets/styles/welcomePageStyling.css">
+    <script src="assets/scripts/login.js" type="module"></script>
     <title>Welcome Page</title>
   </head>
   <body>
@@ -11,12 +12,13 @@
       <div class="signup-form">
         <form>
           <label for="username">Username</label><br />
-          <input type="text" name="username" id="username" />
+          <input required type="text" name="username" id="username" />
           <br /><br />
           <label for="password">Password</label><br />
-          <input type="password" name="password" id="password" />
+          <input required type="password" name="password" id="password" /><br />
+          <p id="warningMessage"></p>
+          <button type="submit" class="login-button">Log in</button>
         </form>
-        <button class="login-button">Login</button>
         <p id="signUpMessage">
           Don't have an account? <a href="signUp.html">Sign up</a>
         </p>
