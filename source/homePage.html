@@ -40,21 +40,24 @@
                             let taskDiv = document.getElementById(id);
                             taskDiv.remove();
                         }
-                        function editTask(t){
+                        function editTask(t,){
                             let id = t.id;
                             let input = document.getElementById("mondayInput"+id);
-                            let inputRef = document.getElementById("mondayInput"+id)
+                            let inputRef = document.getElementById("mondayInput"+id);
                             inputRef.disabled = false;
+                            let confirmBut = document.getElementsByClassName("mondayConfirm"+id);
+                            console.log(confirmBut[0]);
+                            confirmBut.disabled = false;
                         }
                         function confirmButton(t){
                             let id = t.id;
-                            let inputRef = document.getElementById("mondayInput"+id)
-                            t.remove();
+                            let inputRef = document.getElementById("mondayInput"+id);
+                            // t.remove();
+                            t.disabled = true;
                             inputRef.disabled = true;
                         }
                     </script>
                     <button id="addButtonMonday"><img src="assets/icons/add.png" alt="addTask"></button>
-
                 </div>
             </div>
         </div>

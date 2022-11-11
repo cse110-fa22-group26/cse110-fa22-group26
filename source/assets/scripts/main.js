@@ -36,7 +36,11 @@ function addCollapsibleControls(){
     });
 
 }
-
+/**
+ * add new tasks
+ * @param None
+ * @return new div block in week days.
+ */
 function addTasks(){
     // add new task to each week days
     let addButton = document.getElementById("addButtonMonday");
