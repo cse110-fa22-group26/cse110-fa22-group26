@@ -31,33 +31,54 @@
     <main>
         <!--You may use this to test and write styles for task, list, and board of task lists-->
         <div id="board">
-            <div class="list">
+            <div id="weekdays" class="list">
                 <button type="button" class="collapsible">Monday</button>
                 <div id="Monday" class="task-board shrink">
-                    <script>
-                        function deleteTask(t){
-                            let id = t.id;
-                            let taskDiv = document.getElementById(id);
-                            taskDiv.remove();
-                        }
-                        function editTask(t,){
-                            let id = t.id;
-                            let input = document.getElementById("mondayInput"+id);
-                            let inputRef = document.getElementById("mondayInput"+id);
-                            inputRef.disabled = false;
-                            let confirmBut = document.getElementsByClassName("mondayConfirm"+id);
-                            console.log(confirmBut[0]);
-                            confirmBut.disabled = false;
-                        }
-                        function confirmButton(t){
-                            let id = t.id;
-                            let inputRef = document.getElementById("mondayInput"+id);
-                            // t.remove();
-                            t.disabled = true;
-                            inputRef.disabled = true;
-                        }
-                    </script>
+                    <!--script for delete edit and confirm button-->
+                    <script id="mFunc"></script>
                     <button id="addButtonMonday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Tuesday</button>
+                <div id="Tuesday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="tuFunc"></script>
+                    <button id="addButtonTuesday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Wednesday</button>
+                <div id="Wednesday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="wFunc"></script>
+                    <button id="addButtonWednesday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Thursday</button>
+                <div id="Thursday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="thurFunc"></script>
+                    <button id="addButtonThursday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Friday</button>
+                <div id="Friday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="friFunc"></script>
+                    <button id="addButtonFriday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Saturday</button>
+                <div id="Saturday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="satFunc"></script>
+                    <button id="addButtonSaturday"><img src="assets/icons/add.png" alt="addTask"></button>
+                </div>
+
+                <button type="button" class="collapsible">Sunday</button>
+                <div id="Sunday" class="task-board shrink">
+                    <!--script for delete edit and confirm button-->
+                    <script id="sunFunc"></script>
+                    <button id="addButtonSunday"><img src="assets/icons/add.png" alt="addTask"></button>
                 </div>
             </div>
         </div>
