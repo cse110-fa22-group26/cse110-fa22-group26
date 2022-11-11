@@ -34,38 +34,18 @@
             <div class="list">
                 <button type="button" class="collapsible">Monday</button>
                 <div id="Monday" class="task-board shrink">
-                    <div id="task">
+                    <div class="task">
                         <input type="checkbox">
                         <span>Each Lunch</span>
                         <button type="submit">Confirm</button>
                     </div>
-                    <div id="task">
+                    <div class="task">
                         <input type="checkbox">
                         <input type="text" name="taskName" id="Monday2" class="input">
                         <button type="submit">Confirm</button>
                     </div>
-                    <script>
-                        function deleteTask(t){
-                            let id = t.id;
-                            let taskDiv = document.getElementById(id);
-                            taskDiv.remove();
-                        }
-                        function editTask(t){
-                            let id = t.id;
-                            let input = document.getElementById("mondayInput"+id);
-                            let inputRef = document.getElementById("mondayInput"+id)
-                            inputRef.disabled = false;
-                        }
-                        function confirmButton(t){
-                            let id = t.id;
-                            let inputRef = document.getElementById("mondayInput"+id)
-                            t.remove();
-                            inputRef.disabled = true;
-                        }
-                    </script>
-                    <button id="addButtonMonday"><img src="assets/icons/add.png" alt="addTask"></button>
+                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
                 </div>
-                
             </div>
         </div>
     </main>
