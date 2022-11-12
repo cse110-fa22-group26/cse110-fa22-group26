@@ -76,7 +76,7 @@ input[type=checkbox] {
 }
 
 input[type=text] {
-    background: #f5f0f0;
+    background: #f4ecec;
     width: 40%;
     padding: 10px 10px;
     margin: 8px;
@@ -107,6 +107,54 @@ h1 {
 }
 
 #addButtonMonday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonTuesday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonWednesday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonThursday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonFriday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonSaturday {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: transparent;
+    border: solid;
+}
+
+#addButtonSunday {
     width: 46px;
     height: 46px;
     border-radius:50%;
