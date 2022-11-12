@@ -7,30 +7,33 @@ function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
     addTasks();
-    let taskFunc = document.getElementById("mFunc");
-    taskFunc.innerHTML+=`
-    function deleteTask(t){
-        let day = t.parentNode;
-        day.remove();
-    }
-    function editTask(t){
-        let day = t.parentNode;
-        // inputRef[0] is checkbox, inputRef[1] is input text box.
-        let inputRef = day.getElementsByTagName('input')[1];
-        inputRef.disabled = false;
-        let confirmBut = day.getElementsByTagName('button')[0];
-        confirmBut.disabled = false;
-    }
-    function confirmButton(t){
-        let day =t.parentNode;
-        // inputRef[0] is checkbox, inputRef[1] is input text box.
-        let inputRef = day.getElementsByTagName("input")[1];
-        // t.remove();
-        t.disabled = true;
-        inputRef.disabled = true;
-    }
-    `
 }
+
+// deleteBtn function call that remove the task
+window.deleteTask = function(t){
+    t.parentNode.remove();
+}
+
+// edit button functino call that edit input text
+window.editTask = function(t){
+    let day = t.parentNode;
+    // inputRef[0] is checkbox, inputRef[1] is input text box.
+    let inputRef = day.getElementsByTagName('input')[1];
+    inputRef.disabled = false;
+    let confirmBut = day.getElementsByTagName('button')[2];
+    confirmBut.disabled = false;
+}
+
+// confirm button function call that lock input box
+window.confirmFunc = function(t){
+    let day =t.parentNode;
+    // inputRef[0] is checkbox, inputRef[1] is input text box.
+    let inputRef = day.getElementsByTagName("input")[1];
+    // t.remove();
+    t.disabled = true;
+    inputRef.disabled = true;
+}
+
 /**
  * Add collapsible controls to the element with collapsible class.
  * When user click on element, hidden sibling text element will be shown,
@@ -59,42 +62,32 @@ function addCollapsibleControls(){
 
 }
 /**
- * add new tasks
- * @param None
- * @return new div block in week days.
+ * Add event handler to all Add buttons of each day.
  */
 function addTasks(){
-    // add new task to each week days
-    // let elementId = new Map();
-    let daysDiv = document.getElementById("weekdays").getElementsByTagName("div");
-    // add (plus button id, taskcount id) pair to dayToTask.
-    for(const day of daysDiv){
-        document.getElementById("addButton"+day.id).addEventListener('click', function(){createNewTask(day.id)}, false);
-    };
-    // add event listener to all days
-    
-    /**
-     * EventListener function to add new task everytime click add button.
-     * @param string taskCount and dayOfWeek
-     * @return new task div block in week days.
-     */
-    function createNewTask(dayOfWeek){
-        let addButton = document.getElementById("addButton"+dayOfWeek);
-        console.log(dayOfWeek);
-        let newTask = document.createElement('div');
-        // newTask.id = dayOfWeek+dayTaskCount.get(taskCount);
-        newTask.innerHTML += `
-        <input type="checkbox">
-        <input type="text" name="taskName" class="input" >
-        <i onClick="deleteTask(this)" class="fa fa-trash icon"></i>
-        <i onClick="editTask(this)" class="fas fa-edit icon"></i>
-        <button onClick="confirmButton(this)" type="submit">Confirm</button>
-        `
-        addButton.parentNode.insertBefore(newTask,addButton);
-        // dayTaskCount.set(taskCount, dayTaskCount.get(taskCount) + 1);
-      }
+    let addBtn = document.getElementsByClassName("addBtn");
+    // when the control element is clicked 
+    Array.from(addBtn).forEach(button => {
+        button.addEventListener("click", function(){createNewTask(this)});
+    });
 }
 
+/**
+     * call back function of Add buttons, that 
+     * create a new task div every click.
+     * @return new task div block in week days.
+     */
+function createNewTask(t){
+    let newTask = document.createElement('div');
+    newTask.innerHTML += `
+    <input type="checkbox">
+    <input type="text" name="taskName" class="input" >
+    <button type="button" onClick="deleteTask(this)" class="deleteBtn"><i class="fa fa-trash icon"></i> </button>
+    <button type="button" onClick="editTask(this)" class="editBtn"><i class="fas fa-edit icon"></i> </button>
+    <button type="button" onClick="confirmFunc(this)" class="confirmBtn" type="submit">Confirm</button>
+    `
+    t.parentNode.insertBefore(newTask,t);
+}
 /**
  * This is for your reference to write method header of functions
  * @param {Array<Object>} recipes An array of recipes
