@@ -20,7 +20,7 @@ Nov 13th, Sunday 9:00 p.m. to 9:35 p.m. Zoom
 - Record demos for features that has been completed
 
 **to-dos**
-- Check with TA for db confusio & set ups
+- Check with TA for db confusion & set ups
 - Move on to the next sprint: set up the backend for web pages
 
 **Key Assets**
