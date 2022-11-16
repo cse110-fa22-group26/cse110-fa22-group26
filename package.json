@@ -4,6 +4,7 @@
   "description": "[Team Page](/admin/team.md)",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext js,jsx,ts,tsx --fix"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
