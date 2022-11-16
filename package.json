@@ -4,7 +4,7 @@
   "description": "[Team Page](/admin/team.md)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard && node my-tests.js"
   },
   "repository": {
     "type": "git",
@@ -17,16 +17,7 @@
   },
   "homepage": "https://github.com/cse110-fa22-group26/cse110-fa22-group26#readme",
   "devDependencies": {
-    "eslint": "^8.27.0"
-  }
-},
-{
-  "name": "my-cool-package",
-  "devDependencies": {
+    "eslint": "^8.27.0",
     "standard": "*"
-  },
-  "scripts": {
-    "test": "standard && node my-tests.js"
   }
 }
-
