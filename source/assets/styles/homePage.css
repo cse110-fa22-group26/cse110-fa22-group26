@@ -68,6 +68,7 @@
     
 }*/
 
+/*style for checkbox*/
 input[type=checkbox] {
     accent-color: rgb(78, 146, 23);
     width: 20px;
@@ -75,6 +76,7 @@ input[type=checkbox] {
     cursor: pointer;
 }
 
+/*style for input text box*/
 input[type=text] {
     background: #f4ecec;
     width: 40%;
@@ -82,6 +84,7 @@ input[type=text] {
     margin: 8px;
 }
 
+/*
 button[type=submit] {
     color: #03324a;
     padding:5px 15px; 
@@ -96,68 +99,26 @@ button[type=submit] {
 button[type=submit]:hover {
     color:#DDDDDD;
 }
+*/
 
+/*style for body*/
 body {
     background-color: rgb(255, 245, 190);
     line-height: 1.9;
 }
 
+/*style for title*/
 h1 {
     color: #03324a;
 }
 
-#addButtonMonday {
+/*style for add button*/
+.addBtn {
     width: 46px;
     height: 46px;
     border-radius:50%;
-    background-color: transparent;
+    background-color: rgb(245, 216, 149);
     border: solid;
-}
-
-#addButtonTuesday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
-}
-
-#addButtonWednesday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
-}
-
-#addButtonThursday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
-}
-
-#addButtonFriday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
-}
-
-#addButtonSaturday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
-}
-
-#addButtonSunday {
-    width: 46px;
-    height: 46px;
-    border-radius:50%;
-    background-color: transparent;
-    border: solid;
+    cursor: pointer;
+    margin-left:23%;
 }
