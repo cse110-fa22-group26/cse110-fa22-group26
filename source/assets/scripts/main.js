@@ -6,32 +6,8 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
+    // add event listener when user want to add task
     addTasks();
-}
-
-// deleteBtn function call that remove the task
-window.deleteTask = function(t){
-    t.parentNode.remove();
-}
-
-// edit button functino call that edit input text
-window.editTask = function(t){
-    let day = t.parentNode;
-    // inputRef[0] is checkbox, inputRef[1] is input text box.
-    let inputRef = day.getElementsByTagName('input')[1];
-    inputRef.disabled = false;
-    let confirmBut = day.getElementsByTagName('button')[2];
-    confirmBut.disabled = false;
-}
-
-// confirm button function call that lock input box
-window.confirmFunc = function(t){
-    let day =t.parentNode;
-    // inputRef[0] is checkbox, inputRef[1] is input text box.
-    let inputRef = day.getElementsByTagName("input")[1];
-    // t.remove();
-    t.disabled = true;
-    inputRef.disabled = true;
 }
 
 /**
@@ -61,35 +37,77 @@ function addCollapsibleControls(){
     });
 
 }
+
 /**
- * Add event handler to all Add buttons of each day.
+ * Add event handler to all Add buttons of each day. When user click add btn,
+ * a new task div will appear
  */
 function addTasks(){
-    let addBtn = document.getElementsByClassName("addBtn");
-    // when the control element is clicked 
-    Array.from(addBtn).forEach(button => {
-        button.addEventListener("click", function(){createNewTask(this)});
+    let addBtns = document.getElementsByClassName("addBtn");
+    Array.from(addBtns).forEach(addBtn => {
+        addBtn.addEventListener("click", (event) => {
+            // find corresponding sibling text element
+            let taskBoard = addBtn.parentNode;
+            let newTask = document.createElement("div");
+            newTask.innerHTML = `<input type="checkbox">
+            <input type="text" name="taskName" class="input">
+            <i class="fa fa-trash icon deleteBtn"></i>
+            <i class="fas fa-edit icon editBtn"></i>
+            <button type="submit" class="confirmBtn">Confirm</button>`;
+            taskBoard.insertBefore(newTask, addBtn);
+            // add function to icons of new task
+            addtaskFunction();
+        });
+    });
+}
+/**
+ * add delete, edit, confirm functionality to newly added html elements
+ */
+function addtaskFunction(){
+    deleteTasks();
+    editTasks();
+    confirmTasks();
+}
+
+/**
+ * give newest delete btn functionality to remove relevant task
+ */
+function deleteTasks(){
+    let deleteBtns = document.getElementsByClassName("deleteBtn");
+    let deleteBtn = deleteBtns[deleteBtns.length-1];
+    deleteBtn.addEventListener("click", (event) => {
+        let currtask = deleteBtn.parentNode;
+        currtask.remove();
     });
 }
 
 /**
-     * call back function of Add buttons, that 
-     * create a new task div every click.
-     * @return new task div block in week days.
-     */
-function createNewTask(t){
-    let newTask = document.createElement('div');
-    newTask.innerHTML += `
-    <input type="checkbox">
-    <input type="text" name="taskName" class="input" >
-    <button type="button" onClick="deleteTask(this)" class="deleteBtn"><i class="fa fa-trash icon"></i> </button>
-    <button type="button" onClick="editTask(this)" class="editBtn"><i class="fas fa-edit icon"></i> </button>
-    <button type="button" onClick="confirmFunc(this)" class="confirmBtn" type="submit">Confirm</button>
-    `
-    t.parentNode.insertBefore(newTask,t);
-}
-/**
- * This is for your reference to write method header of functions
- * @param {Array<Object>} recipes An array of recipes
- * @return {Array<Object>}  An array of recipes found in localStorage
+ * give newest edit btn functionality to edit relevant task input
  */
+function editTasks(){
+    let editBtns = document.getElementsByClassName("editBtn");
+    let editBtn = editBtns[editBtns.length-1];
+    editBtn.addEventListener("click", (event) => {
+        let currtask = editBtn.parentNode;
+        // find input btn
+        let input = currtask.querySelectorAll("input")[1];
+        let confirmBtn = currtask.querySelector("button");
+        input.disabled = false;
+        confirmBtn.disabled = false;
+    });
+    
+}
+
+/**
+ * give newest confirm btn functionality to confirm and block task input 
+ */
+function confirmTasks(){
+    let confirmBtns = document.getElementsByClassName("confirmBtn");
+    let confirmBtn = confirmBtns[confirmBtns.length-1];
+    confirmBtn.addEventListener("click", (event) => {
+        let currtask = confirmBtn.parentNode;
+        let input = currtask.querySelectorAll("input")[1];
+        input.disabled = true;
+    });
+    
+}
