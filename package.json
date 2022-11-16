@@ -4,13 +4,14 @@
   "description": "[Team Page](/admin/team.md)",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext js,jsx,ts,tsx --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cse110-fa22-group26/cse110-fa22-group26.git"
   },
-  "author": "",
+  "author": "Code Cowboys",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cse110-fa22-group26/cse110-fa22-group26/issues"
