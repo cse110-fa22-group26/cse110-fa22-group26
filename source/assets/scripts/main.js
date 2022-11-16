@@ -1,3 +1,5 @@
+// main.js
+
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
 // Starts the program, all function calls trace back here
@@ -32,7 +34,6 @@ function addCollapsibleControls(){
         });
     });
 
-<<<<<<< HEAD
 }
 
 /**
@@ -40,18 +41,3 @@ function addCollapsibleControls(){
  * @param {Array<Object>} recipes An array of recipes
  * @return {Array<Object>}  An array of recipes found in localStorage
  */
-=======
-
-const formEl = document.querySelector('form');
-alert("ran HERE 1");
-//const signUpButton = document.querySelector('button[name="create"]');
-//const signUpBut = document.getElementsByClassName("signUp-button");
-const selectButton = document.getElementsByTagName("button")[0];
-formEl.addEventListener('submit',(event) =>{
-    console.log("ran HERE 2");
-    const formInfo = new FormData(formEl);
-    let username = formInfo.get('username');
-    let password = formInfo.get('confirmPassword');
-    
-});*/
->>>>>>> 12130af57d4eb26caf31b7a7850f7c401a1c3ae6
