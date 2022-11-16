@@ -12,6 +12,7 @@ jobs:
           node-version: 16
       - run: npm install standard
       - run: npm test
+      - run: standard --fix
       - run: npm ci
       - uses: sibiraj-s/action-eslint@v2
         with:
