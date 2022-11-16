@@ -12,13 +12,8 @@ jobs:
           node-version: 16
       - run: npm install standard
       - run: npm test
-
-  fix-StandardJS:
+  eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - run: standard --fix
-
+      - uses: actions/checkout@v1
+      - uses: stefanoeb/eslint-action@1.0.2
