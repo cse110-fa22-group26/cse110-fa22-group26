@@ -1,3 +1,4 @@
+
 // main.js
 
 // Run the init() function when the page has loaded
