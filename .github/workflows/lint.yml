@@ -13,10 +13,17 @@ jobs:
       - run: npm install standard
       - run: npm test
       - run: standard --fix
-      - run: npm ci
-      - uses: sibiraj-s/action-eslint@v2
+
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mrdivyansh/eslint-action@v1.0.7
+        # GITHUB_TOKEN in forked repositories is read-only
+        # https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
+        if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }} 
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }} # Optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+          repo-token: ${{secrets.GITHUB_TOKEN}}
+          eslint-rc: .eslintrc.js
+          execute-on-files: ./packages
+
