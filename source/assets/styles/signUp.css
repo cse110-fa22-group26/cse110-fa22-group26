@@ -58,15 +58,18 @@ label {
 
   box-shadow: 0 0 5px;
 }
+
 .warning-signup {
   font-size: 0.5rem;
   color: red;
   margin-top: 2px;
 }
 
+
 #signUpHeading {
   color: #03324a;
 }
+
 
 .signUp-button {
   background-color: #03324a;
