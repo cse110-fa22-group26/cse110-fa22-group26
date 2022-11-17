@@ -50,6 +50,7 @@ label {
   border-radius: 5px;
   padding: 0px 10px;
 }
+
 #password:focus,
 #username:focus,
 #confirmPassword:focus {
@@ -57,6 +58,13 @@ label {
 
   box-shadow: 0 0 5px;
 }
+
+.warning-signup {
+  font-size: 0.5rem;
+  color: red;
+  margin-top: 2px;
+}
+
 
 #signUpHeading {
   color: #03324a;
@@ -66,11 +74,17 @@ label {
 .signUp-button {
   background-color: #03324a;
   margin: 30px 0 10px;
+  margin-left: 30%;
   color: #eae2b7;
   width: 90px;
   height: 30px;
   border-radius: 10px;
   border-color: #03324a;
+}
+
+.signUp-button:active {
+  transform: scale(0.98);
+  background-color: rgb(57, 102, 186);
 }
 
 p > a {

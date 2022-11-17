@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="assets/styles/signUp.css">
+    <script src="assets/scripts/signUp.js"></script>
     <title>Sign Up Page</title>
   </head>
   <body>
@@ -9,16 +10,18 @@
       <h1 id="signUpHeading">Sign Up</h1>
       <div class="signup-form">
         <form>
-          <label for="username">Username</label><br />
-          <input type="text" name="username" id="username" />
-          <br /><br />
-          <label for="password">Password</label><br />
-          <input type="password" name="password" id="password" />
-          <br /><br />
-          <label for="password">Confirm Password</label><br />
-          <input type="password" name="confirmPassword" id="confirmPassword" />
+          <label for="username">Username</label><br>
+          <input required type="text" name="username" id="username">
+          <br><br>
+          <label for="password">Password</label><br>
+          <input required type="password" name="password" id="password">
+          <br><br>
+          <label for="password">Confirm Password</label><br>
+          <input required type="password" name="confirmPassword" id="confirmPassword">
+          <p class="warning-signup"></p>
+          <br> <br>
+          <button type = "submit" class="signUp-button">Create</button>
         </form>
-        <button class="signUp-button">Create</button>
       </div>
     </main>
   </body>

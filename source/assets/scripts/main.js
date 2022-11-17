@@ -6,6 +6,8 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
+    // add correspondinng event listener when user want to add task
+    addTasks();
 }
 
 /**
@@ -37,16 +39,75 @@ function addCollapsibleControls(){
 }
 
 /**
- * This is for your reference to write method header of functions
- * @param {Array<Object>} recipes An array of recipes
- * @return {Array<Object>}  An array of recipes found in localStorage
+ * Add event handler to all add buttons of each day's list. When user click add btn,
+ * a new task div will appear
  */
+function addTasks(){
+    let addBtns = document.getElementsByClassName("addBtn");
+    Array.from(addBtns).forEach(addBtn => {
+        addBtn.addEventListener("click", (event) => {
+            // find corresponding sibling text element
+            let taskBoard = addBtn.parentNode;
+            let newTask = document.createElement("div");
+            newTask.innerHTML = `<input type="checkbox">
+            <input type="text" name="taskName" class="input">
+            <i class="fa fa-trash icon deleteBtn"></i>
+            <i class="fas fa-edit icon editBtn"></i>
+            <button type="submit" class="confirmBtn">Confirm</button>`;
+            taskBoard.insertBefore(newTask, addBtn);
+            // add function to icons of new task
+            addtaskFunction();
+        });
+    });
+}
+/**
+ * add delete, edit, confirm functionality to newly added task 
+ */
+function addtaskFunction(){
+    deleteTasks();
+    editTasks();
+    confirmTasks();
+}
 
-/*
-1) add submit event listener for both the welcome and sign up page(on click takes back to sign in?)
-2) on click we store information to local storage (?)
-    - create array storing all user's information
-        - object within an object ?
-    - we would set item (username as key and password is value)
-3) On login, user is matched to their home page
-*/
+/**
+ * give newest delete btn functionality to remove relevant task
+ */
+function deleteTasks(){
+    let deleteBtns = document.getElementsByClassName("deleteBtn");
+    let deleteBtn = deleteBtns[deleteBtns.length-1];
+    deleteBtn.addEventListener("click", (event) => {
+        let currtask = deleteBtn.parentNode;
+        currtask.remove();
+    });
+}
+
+/**
+ * give newest edit btn functionality to edit relevant task input
+ */
+function editTasks(){
+    let editBtns = document.getElementsByClassName("editBtn");
+    let editBtn = editBtns[editBtns.length-1];
+    editBtn.addEventListener("click", (event) => {
+        let currtask = editBtn.parentNode;
+        // find input btn
+        let input = currtask.querySelectorAll("input")[1];
+        let confirmBtn = currtask.querySelector("button");
+        input.disabled = false;
+        confirmBtn.disabled = false;
+    });
+    
+}
+
+/**
+ * give newest confirm btn functionality to confirm and block user from change input 
+ */
+function confirmTasks(){
+    let confirmBtns = document.getElementsByClassName("confirmBtn");
+    let confirmBtn = confirmBtns[confirmBtns.length-1];
+    confirmBtn.addEventListener("click", (event) => {
+        let currtask = confirmBtn.parentNode;
+        let input = currtask.querySelectorAll("input")[1];
+        input.disabled = true;
+    });
+    
+}
