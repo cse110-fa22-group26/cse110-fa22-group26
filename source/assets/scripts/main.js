@@ -1,4 +1,3 @@
-
 // main.js
 
 // Run the init() function when the page has loaded
@@ -7,7 +6,7 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
-    // add event listener when user want to add task
+    // add correspondinng event listener when user want to add task
     addTasks();
 }
 
@@ -40,7 +39,7 @@ function addCollapsibleControls(){
 }
 
 /**
- * Add event handler to all Add buttons of each day. When user click add btn,
+ * Add event handler to all add buttons of each day's list. When user click add btn,
  * a new task div will appear
  */
 function addTasks(){
@@ -62,7 +61,7 @@ function addTasks(){
     });
 }
 /**
- * add delete, edit, confirm functionality to newly added html elements
+ * add delete, edit, confirm functionality to newly added task 
  */
 function addtaskFunction(){
     deleteTasks();
@@ -100,7 +99,7 @@ function editTasks(){
 }
 
 /**
- * give newest confirm btn functionality to confirm and block task input 
+ * give newest confirm btn functionality to confirm and block user from change input 
  */
 function confirmTasks(){
     let confirmBtns = document.getElementsByClassName("confirmBtn");
