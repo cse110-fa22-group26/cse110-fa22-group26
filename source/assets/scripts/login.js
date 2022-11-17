@@ -27,6 +27,7 @@ function getUserDB() {
     // get user's password and username
     let password = userInput.password;
     let username = userInput.username;
+
     // check if credential exist in db. If match, get and save related taskDB
     findAndSetUsersDB(username, password);
   });
@@ -41,40 +42,24 @@ function getUserDB() {
  */
 function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials
-  let todoListDB = JSON.parse(localStorage.getItem("todoListDB"));
-  // get warning message
-  let warningTxt = document.getElementById("warningMessage");
-  // check if it is password error 
-  let pwErr = false;
-  // go through each user data stored in DB
-  todoListDB.forEach((userObj) => {
-    // if input username is found
-    if (userObj.username == username) {
-      // and password match record in DB
-      if (userObj.password == password) {
-        // store user's task in taskDB
-        console.log("data found");
-        localStorage.setItem("taskDB", JSON.stringify(userObj.tasks));
-      }
-      // if username found but password incorrect
-      else{
-        // alert user for invalid password & set password error to true
-        warningTxt.textContent = "Username and password does not match"
-        pwErr = true;
+  let found = false;
+  const todoListDB = localStorage.getItem("todoListDB");
+  if (todoListDB) {
+    const db = JSON.parse(todoListDB);
+    for (let i = 0; i < db.length; i++) {
+      if (db[i].username === username && db[i].password === password) {
+        found = true;
+        break;
       }
     }
-  });
-  // if credential does not match any record in DB, alert user.
-  if (!localStorage.getItem("taskDB")) {
-    // if not a password error
-    if (!pwErr){
-        // alert user for invalid username
-        warningTxt.textContent = "Invalid Username";
-    }
+    
+    if (found) console.log("user found");
+    else console.log("user not found");
+  } else {
+    console.log("no db");
   }
-  // if credential match and taskDB has saved
-  // redirect user to homePage to view tasks
-  else {
-    location.replace("homePage.html");
-  }
+
+  // else {
+  //   location.replace("homePage.html");
+  // }
 }
