@@ -14,25 +14,22 @@
     margin: auto;
     width: 98%;
 }
+
 /*align text to the right*/
 .right{
     float: right;
 }
+
 /*align title to center*/
 #title{
     text-align: center;
 }
-
 
 /*feel free to change based on your design*/
 #board{
     width: 80%;
     margin: auto;
 }
-
-/*.list{
-
-}*/
 
 .task-board{
     overflow: hidden;
@@ -54,9 +51,3 @@
 .expand{
     display:block; 
 }
-
-/*.task{
-
-}*/
-
-

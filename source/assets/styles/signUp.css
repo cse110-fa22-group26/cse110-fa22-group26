@@ -50,6 +50,7 @@
     border-radius: 5px;
     padding: 0px 10px;
   }
+
   #password:focus,
   #username:focus,
   #confirmPassword:focus {
@@ -57,22 +58,17 @@
   
     box-shadow: 0 0 5px;
   }
+  #warningMessage{
+    font-size: 0.5rem;
+    color: red;
+    padding: 0%;
+    margin: 0%;
+  }
   
   #signUpHeading {
     color: #03324a;
   }
   
-/*
-  .signUp-button {
-    background-color: #03324a;
-    margin: 30px 0 10px;
-    color: #eae2b7;
-    width: 90px;
-    height: 30px;
-    border-radius: 10px;
-    border-color: #03324a;
-  }
-  */
   .signUp-button {
     background-color: #03324a;
     margin: 30px 0 10px;
@@ -89,10 +85,7 @@
     background-color: rgb(57, 102, 186);
   }
 
-
-  
   p > a {
     color: rgb(57, 102, 186);
     text-decoration: none;
-  }
-  
+  }  
