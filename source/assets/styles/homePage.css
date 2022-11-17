@@ -30,10 +30,6 @@
     margin: auto;
 }
 
-/*.list{
-
-}*/
-
 .task-board{
     overflow: hidden;
 }
@@ -42,6 +38,14 @@
 .collapsible{
     width:100%;
     font-size: larger;
+    color: #03324a;
+    background-color: antiquewhite;
+    border-radius:2em;
+    transition: all 0.2s;
+    border-color: rgb(234, 206, 206);
+}
+.collapsible:hover{
+    background-color:#f8e1a6;
 }
 
 /*Implement Collapsible function with two state*/
@@ -55,8 +59,57 @@
     display:block; 
 }
 
-/*.task{
+/*style for checkbox*/
+input[type=checkbox] {
+    accent-color: rgb(78, 146, 23);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
 
-}*/
+/*style for input text box*/
+input[type=text] {
+    background: #f4ecec;
+    width: 40%;
+    padding: 10px 10px;
+    margin: 8px;
+}
+
+/*style for submit btn*/
+button[type=submit] {
+    color: #03324a;
+    padding:5px 15px; 
+    background:transparent; 
+    border:0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 10px; 
+    transition: all 0.15s;
+}
+
+button[type=submit]:hover {
+    color:#DDDDDD;
+}
 
 
+/*style for body*/
+body {
+    background-color: rgb(255, 245, 190);
+    line-height: 1.9;
+}
+
+/*style for title*/
+h1 {
+    color: #03324a;
+}
+
+/*style for add button*/
+.addBtn {
+    width: 46px;
+    height: 46px;
+    border-radius:50%;
+    background-color: rgb(245, 216, 149);
+    border: solid;
+    cursor: pointer;
+    margin: 2% 48%;
+}
