@@ -48,43 +48,49 @@ function addTasks(){
         addBtn.addEventListener("click", (event) => {
             // find corresponding sibling text element
             let taskBoard = addBtn.parentNode;
-            let newTask = document.createElement("div");
-            newTask.innerHTML = `<input type="checkbox">
-            <input type="text" name="taskName" class="input">
-            <i class="fa fa-trash icon deleteBtn"></i>
-            <i class="fas fa-edit icon editBtn"></i>
-            <button type="submit" class="confirmBtn">Confirm</button>`;
+            let newTask = document.createElement("task-card");
+            // get new task id, == Monday0,Tuesday0,......
+            let newTaskID = taskBoard.id+ (document.getElementById(taskBoard.id).getElementsByTagName("task-card").length);
+            // add <task-card> id = Monday0, Monday1,......
+            newTask.setAttribute("id", newTaskID);
             taskBoard.insertBefore(newTask, addBtn);
             // add function to icons of new task
-            addtaskFunction();
+            addtaskFunction(newTaskID);
         });
     });
 }
 /**
  * add delete, edit, confirm functionality to newly added task 
  */
-function addtaskFunction(){
-    deleteTasks();
-    editTasks();
-    confirmTasks();
+function addtaskFunction(taskID){
+    deleteTasks(taskID);
+    editTasks(taskID);
+    confirmTasks(taskID);
 }
 
 /**
  * give newest delete btn functionality to remove relevant task
  */
-function deleteTasks(){
+function deleteTasks(taskID){
+    // let deleteBtns = document.getElementsByClassName("deleteBtn");
+    // let deleteBtn = deleteBtns[deleteBtns.length-1];
+    // deleteBtn.addEventListener("click", async(event) => {
+    //     let currtask = deleteBtn.parentNode;
+    //     currtask.remove();
+    // });
+    let taskBlock = document.getElementById(taskID);
     let deleteBtns = document.getElementsByClassName("deleteBtn");
     let deleteBtn = deleteBtns[deleteBtns.length-1];
+    console.log(deleteBtn);
     deleteBtn.addEventListener("click", (event) => {
-        let currtask = deleteBtn.parentNode;
-        currtask.remove();
+        deleteBtn.remove();
     });
 }
 
 /**
  * give newest edit btn functionality to edit relevant task input
  */
-function editTasks(){
+function editTasks(taskID){
     let editBtns = document.getElementsByClassName("editBtn");
     let editBtn = editBtns[editBtns.length-1];
     editBtn.addEventListener("click", (event) => {
@@ -101,7 +107,7 @@ function editTasks(){
 /**
  * give newest confirm btn functionality to confirm and block user from change input 
  */
-function confirmTasks(){
+function confirmTasks(taskID){
     let confirmBtns = document.getElementsByClassName("confirmBtn");
     let confirmBtn = confirmBtns[confirmBtns.length-1];
     confirmBtn.addEventListener("click", (event) => {
@@ -111,3 +117,4 @@ function confirmTasks(){
     });
     
 }
+
