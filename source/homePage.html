@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,64 +11,80 @@
     <script src="assets/scripts/main.js" type="module"></script>
 
     <!-- forawesome (good resource for finding icons, go to their website https://fontawesome.com/icons search and copy & paste html code to add icons)-->
-    <script src="https://kit.fontawesome.com/8c6cfa6ebd.js" crossorigin="anonymous"></script>
-</head>
+    <script
+      src="https://kit.fontawesome.com/8c6cfa6ebd.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <header>
-        <!-- top navigation bar -->
-        <div class="top-nav">
-            <!-- Welcome message & Log out option -->
-            <p>Hi Jack
-                <!-- Align text to right -->
-                <span class="right">Log Out</span>
-            </p>
-        </div>
-        <!--title-->
-        <h1 id="title">Weekly Planner</h1>
+      <!-- top navigation bar -->
+      <div class="top-nav">
+        <!-- Welcome message & Log out option -->
+        <p class="greeting-message"></p>
+        <button class="logout-btn">
+          <img class="logout-img" src="assets/icons/logout.png" alt="LogOut" />
+        </button>
+      </div>
+      <!--title-->
+      <h1 id="title">Weekly Planner</h1>
     </header>
     <main>
-        <!--You may use this to test and write styles for task, list, and board of task lists-->
-        <div id="board">
-            <div id="weekdays" class="list">
-                <button type="button" class="collapsible">Monday</button>
-               
-                <div id="Monday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+      <!--You may use this to test and write styles for task, list, and board of task lists-->
+      <div id="board">
+        <div id="weekdays" class="list">
+          <button type="button" class="collapsible">Monday</button>
 
-                <button type="button" class="collapsible">Tuesday</button>
-                <div id="Tuesday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+          <div id="Monday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
 
-                <button type="button" class="collapsible">Wednesday</button>
-                <div id="Wednesday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+          <button type="button" class="collapsible">Tuesday</button>
+          <div id="Tuesday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
 
-                <button type="button" class="collapsible">Thursday</button>
-                <div id="Thursday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+          <button type="button" class="collapsible">Wednesday</button>
+          <div id="Wednesday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
 
-                <button type="button" class="collapsible">Friday</button>
-                <div id="Friday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+          <button type="button" class="collapsible">Thursday</button>
+          <div id="Thursday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
 
-                <button type="button" class="collapsible">Saturday</button>
-                <div id="Saturday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
+          <button type="button" class="collapsible">Friday</button>
+          <div id="Friday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
 
-                <button type="button" class="collapsible">Sunday</button>
-                <div id="Sunday" class="task-board shrink">
-                    <button class="addBtn"><img src="assets/icons/add.png" alt="addTask"></button>
-                </div>
-            </div>
+          <button type="button" class="collapsible">Saturday</button>
+          <div id="Saturday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
+
+          <button type="button" class="collapsible">Sunday</button>
+          <div id="Sunday" class="task-board shrink">
+            <button class="addBtn">
+              <img src="assets/icons/add.png" alt="addTask" />
+            </button>
+          </div>
         </div>
+      </div>
     </main>
-</body>
-
+  </body>
 </html>
