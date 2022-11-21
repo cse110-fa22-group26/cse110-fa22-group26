@@ -1,4 +1,4 @@
-name: HTML-validator
+name: CI
 
 on: [push]
 
@@ -12,4 +12,13 @@ jobs:
         uses: Cyb3r-Jak3/html5validator-action@v0.6.1 
         with:
           root: ./source/
+  codacy-analysis-cli:
+    name: Codacy Analysis CLI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
           
