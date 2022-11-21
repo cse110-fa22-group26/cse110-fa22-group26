@@ -72,49 +72,43 @@ function addtaskFunction(taskID){
  * give newest delete btn functionality to remove relevant task
  */
 function deleteTasks(taskID){
-    // let deleteBtns = document.getElementsByClassName("deleteBtn");
-    // let deleteBtn = deleteBtns[deleteBtns.length-1];
-    // deleteBtn.addEventListener("click", async(event) => {
-    //     let currtask = deleteBtn.parentNode;
-    //     currtask.remove();
-    // });
     let taskBlock = document.getElementById(taskID);
-    let deleteBtns = document.getElementsByClassName("deleteBtn");
-    let deleteBtn = deleteBtns[deleteBtns.length-1];
-    console.log(deleteBtn);
+    let shadowRoot = taskBlock.shadowRoot;
+    let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName('deleteBtn')[0];
     deleteBtn.addEventListener("click", (event) => {
-        deleteBtn.remove();
+        taskBlock.remove();
     });
+    // update localStorage by remove taks with taskID
+
 }
 
 /**
  * give newest edit btn functionality to edit relevant task input
  */
 function editTasks(taskID){
-    let editBtns = document.getElementsByClassName("editBtn");
-    let editBtn = editBtns[editBtns.length-1];
+    let taskBlock = document.getElementById(taskID);
+    let shadowRoot = taskBlock.shadowRoot;
+    let editBtn = shadowRoot.childNodes[0].getElementsByClassName('editBtn')[0];
     editBtn.addEventListener("click", (event) => {
-        let currtask = editBtn.parentNode;
-        // find input btn
-        let input = currtask.querySelectorAll("input")[1];
-        let confirmBtn = currtask.querySelector("button");
+        let input = shadowRoot.childNodes[0].querySelectorAll("input")[1];
+        let confirmBtn = shadowRoot.childNodes[0].querySelector("button");
         input.disabled = false;
         confirmBtn.disabled = false;
     });
-    
 }
 
 /**
  * give newest confirm btn functionality to confirm and block user from change input 
  */
 function confirmTasks(taskID){
-    let confirmBtns = document.getElementsByClassName("confirmBtn");
-    let confirmBtn = confirmBtns[confirmBtns.length-1];
+    let taskBlock = document.getElementById(taskID);
+    let shadowRoot = taskBlock.shadowRoot;
+    let confirmBtn = shadowRoot.childNodes[0].getElementsByClassName('confirmBtn')[0];
     confirmBtn.addEventListener("click", (event) => {
-        let currtask = confirmBtn.parentNode;
-        let input = currtask.querySelectorAll("input")[1];
+        let input = shadowRoot.childNodes[0].querySelectorAll("input")[1];
+        let confirmBtn = shadowRoot.childNodes[0].querySelector("button");
         input.disabled = true;
+        confirmBtn.disabled = true;
     });
-    
 }
 
