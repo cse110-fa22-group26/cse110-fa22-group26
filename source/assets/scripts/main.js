@@ -32,7 +32,6 @@ function taskCount(){
     });
     let lists = document.getElementsByClassName("collapsible");
     Array.from(lists).forEach(list =>{
-        console.log(list.getElementsByTagName('span')[0].textContent);
         list.getElementsByTagName('span')[1].textContent = ` 
         (${taskCount[list.getElementsByTagName('span')[0].textContent]} Tasks,
         0 Done)
@@ -58,10 +57,19 @@ function getTasksFromStorage() {
 function addTasksToDocument(savedTasks) {
     // if no saved tasks return.
     if (savedTasks == null) return;    
+    const dayIndex = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+    };
     let addBtns = document.getElementsByClassName("addBtn");
     const daysWithTasks = new Set();
     Array.from(addBtns).forEach(addBtn => {
-        Array.from(savedTasks).forEach(task =>{
+        Array.from(savedTasks[dayIndex[addBtn.parentNode.id]]).forEach(task =>{
             let taskBoard = addBtn.parentNode;
             if(taskBoard.id==task["day"]){
                 let newTask = document.createElement("task-card");
@@ -176,18 +184,28 @@ function deleteTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
     let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
+    const dayIndex = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+    };
     deleteBtn.addEventListener("click", (event) => {
-        taskBlock.remove();
         // get current localStorage
         let localTasks = getTasksFromStorage();
         // splice out the deleted task in localstorage
-        for(let i = 0; i< localTasks.length; i++){
-            if(taskID===localTasks[i]["taskID"]){
-                localTasks.splice(i, 1);
+        for(let i = 0; i< localTasks[dayIndex[taskBlock.parentNode.id]].length; i++){
+            if(taskID===localTasks[dayIndex[taskBlock.parentNode.id]][i]["taskID"]){
+                localTasks[dayIndex[taskBlock.parentNode.id]].splice(i, 1);
             }
         }
+        
         // saved modified tasks to localstorage
         saveTasksToStorage(localTasks);
+        taskBlock.remove();
         taskCount();
     });
 }
@@ -215,6 +233,15 @@ function confirmTasks(taskID){
     let shadowRoot = taskBlock.shadowRoot;
     let confirmBtn = shadowRoot.childNodes[0].getElementsByClassName('confirmBtn')[0];
     let input = shadowRoot.childNodes[0].getElementsByTagName('input')[1];
+    const dayIndex = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+    };
     confirmBtn.addEventListener("click", (event) => {
         input.disabled = true;
         confirmBtn.disabled = true;
@@ -229,17 +256,26 @@ function confirmTasks(taskID){
         };
 
         let localTasks = getTasksFromStorage();
+        if(localTasks.length === 0){
+            localTasks.push([]);
+            localTasks.push([]);
+            localTasks.push([]);
+            localTasks.push([]);
+            localTasks.push([]);
+            localTasks.push([]);
+            localTasks.push([]);
+        }
+
         let found = false;
-        Array.from(localTasks).forEach(task =>{
+        Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
             if(taskID===task["taskID"]){
-                console.log(task["taskID"]);
                 task["input"] = input.value;
                 task["checkBox"] = shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked;
                 found = true;
             }
         });
         if(found===false){
-            localTasks.push(taskObject);
+            localTasks[dayIndex[taskBlock.parentNode.id]].push(taskObject);
         }
         saveTasksToStorage(localTasks);
         taskCount();
