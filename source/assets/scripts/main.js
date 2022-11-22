@@ -65,7 +65,7 @@ function addTasksToDocument(savedTasks) {
  * saves that string to 'recipes' in localStorage
  * @param {Array<Object>} recipes An array of recipes
  */
-function saveRecipesToStorage(savedTasks) {
+function saveTasksToStorage(savedTasks) {
     localStorage.setItem('savedTasks',JSON.stringify(savedTasks));
   }
 
@@ -144,17 +144,17 @@ function addtaskFunction(taskID){
 function deleteTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
-    // let delBtn = taskBlock.getElementsByClassName("deleteBtn")[0];
-    console.log(shadowRoot.childNodes);
     let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
     let localTasks = getTasksFromStorage();
     deleteBtn.addEventListener("click", (event) => {
         taskBlock.remove();
-        for(let i = 0; i < localTasks.length; i++){
-            if(localTasks[i]["taskID"] === taskID){
-                localStorage.removeItem(taskID);
+        let localTasks = getTasksFromStorage();
+        for(let i = 0; i< localTasks.length; i++){
+            if(taskID===localTasks[i]["taskID"]){
+                localTasks.splice(i, 1);
             }
         }
+        saveTasksToStorage(localTasks);
     });
     // update localStorage by remove taks with taskID
 
@@ -183,7 +183,6 @@ function confirmTasks(taskID){
     let shadowRoot = taskBlock.shadowRoot;
     let confirmBtn = shadowRoot.childNodes[0].getElementsByClassName('confirmBtn')[0];
     let input = shadowRoot.childNodes[0].getElementsByTagName('input')[1];
-    console.log(input);
     confirmBtn.addEventListener("click", (event) => {
         input.disabled = true;
         confirmBtn.disabled = true;
@@ -192,7 +191,7 @@ function confirmTasks(taskID){
             "day": taskBlock.parentNode.id,
             "taskID": taskID, 
             "input":input.value, 
-            "checkBox":shadowRoot.childNodes[1].checked,
+            "checkBox":shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked,
             "confirmDisable": true,
             "inputDisable": true
         };
@@ -200,21 +199,17 @@ function confirmTasks(taskID){
         let localTasks = getTasksFromStorage();
         let found = false;
         Array.from(localTasks).forEach(task =>{
-            // find corresponding sibling text element
             if(taskID===task["taskID"]){
-                task["day"]= taskBlock.parentNode.id;
-                task["taskID"]= taskID;
+                console.log(task["taskID"]);
                 task["input"] = input.value;
                 task["checkBox"] = shadowRoot.childNodes[1].checked;
-                task["confirmDisable"]= true;
-                task["inputDisable"]= true;
                 found = true;
             }
         });
         if(found===false){
             localTasks.push(taskObject);
         }
-        saveRecipesToStorage(localTasks);
+        saveTasksToStorage(localTasks);
     });
 }
 
