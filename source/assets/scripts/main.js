@@ -45,7 +45,7 @@ function taskCount(){
  * @returns {Array<Object>} An array of tasks found in localStorage
  */
 function getTasksFromStorage() {
-    return JSON.parse(localStorage.getItem('savedTasks')) || [];
+    return JSON.parse(localStorage.getItem('savedTasks')) || [[],[],[],[],[],[],[]];
 }
 
 /**
@@ -256,16 +256,6 @@ function confirmTasks(taskID){
         };
 
         let localTasks = getTasksFromStorage();
-        if(localTasks.length === 0){
-            localTasks.push([]);
-            localTasks.push([]);
-            localTasks.push([]);
-            localTasks.push([]);
-            localTasks.push([]);
-            localTasks.push([]);
-            localTasks.push([]);
-        }
-
         let found = false;
         Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
             if(taskID===task["taskID"]){
