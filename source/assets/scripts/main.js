@@ -37,7 +37,7 @@ function addTasksToDocument(savedTasks) {
             if(taskBoard.id==task["day"]){
                 let newTask = document.createElement("task-card");
                 // get new task id, == Monday0,Tuesday0,......
-                let newTaskID = taskBoard.id+ (document.getElementById(taskBoard.id).getElementsByTagName("task-card").length);
+                let newTaskID = task["taskID"];
                 // add <task-card> id = Monday0, Monday1,......
                 newTask.setAttribute("id", newTaskID);
                 if(task == null){
@@ -109,7 +109,8 @@ function addTasks(task){
             let taskBoard = addBtn.parentNode;
             let newTask = document.createElement("task-card");
             // get new task id, == Monday0,Tuesday0,......
-            let newTaskID = taskBoard.id+ (document.getElementById(taskBoard.id).getElementsByTagName("task-card").length);
+            let newTaskID = taskBoard.id+ Math.floor(Math.random() * 99999)+(Math.random() + 1).toString(36).substring(7);
+            console.log(newTaskID);
             // add <task-card> id = Monday0, Monday1,......
             newTask.setAttribute("id", newTaskID);
             if(task == null){
