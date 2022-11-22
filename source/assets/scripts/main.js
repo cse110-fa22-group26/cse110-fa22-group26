@@ -203,7 +203,7 @@ function confirmTasks(taskID){
             if(taskID===task["taskID"]){
                 console.log(task["taskID"]);
                 task["input"] = input.value;
-                task["checkBox"] = shadowRoot.childNodes[1].checked;
+                task["checkBox"] = shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked;
                 found = true;
             }
         });
