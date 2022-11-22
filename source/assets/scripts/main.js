@@ -13,6 +13,35 @@ function init() {
 }
 
 /**
+ * count number of tasks for each day
+ * add task count to each day button.
+ */
+function taskCount(){
+    let addBtns = document.getElementsByClassName("addBtn");
+    const taskCount = {
+        "Monday": 0,
+        "Tuesday": 0,
+        "Wednesday": 0,
+        "Thursday": 0,
+        "Friday": 0,
+        "Saturday": 0,
+        "Sunday": 0
+    };
+    Array.from(addBtns).forEach(btn =>{
+        taskCount[btn.parentNode.id] = btn.parentNode.childElementCount-1; 
+    });
+    let lists = document.getElementsByClassName("collapsible");
+    Array.from(lists).forEach(list =>{
+        console.log(list.getElementsByTagName('span')[0].textContent);
+        list.getElementsByTagName('span')[1].textContent = ` 
+        (${taskCount[list.getElementsByTagName('span')[0].textContent]} Tasks,
+        0 Done)
+        `;
+    });
+}
+
+
+/**
  * load tasks from local storage
  * @returns {Array<Object>} An array of tasks found in localStorage
  */
@@ -46,16 +75,18 @@ function addTasksToDocument(savedTasks) {
                 addtaskFunction(newTaskID);
             }
             daysWithTasks.add(task["day"]);
+            taskCount[task["day"]] += 1; // get task count for each day, need to divide by 7
         });
     });
 
     // initially uncollapse days with tasks
     let lists = document.getElementsByClassName("collapsible");
     for(const dayBtn of lists){
-        if(daysWithTasks.has(dayBtn.textContent)){
+        if(daysWithTasks.has(dayBtn.getElementsByTagName('span')[0].textContent)){
             dayBtn.click();
         }
     }
+    taskCount();
   }
 
 
@@ -109,7 +140,6 @@ function addTasks(task){
             let newTask = document.createElement("task-card");
             // get new task id, == Monday0,Tuesday0,......
             let newTaskID = taskBoard.id+ Math.floor(Math.random() * 99999)+(Math.random() + 1).toString(36).substring(7);
-            console.log(newTaskID);
             // add <task-card> id = Monday0, Monday1,......
             newTask.setAttribute("id", newTaskID);
             if(task == null){
@@ -128,6 +158,7 @@ function addTasks(task){
             addtaskFunction(newTaskID);
         });
     });
+    // count number of tasks after adding new tasks
 }
 /**
  * add delete, edit, confirm functionality to newly added task 
@@ -157,6 +188,7 @@ function deleteTasks(taskID){
         }
         // saved modified tasks to localstorage
         saveTasksToStorage(localTasks);
+        taskCount();
     });
 }
 
@@ -210,6 +242,7 @@ function confirmTasks(taskID){
             localTasks.push(taskObject);
         }
         saveTasksToStorage(localTasks);
+        taskCount();
     });
 }
 
