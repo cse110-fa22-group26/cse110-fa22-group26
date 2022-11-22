@@ -56,7 +56,7 @@ function getTasksFromStorage() {
  */
 function addTasksToDocument(savedTasks) {
     // if no saved tasks return.
-    if (savedTasks == null) return;    
+    if (savedTasks.length===0) return;    
     const dayIndex = {
         "Monday": 0,
         "Tuesday": 1,
