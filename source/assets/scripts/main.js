@@ -32,7 +32,6 @@ function addTasksToDocument(savedTasks) {
     let addBtns = document.getElementsByClassName("addBtn");
     Array.from(addBtns).forEach(addBtn => {
         Array.from(savedTasks).forEach(task =>{
-            // find corresponding sibling text element
             let taskBoard = addBtn.parentNode;
             if(taskBoard.id==task["day"]){
                 let newTask = document.createElement("task-card");
@@ -40,16 +39,6 @@ function addTasksToDocument(savedTasks) {
                 let newTaskID = task["taskID"];
                 // add <task-card> id = Monday0, Monday1,......
                 newTask.setAttribute("id", newTaskID);
-                if(task == null){
-                    task = {
-                        "day": taskBoard.parentNode.id,
-                        "taskID": newTaskID, 
-                        "input":"", 
-                        "checkBox":false,
-                        "confirmDisable": false,
-                        "inputDisable": false
-                    };
-                }
                 newTask.data = task;
                 taskBoard.insertBefore(newTask, addBtn);
                 // add function to icons of new task
@@ -63,7 +52,7 @@ function addTasksToDocument(savedTasks) {
 /**
  * Takes in an array of recipes, converts it to a string, and then
  * saves that string to 'recipes' in localStorage
- * @param {Array<Object>} recipes An array of recipes
+ * @param {Array<Object>} savedTasks An array of recipes
  */
 function saveTasksToStorage(savedTasks) {
     localStorage.setItem('savedTasks',JSON.stringify(savedTasks));
@@ -146,19 +135,19 @@ function deleteTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
     let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
-    let localTasks = getTasksFromStorage();
     deleteBtn.addEventListener("click", (event) => {
         taskBlock.remove();
+        // get current localStorage
         let localTasks = getTasksFromStorage();
+        // splice out the deleted task in localstorage
         for(let i = 0; i< localTasks.length; i++){
             if(taskID===localTasks[i]["taskID"]){
                 localTasks.splice(i, 1);
             }
         }
+        // saved modified tasks to localstorage
         saveTasksToStorage(localTasks);
     });
-    // update localStorage by remove taks with taskID
-
 }
 
 /**
