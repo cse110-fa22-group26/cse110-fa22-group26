@@ -166,8 +166,8 @@ function addTasks(task){
             addtaskFunction(newTaskID);
         });
     });
-    // count number of tasks after adding new tasks
 }
+
 /**
  * add delete, edit, confirm functionality to newly added task 
  */
@@ -179,6 +179,8 @@ function addtaskFunction(taskID){
 
 /**
  * give newest delete btn functionality to remove relevant task
+ * on click delete, will remove the task shadow dom and remove from
+ * localstorage.
  */
 function deleteTasks(taskID){
     let taskBlock = document.getElementById(taskID);
@@ -212,6 +214,7 @@ function deleteTasks(taskID){
 
 /**
  * give newest edit btn functionality to edit relevant task input
+ * on click edit, will active input box and confirm button.
  */
 function editTasks(taskID){
     let taskBlock = document.getElementById(taskID);
@@ -227,6 +230,8 @@ function editTasks(taskID){
 
 /**
  * give newest confirm btn functionality to confirm and block user from change input 
+ * on click confirm, will either update the new input in localstorage 
+ * or create a new task if task does not already exist.
  */
 function confirmTasks(taskID){
     let taskBlock = document.getElementById(taskID);
@@ -254,7 +259,7 @@ function confirmTasks(taskID){
             "confirmDisable": true,
             "inputDisable": true
         };
-
+        // get tasks from localstorage
         let localTasks = getTasksFromStorage();
         let found = false;
         Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
@@ -264,11 +269,12 @@ function confirmTasks(taskID){
                 found = true;
             }
         });
+        // add new task to localstorage if task does not exist.
         if(found===false){
             localTasks[dayIndex[taskBlock.parentNode.id]].push(taskObject);
         }
-        saveTasksToStorage(localTasks);
-        taskCount();
+        saveTasksToStorage(localTasks);     // save to localstorage
+        taskCount();    // update task count.
     });
 }
 

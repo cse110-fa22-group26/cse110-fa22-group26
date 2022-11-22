@@ -1,4 +1,9 @@
-// task shadow dom
+/* 
+* task shadow dom
+* dynamically add new <task-card> when add button clicked
+* either create a empty <task-card> or
+* update current <task-card> with data input.
+*/
 class taskCard extends HTMLElement {
     constructor() {
       super(); // Inheret everything from HTMLElement
