@@ -7,8 +7,67 @@ function init() {
     // add collapsible function to list titles
     addCollapsibleControls();
     // add correspondinng event listener when user want to add task
+    let savedTasks = getTasksFromStorage();
+    addTasksToDocument(savedTasks);
     addTasks();
 }
+
+/**
+ * load tasks from local storage
+ * @returns {Array<Object>} An array of tasks found in localStorage
+ */
+function getTasksFromStorage() {
+    return JSON.parse(localStorage.getItem('savedTasks')) || [];
+}
+
+/**
+ * Takes in an array of tasks and for each tasks creates a
+ * new <task-card> element, adds the tasks data to that card
+ * then appends that new task to it's coresponding days
+ * @param {Array<Object>} savedTasks An array of tasks
+ */
+function addTasksToDocument(savedTasks) {
+    // if no saved tasks return.
+    if (savedTasks == null) return;    
+    let addBtns = document.getElementsByClassName("addBtn");
+    Array.from(addBtns).forEach(addBtn => {
+        Array.from(savedTasks).forEach(task =>{
+            // find corresponding sibling text element
+            let taskBoard = addBtn.parentNode;
+            if(taskBoard.id==task["day"]){
+                let newTask = document.createElement("task-card");
+                // get new task id, == Monday0,Tuesday0,......
+                let newTaskID = taskBoard.id+ (document.getElementById(taskBoard.id).getElementsByTagName("task-card").length);
+                // add <task-card> id = Monday0, Monday1,......
+                newTask.setAttribute("id", newTaskID);
+                if(task == null){
+                    task = {
+                        "day": taskBoard.parentNode.id,
+                        "taskID": newTaskID, 
+                        "input":"", 
+                        "checkBox":false,
+                        "confirmDisable": false,
+                        "inputDisable": false
+                    };
+                }
+                newTask.data = task;
+                taskBoard.insertBefore(newTask, addBtn);
+                // add function to icons of new task
+                addtaskFunction(newTaskID);
+            }
+        });
+    });
+  }
+
+
+/**
+ * Takes in an array of recipes, converts it to a string, and then
+ * saves that string to 'recipes' in localStorage
+ * @param {Array<Object>} recipes An array of recipes
+ */
+function saveRecipesToStorage(savedTasks) {
+    localStorage.setItem('savedTasks',JSON.stringify(savedTasks));
+  }
 
 /**
  * Add collapsible controls to the element with collapsible class.
@@ -42,7 +101,7 @@ function addCollapsibleControls(){
  * Add event handler to all add buttons of each day's list. When user click add btn,
  * a new task div will appear
  */
-function addTasks(){
+function addTasks(task){
     let addBtns = document.getElementsByClassName("addBtn");
     Array.from(addBtns).forEach(addBtn => {
         addBtn.addEventListener("click", (event) => {
@@ -53,6 +112,17 @@ function addTasks(){
             let newTaskID = taskBoard.id+ (document.getElementById(taskBoard.id).getElementsByTagName("task-card").length);
             // add <task-card> id = Monday0, Monday1,......
             newTask.setAttribute("id", newTaskID);
+            if(task == null){
+                task = {
+                    "day": taskBoard.parentNode.id,
+                    "taskID": newTaskID, 
+                    "input":"", 
+                    "checkBox":false,
+                    "confirmDisable": false,
+                    "inputDisable": false
+                };
+            }
+            newTask.data = task;
             taskBoard.insertBefore(newTask, addBtn);
             // add function to icons of new task
             addtaskFunction(newTaskID);
@@ -74,9 +144,17 @@ function addtaskFunction(taskID){
 function deleteTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
-    let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName('deleteBtn')[0];
+    // let delBtn = taskBlock.getElementsByClassName("deleteBtn")[0];
+    console.log(shadowRoot.childNodes);
+    let deleteBtn = shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
+    let localTasks = getTasksFromStorage();
     deleteBtn.addEventListener("click", (event) => {
         taskBlock.remove();
+        for(let i = 0; i < localTasks.length; i++){
+            if(localTasks[i]["taskID"] === taskID){
+                localStorage.removeItem(taskID);
+            }
+        }
     });
     // update localStorage by remove taks with taskID
 
@@ -88,10 +166,10 @@ function deleteTasks(taskID){
 function editTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
-    let editBtn = shadowRoot.childNodes[0].getElementsByClassName('editBtn')[0];
+    let editBtn = shadowRoot.childNodes[0].getElementsByClassName("editBtn")[0];
+    let input = shadowRoot.childNodes[0].getElementsByTagName("input")[1];
+    let confirmBtn = shadowRoot.childNodes[0].getElementsByClassName("confirmBtn")[0];
     editBtn.addEventListener("click", (event) => {
-        let input = shadowRoot.childNodes[0].querySelectorAll("input")[1];
-        let confirmBtn = shadowRoot.childNodes[0].querySelector("button");
         input.disabled = false;
         confirmBtn.disabled = false;
     });
@@ -104,11 +182,39 @@ function confirmTasks(taskID){
     let taskBlock = document.getElementById(taskID);
     let shadowRoot = taskBlock.shadowRoot;
     let confirmBtn = shadowRoot.childNodes[0].getElementsByClassName('confirmBtn')[0];
+    let input = shadowRoot.childNodes[0].getElementsByTagName('input')[1];
+    console.log(input);
     confirmBtn.addEventListener("click", (event) => {
-        let input = shadowRoot.childNodes[0].querySelectorAll("input")[1];
-        let confirmBtn = shadowRoot.childNodes[0].querySelector("button");
         input.disabled = true;
         confirmBtn.disabled = true;
+        let taskObject = {};
+        taskObject = {
+            "day": taskBlock.parentNode.id,
+            "taskID": taskID, 
+            "input":input.value, 
+            "checkBox":shadowRoot.childNodes[1].checked,
+            "confirmDisable": true,
+            "inputDisable": true
+        };
+
+        let localTasks = getTasksFromStorage();
+        let found = false;
+        Array.from(localTasks).forEach(task =>{
+            // find corresponding sibling text element
+            if(taskID===task["taskID"]){
+                task["day"]= taskBlock.parentNode.id;
+                task["taskID"]= taskID;
+                task["input"] = input.value;
+                task["checkBox"] = shadowRoot.childNodes[1].checked;
+                task["confirmDisable"]= true;
+                task["inputDisable"]= true;
+                found = true;
+            }
+        });
+        if(found===false){
+            localTasks.push(taskObject);
+        }
+        saveRecipesToStorage(localTasks);
     });
 }
 

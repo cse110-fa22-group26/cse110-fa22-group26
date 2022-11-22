@@ -3,32 +3,34 @@ class taskCard extends HTMLElement {
     constructor() {
       super(); // Inheret everything from HTMLElement
       
-      const taskShadowOpen = this.attachShadow({ mode: "open" });
-      let shadowRoot = this.shadowRoot;
-      const fontAwesomeScript = document.querySelector(
-        `script[src*="https://kit.fontawesome.com/8c6cfa6ebd.js"]`
-      );
-      const id = setInterval(() => {
-        console.log('setInterval');
-        const fontAwesomeFont = document.querySelector('#fa-v5-font-face');
-        const fontAwesomeMain = document.querySelector('#fa-main');
-        if (fontAwesomeScript && fontAwesomeFont && fontAwesomeMain) {
-          shadowRoot.appendChild(fontAwesomeScript.cloneNode());
-          shadowRoot.appendChild(fontAwesomeFont.cloneNode('deep'));
-          shadowRoot.appendChild(fontAwesomeMain.cloneNode('deep'));
-          clearInterval(id);
-        }
-      }, 1);
+      const shadowRoot = this.attachShadow({ mode: "open" });
+    //   let shadowRoot = this.shadowRoot;
+    //   const fontAwesomeScript = document.querySelector(
+    //     `script[src*="https://kit.fontawesome.com/8c6cfa6ebd.js"]`
+    //   );
+    //   const id = setInterval(() => {
+    //     console.log('setInterval');
+    //     const fontAwesomeFont = document.querySelector('#fa-v5-font-face');
+    //     const fontAwesomeMain = document.querySelector('#fa-main');
+    //     if (fontAwesomeScript && fontAwesomeFont && fontAwesomeMain) {
+    //       shadowRoot.appendChild(fontAwesomeScript.cloneNode());
+    //       shadowRoot.appendChild(fontAwesomeFont.cloneNode('deep'));
+    //       shadowRoot.appendChild(fontAwesomeMain.cloneNode('deep'));
+    //       clearInterval(id);
+    //     }
+    //   }, 1);
+      
+    // //   const taskDiv = document.createElement("div");
+    // //   taskDiv.setAttribute("class", "tasks");
+    //   shadowRoot.innerHTML += `
+    //   <input type="checkbox">
+    //   <input type="text" name="taskName" class="input">
+    //   <i class="fa-solid fa-trash-can icon deleteBtn"></i>
+    //   <i class="fa-solid fa-pen-to-square icon editBtn"></i>
+    //   <button type="submit" class="confirmBtn">Confirm</button>
+    //   <br>`;
 
-      const taskDiv = document.createElement("div");
-      taskDiv.setAttribute("class", "tasks");
-      taskDiv.innerHTML += `<input type="checkbox">
-      <input type="text" name="taskName" class="input">
-      <i class="fa-solid fa-trash-can icon deleteBtn"></i>
-      <i class="fa-solid fa-pen-to-square icon editBtn"></i>
-      <button type="submit" class="confirmBtn">Confirm</button>`;
-
-      taskShadowOpen.appendChild(taskDiv);
+    //   taskShadowOpen.appendChild(taskDiv);
     }
   
     /**
@@ -55,15 +57,46 @@ class taskCard extends HTMLElement {
     set data(data) {
       // If nothing was passed in, return
       if (!data) return;
+      let shadowRoot = this.shadowRoot;
+      const fontAwesomeScript = document.querySelector(
+        `script[src*="https://kit.fontawesome.com/8c6cfa6ebd.js"]`
+      );
+      const id = setInterval(() => {
+        console.log('setInterval');
+        const fontAwesomeFont = document.querySelector('#fa-v5-font-face');
+        const fontAwesomeMain = document.querySelector('#fa-main');
+        if (fontAwesomeScript && fontAwesomeFont && fontAwesomeMain) {
+          shadowRoot.appendChild(fontAwesomeScript.cloneNode());
+          shadowRoot.appendChild(fontAwesomeFont.cloneNode('deep'));
+          shadowRoot.appendChild(fontAwesomeMain.cloneNode('deep'));
+          clearInterval(id);
+        }
+      }, 1);
+      
+    //   const taskDiv = document.createElement("div");
+    //   taskDiv.setAttribute("class", "tasks");
+    //   shadowRoot.innerHTML += `
+    //   <input type="checkbox">
+    //   <input type="text" name="taskName" class="input">
+    //   <i class="fa-solid fa-trash-can icon deleteBtn"></i>
+    //   <i class="fa-solid fa-pen-to-square icon editBtn"></i>
+    //   <button type="submit" class="confirmBtn">Confirm</button>
+    //   <br>`;
 
-      let shadow = this.shadowRoot;
-      let getTaskDiv = shadow.createElement("div");
-      getTaskDiv.innerHTML += `<input type="checkbox">
-      <input type="text" name="taskName" class="input">
+      let newTaskDiv = document.createElement('div');
+    //   newTaskDiv.setAttribute("id", data["taskID"]);
+      newTaskDiv.innerHTML += `
+      <input type="checkbox">
+      <input type="text" name="taskName" class="input" value=${data["input"]}>
       <i class="fa fa-trash icon deleteBtn"></i>
       <i class="fas fa-edit icon editBtn"></i>
-      <button type="submit" class="confirmBtn">Confirm</button>`;
+      <button type="submit" class="confirmBtn" >Confirm</button>`;
+      newTaskDiv.getElementsByTagName('input')[1].disabled = data["inputDisable"];
+      newTaskDiv.getElementsByTagName('button')[0].disabled=data["confirmDisable"];
+      newTaskDiv.getElementsByTagName('input')[0].checked = data["checkBox"];
+      shadowRoot.appendChild(newTaskDiv);
     }
+    
   }
   
   customElements.define("task-card", taskCard);
