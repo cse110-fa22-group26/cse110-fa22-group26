@@ -30,6 +30,7 @@ function addTasksToDocument(savedTasks) {
     // if no saved tasks return.
     if (savedTasks == null) return;    
     let addBtns = document.getElementsByClassName("addBtn");
+    const daysWithTasks = new Set();
     Array.from(addBtns).forEach(addBtn => {
         Array.from(savedTasks).forEach(task =>{
             let taskBoard = addBtn.parentNode;
@@ -44,8 +45,17 @@ function addTasksToDocument(savedTasks) {
                 // add function to icons of new task
                 addtaskFunction(newTaskID);
             }
+            daysWithTasks.add(task["day"]);
         });
     });
+
+    // initially uncollapse days with tasks
+    let lists = document.getElementsByClassName("collapsible");
+    for(const dayBtn of lists){
+        if(daysWithTasks.has(dayBtn.textContent)){
+            dayBtn.click();
+        }
+    }
   }
 
 
