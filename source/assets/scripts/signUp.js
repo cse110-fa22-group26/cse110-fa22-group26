@@ -57,7 +57,7 @@ function getUserSignUpInfo() {
 
         //create the new user object and put it in database
         db.push({
-          usename: userObj.username,
+          username: userObj.username,
           password: userObj.password,
           tasks: [...userObj.tasks],
         });
