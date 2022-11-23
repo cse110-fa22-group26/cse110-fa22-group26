@@ -27,14 +27,30 @@ function taskCount(){
         "Saturday": 0,
         "Sunday": 0
     };
+    const doneCount = {
+        "Monday": 0,
+        "Tuesday": 0,
+        "Wednesday": 0,
+        "Thursday": 0,
+        "Friday": 0,
+        "Saturday": 0,
+        "Sunday": 0
+    };
     Array.from(addBtns).forEach(btn =>{
         taskCount[btn.parentNode.id] = btn.parentNode.childElementCount-1; 
+        let day = btn.parentNode;
+        let taskCard = day.getElementsByTagName('task-card');
+        Array.from(taskCard).forEach(ts =>{
+            let shadowRoot = ts.shadowRoot;
+            let checked = shadowRoot.childNodes[0].querySelectorAll('input[type=checkbox]:checked');
+            if(checked[0]) doneCount[btn.parentNode.id]++;
+        })
     });
     let lists = document.getElementsByClassName("collapsible");
     Array.from(lists).forEach(list =>{
         list.getElementsByTagName('span')[1].textContent = ` 
         (${taskCount[list.getElementsByTagName('span')[0].textContent]} Tasks,
-        0 Done)
+        ${doneCount[list.getElementsByTagName('span')[0].textContent]} Done)
         `;
     });
 }
@@ -175,32 +191,7 @@ function addtaskFunction(taskID){
     deleteTasks(taskID);
     editTasks(taskID);
     confirmTasks(taskID);
-    checkTask(taskID);
-}
-
-function checkTask(taskID){
-    let taskBlock = document.getElementById(taskID);
-    let shadowRoot = taskBlock.shadowRoot;
-    let checkBox = shadowRoot.childNodes[0].getElementsByClassName("checkbox")[0];
-    const dayIndex = {
-        "Monday": 0,
-        "Tuesday": 1,
-        "Wednesday": 2,
-        "Thursday": 3,
-        "Friday": 4,
-        "Saturday": 5,
-        "Sunday": 6
-    };
-    checkBox.addEventListener("click", (event) => {
-        // get tasks from localstorage
-        let localTasks = getTasksFromStorage();
-        Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
-            if(taskID===task["taskID"]){
-                task["checkBox"] = shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked;
-            }
-        });
-        saveTasksToStorage(localTasks);     // save to localstorage
-    });
+    checkTask(taskID)
 }
 
 /**
@@ -251,6 +242,37 @@ function editTasks(taskID){
     editBtn.addEventListener("click", (event) => {
         input.disabled = false;
         confirmBtn.disabled = false;
+    });
+}
+
+/**
+ * check number of tasks marked done
+ * update new count to display
+ * update to localstorage
+ */
+function checkTask(taskID){
+    let taskBlock = document.getElementById(taskID);
+    let shadowRoot = taskBlock.shadowRoot;
+    let checkBox = shadowRoot.childNodes[0].getElementsByClassName("checkbox")[0];
+    const dayIndex = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+    };
+    checkBox.addEventListener("click", (event) => {
+        // get tasks from localstorage
+        let localTasks = getTasksFromStorage();
+        Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
+            if(taskID===task["taskID"]){
+                task["checkBox"] = shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked;
+            }
+        });
+        taskCount(); // update task count
+        saveTasksToStorage(localTasks);     // save to localstorage
     });
 }
 
