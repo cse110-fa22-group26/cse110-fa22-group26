@@ -175,6 +175,32 @@ function addtaskFunction(taskID){
     deleteTasks(taskID);
     editTasks(taskID);
     confirmTasks(taskID);
+    checkTask(taskID);
+}
+
+function checkTask(taskID){
+    let taskBlock = document.getElementById(taskID);
+    let shadowRoot = taskBlock.shadowRoot;
+    let checkBox = shadowRoot.childNodes[0].getElementsByClassName("checkbox")[0];
+    const dayIndex = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6
+    };
+    checkBox.addEventListener("click", (event) => {
+        // get tasks from localstorage
+        let localTasks = getTasksFromStorage();
+        Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(task =>{
+            if(taskID===task["taskID"]){
+                task["checkBox"] = shadowRoot.childNodes[0].getElementsByTagName('input')[0].checked;
+            }
+        });
+        saveTasksToStorage(localTasks);     // save to localstorage
+    });
 }
 
 /**
