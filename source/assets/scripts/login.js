@@ -43,23 +43,37 @@ function getUserDB() {
 function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials
   let found = false;
+  let usrname = "";
+  let tasks = [];
   const todoListDB = localStorage.getItem("todoListDB");
   if (todoListDB) {
     const db = JSON.parse(todoListDB);
     for (let i = 0; i < db.length; i++) {
       if (db[i].username === username && db[i].password === password) {
         found = true;
+
+        // set the username and tasks
+        usrname = db[i].username;
+        tasks = [...db[i].tasks];
         break;
       }
     }
-    
-    if (found) console.log("user found");
-    else console.log("user not found");
+
+    if (found) {
+      console.log("user found");
+
+      // on user found add user object with tasks array and username in local storage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username: usrname, tasks: tasks })
+      );
+
+      // redirect to the new page
+      location.replace("homePage.html");
+    } else {
+      console.log("user not found");
+    }
   } else {
     console.log("no db");
   }
-
-  // else {
-  //   location.replace("homePage.html");
-  // }
 }
