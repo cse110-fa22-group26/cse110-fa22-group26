@@ -99,7 +99,6 @@ function addTasksToDocument(savedTasks) {
                 addtaskFunction(newTaskID);
             }
             daysWithTasks.add(task["day"]);
-            taskCount[task["day"]] += 1; // get task count for each day, need to divide by 7
         });
     });
 
@@ -166,16 +165,14 @@ function addTasks(task){
             let newTaskID = taskBoard.id+ Math.floor(Math.random() * 99999)+(Math.random() + 1).toString(36).substring(7);
             // add <task-card> id = Monday0, Monday1,......
             newTask.setAttribute("id", newTaskID);
-            if(task == null){
-                task = {
-                    "day": taskBoard.parentNode.id,
-                    "taskID": newTaskID, 
-                    "input":"", 
-                    "checkBox":false,
-                    "confirmDisable": false,
-                    "inputDisable": false
-                };
-            }
+            task = {
+                "day": taskBoard.parentNode.id,
+                "taskID": newTaskID, 
+                "input":"", 
+                "checkBox":false,
+                "confirmDisable": false,
+                "inputDisable": false
+            };
             newTask.data = task;
             taskBoard.insertBefore(newTask, addBtn);
             // add function to icons of new task

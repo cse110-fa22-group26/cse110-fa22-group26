@@ -48,7 +48,7 @@ class taskCard extends HTMLElement {
       // add task element valuse.
       newTaskDiv.innerHTML += `
       <input type="checkbox" class="checkbox">
-      <input type="text" name="taskName" class="input" value=${data["input"]}>
+      <input type="text" name="taskName" class="input" value="${data["input"]}">
       <i class="fa fa-trash icon deleteBtn"></i>
       <i class="fas fa-edit icon editBtn"></i>
       <button type="submit" class="confirmBtn" >Confirm</button>`;
