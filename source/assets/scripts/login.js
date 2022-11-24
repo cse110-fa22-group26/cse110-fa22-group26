@@ -76,8 +76,4 @@ function findAndSetUsersDB(username, password) {
   } else {
     console.log("no db");
   }
-
-  // else {
-  //   location.replace("homePage.html");
-  // }
 }

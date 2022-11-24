@@ -70,7 +70,6 @@ function getUserSignUpInfo() {
         userDup.textContent = "";
         loginForm.reset();
 
-       
         // setting the user as an logged in user in the system
         localStorage.setItem(
           "user",
@@ -78,24 +77,22 @@ function getUserSignUpInfo() {
             username: userObj.username,
             tasks: [...userObj.tasks],
           })
-        )
+        );
 
         // redirect to the new page
         location.replace("homePage.html");
       }
     }
-
-    // check if credential exist in db. If match, get and save related taskDB
   });
 }
 
-/*
-  we need a function to save user input to local storage
+/** 
+ * we need a function to save user input to local storage
   function should ensure the password's match
   ensure that username does not already exist. If it works,
   then save to local storage
-*/
-
+ * @returns {object} - database 
+**/
 function getDB() {
   const db = localStorage.getItem("todoListDB");
   if (db) {
@@ -107,8 +104,10 @@ function getDB() {
 }
 
 /**
- *
+ * Function checks for user existence in the database
  * @param {Object[]} db
+ * @param {string} username
+ * @returns {boolean}
  */
 function usernameExists(db, username) {
   //populating username array
