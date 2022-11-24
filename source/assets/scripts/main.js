@@ -325,4 +325,3 @@ function confirmTasks(taskID){
         taskCount();    // update task count.
     });
 }
-

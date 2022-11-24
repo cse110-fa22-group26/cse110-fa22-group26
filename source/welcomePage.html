@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="assets/styles/welcomePageStyling.css">
+    <script src="assets/scripts/login.js" type="module"></script>
+    <title>Welcome Page</title>
+  </head>
+  <body>
+    <main id="mainEle">
+      <h1 id="welcomeHeading">Welcome</h1>
+      <h2 id="welcomeMessage">Start planning your week</h2>
+      <div class="signup-form">
+        <form>
+          <label for="username">Username</label><br>
+          <input required type="text" name="username" id="username">
+          <br><br>
+          <label for="password">Password</label><br>
+          <input required type="password" name="password" id="password"><br>
+          <p id="warningMessage"></p>
+          <button type="submit" class="login-button">Log in</button>
+        </form>
+        <p id="signUpMessage">
+          Don't have an account? <a href="signUp.html">Sign up</a>
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
