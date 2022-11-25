@@ -70,6 +70,21 @@ function taskCount() {
         ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done)
         `;
   });
+  
+  // update progress bar
+  let totalTasks = taskCount["Monday"] + taskCount["Tuesday"]+ taskCount["Wednesday"]+ taskCount["Thursday"]+ 
+                    taskCount["Friday"]+ taskCount["Saturday"]+ taskCount["Sunday"];
+  let totalDone = doneCount["Monday"] + doneCount["Tuesday"]+ doneCount["Wednesday"]+ doneCount["Thursday"]+ 
+                  doneCount["Friday"]+ doneCount["Saturday"]+ doneCount["Sunday"];
+  let progBar = document.getElementsByClassName('circle-container__progress')[0];
+  let progress = totalDone/totalTasks*63 < 8? 8: totalDone/totalTasks*63;
+  progBar.style["stroke-dasharray"] = [progress, 100];
+  let progressTxt = document.getElementById('progTxt');
+  if(progress < 15) progressTxt.textContent = "TOO LAZY!";
+  else if(progress < 30) progressTxt.textContent = "Doing Smth";
+  else if(progress < 50) progressTxt.textContent = "On Schedule!";
+  else if(progress < 63) progressTxt.textContent = "Almost Done!";
+  else progressTxt.textContent = "ALL DONE!";
 }
 
 /**

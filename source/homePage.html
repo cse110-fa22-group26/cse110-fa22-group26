@@ -37,6 +37,19 @@
       <h1 id="title">Weekly Planner</h1>
     </header>
     <main>
+        <!--progress bar-->
+        <div class="container">
+          <svg class="circle-container" viewBox="-45 20 90 15">
+            <linearGradient id="gradient">
+              <stop class="stop1" offset="00%" />
+              <stop class="stop2" offset="100%" />
+            </linearGradient>
+            <text id="progTxt" x="0%" y="150%"  alignment-baseline="middle" text-anchor="middle" stroke="#51c5cf" stroke-width=".2px" font-size="4px" dy=".7em">Lazy now</text>
+            <circle class="circle-container__background" r="35%" cx="0" cy="12" shape-rendering="geometricPrecision"></circle>
+            <circle class="circle-container__progress" r="35%" cx="0" cy="12" style="stroke-dashoffset: 0" shape-rendering="geometricPrecision">
+            </circle>
+          </svg>
+        </div>
         <!--You may use this to test and write styles for task, list, and board of task lists-->
         <div id="board">
             <div id="weekdays" class="list">
