@@ -88,21 +88,16 @@ function taskCount() {
 }
 
 /**
- * load tasks from local storage
- * @returns {Array<Object>} An array of tasks found in localStorage
+ * load db from local storage
+ * @returns {Array<Object>} An array of users found in localStorage
  */
 function getTasksFromStorage() {
-  return (
-    JSON.parse(localStorage.getItem("todoListDB")) || [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-    ]
-  );
+  //check if "todoListDB" exist
+  if (localStorage.getItem("todoListDB")) {
+    return JSON.parse(localStorage.getItem("todoListDB"));
+  } else {
+    return [];
+  }
 }
 
 /**
@@ -163,10 +158,10 @@ function saveTasksToStorage(savedTasks) {
   let userDB = JSON.parse(localStorage.getItem("user"));
   let username = userDB.username;
   let todoListDB = getTasksFromStorage();
-  for(let i = 0; i < todoListDB.length; i++){
-    if(todoListDB[i].username == username){
-      todoListDB[i]['tasks']=savedTasks;
-      userDB['tasks'] = savedTasks;
+  for (let i = 0; i < todoListDB.length; i++) {
+    if (todoListDB[i].username == username) {
+      todoListDB[i]["tasks"] = savedTasks;
+      userDB["tasks"] = savedTasks;
       localStorage.setItem("user", JSON.stringify(userDB));
     }
   }
@@ -236,7 +231,6 @@ function addTasks(task) {
   });
 }
 
-
 /**
  * add delete, edit, confirm functionality to newly added task
  */
@@ -269,7 +263,7 @@ function deleteTasks(taskID) {
   deleteBtn.addEventListener("click", (event) => {
     // get current localStorage
     let user = JSON.parse(localStorage.getItem("user"));
-    let localTasks = user['tasks'];
+    let localTasks = user["tasks"];
     // splice out the deleted task in localstorage
     for (
       let i = 0;
@@ -328,7 +322,7 @@ function checkTask(taskID) {
   checkBox.addEventListener("click", (event) => {
     // get tasks from localstorage
     let user = JSON.parse(localStorage.getItem("user"));
-    let localTasks = user['tasks'];
+    let localTasks = user["tasks"];
     Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(
       (task) => {
         if (taskID === task["taskID"]) {
@@ -377,7 +371,7 @@ function confirmTasks(taskID) {
     };
     // get tasks from localstorage
     let user = JSON.parse(localStorage.getItem("user"));
-    let localTasks = user['tasks'];
+    let localTasks = user["tasks"];
 
     let found = false;
     Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(
