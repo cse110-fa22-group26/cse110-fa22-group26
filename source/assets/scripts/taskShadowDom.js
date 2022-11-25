@@ -49,8 +49,8 @@ class taskCard extends HTMLElement {
       newTaskDiv.innerHTML += `
       <input type="checkbox" class="checkbox">
       <input type="text" name="taskName" class="input" value="${data["input"]}">
-      <i class="fa fa-trash icon deleteBtn"></i>
-      <i class="fas fa-edit icon editBtn"></i>
+      <i class="fa fa-trash icon deleteBtn" style="cursor: pointer;"></i>
+      <i class="fas fa-edit icon editBtn" style="cursor: pointer;"></i>
       <button type="submit" class="confirmBtn" >Confirm</button>`;
       newTaskDiv.getElementsByTagName('input')[1].disabled = data["inputDisable"];
       newTaskDiv.getElementsByTagName('button')[0].disabled=data["confirmDisable"];
@@ -71,6 +71,8 @@ class taskCard extends HTMLElement {
         input[type=text] {
             background: #f4ecec;
             width: 80%;
+            border: solid 1px;
+            border-radius: 5px;
             padding: 10px 10px;
             margin: 8px;
         }

@@ -66,8 +66,8 @@ function taskCount() {
   let lists = document.getElementsByClassName("collapsible");
   Array.from(lists).forEach((list) => {
     list.getElementsByTagName("span")[1].textContent = ` 
-        (${taskCount[list.getElementsByTagName("span")[0].textContent]} Tasks,
-        ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done)
+        ${taskCount[list.getElementsByTagName("span")[0].textContent]} Tasks - 
+        ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done
         `;
   });
 }
