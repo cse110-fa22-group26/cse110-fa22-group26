@@ -3,22 +3,25 @@ name: CI
 on: [push]
 
 jobs:
-  web-deploy:
-    name: HTML-validator
+  code-validators:
+    name: code-validator
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.2 
-      - name: Test Files # https://github.com/marketplace/actions/html5-validator
+      - uses: actions/checkout@v2.3.2 # checkout the code
+      - name: HTML Validator # https://github.com/marketplace/actions/html5-validator
         uses: Cyb3r-Jak3/html5validator-action@v0.6.1 
         with:
           root: ./source/
-  codacy-analysis-cli:
-    name: Codacy Analysis CLI
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@main
-
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
+    
+      - uses: actions/checkout@v3 # checkout the code
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+        
+      - name: Lint Code Base #https://github.com/marketplace/actions/super-linter
+        uses: github/super-linter@v4
+        env:
+            VALIDATE_ALL_CODEBASE: false
+            DEFAULT_BRANCH: main
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
