@@ -192,7 +192,7 @@ svg {
   content: "";
   display: block;
   background: #ffc635;
-  width: 10%;
+  width: 0%;
   height: 100%;
   border-radius: 9px;
 }
