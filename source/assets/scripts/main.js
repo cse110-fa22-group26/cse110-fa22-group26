@@ -4,14 +4,19 @@
 window.addEventListener("DOMContentLoaded", init);
 // Starts the program, all function calls trace back here
 function init() {
+  // add collapsible function to list titles
   let user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
-  
-  document.querySelector('.greeting-message').innerText = `Hi ${user.username}!`
-  
-  // add collapsible function to list titles
+
+  document.querySelector(
+    ".greeting-message"
+  ).innerText = `Hi ${user.username}!`;
+
   addCollapsibleControls();
   // add correspondinng event listener when user want to add task
+  let userTasks = user["tasks"];
+  // console.log(userTasks);
+  addTasksToDocument(userTasks);
   addTasks();
 
   // handling logout after button is clicked
@@ -20,6 +25,133 @@ function init() {
     localStorage.removeItem("user");
     location.replace("welcomePage.html");
   });
+}
+
+/**
+ * count number of tasks for each day
+ * add task count to each day button.
+ */
+function taskCount() {
+  let addBtns = document.getElementsByClassName("addBtn");
+  const taskCount = {
+    Monday: 0,
+    Tuesday: 0,
+    Wednesday: 0,
+    Thursday: 0,
+    Friday: 0,
+    Saturday: 0,
+    Sunday: 0,
+  };
+  const doneCount = {
+    Monday: 0,
+    Tuesday: 0,
+    Wednesday: 0,
+    Thursday: 0,
+    Friday: 0,
+    Saturday: 0,
+    Sunday: 0,
+  };
+  Array.from(addBtns).forEach((btn) => {
+    taskCount[btn.parentNode.id] = btn.parentNode.childElementCount - 1;
+    let day = btn.parentNode;
+    let taskCard = day.getElementsByTagName("task-card");
+    Array.from(taskCard).forEach((ts) => {
+      let shadowRoot = ts.shadowRoot;
+      let checked = shadowRoot.childNodes[0].querySelectorAll(
+        "input[type=checkbox]:checked"
+      );
+      if (checked[0]) doneCount[btn.parentNode.id]++;
+    });
+  });
+  let lists = document.getElementsByClassName("collapsible");
+  Array.from(lists).forEach((list) => {
+    list.getElementsByTagName("span")[1].textContent = ` 
+        (${taskCount[list.getElementsByTagName("span")[0].textContent]} Tasks,
+        ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done)
+        `;
+  });
+
+}
+
+/**
+ * load db from local storage
+ * @returns {Array<Object>} An array of users found in localStorage
+ */
+function getTasksFromStorage() {
+  //check if "todoListDB" exist
+  if (localStorage.getItem("todoListDB")) {
+    return JSON.parse(localStorage.getItem("todoListDB"));
+  } else {
+    return [];
+  }
+}
+
+/**
+ * Takes in an array of tasks and for each tasks creates a
+ * new <task-card> element, adds the tasks data to that card
+ * then appends that new task to it's coresponding days
+ * @param {Array<Object>} savedTasks An array of tasks
+ */
+function addTasksToDocument(savedTasks) {
+  // if no saved tasks return.
+  if (savedTasks.length === 0) return;
+  const dayIndex = {
+    Monday: 0,
+    Tuesday: 1,
+    Wednesday: 2,
+    Thursday: 3,
+    Friday: 4,
+    Saturday: 5,
+    Sunday: 6,
+  };
+  let addBtns = document.getElementsByClassName("addBtn");
+  const daysWithTasks = new Set();
+  Array.from(addBtns).forEach((addBtn) => {
+    Array.from(savedTasks[dayIndex[addBtn.parentNode.id]]).forEach((task) => {
+      let taskBoard = addBtn.parentNode;
+      if (taskBoard.id == task["day"]) {
+        let newTask = document.createElement("task-card");
+        // get new task id, == Monday0,Tuesday0,......
+        let newTaskID = task["taskID"];
+        // add <task-card> id = Monday0, Monday1,......
+        newTask.setAttribute("id", newTaskID);
+        newTask.data = task;
+        taskBoard.insertBefore(newTask, addBtn);
+        // add function to icons of new task
+        addtaskFunction(newTaskID);
+      }
+      daysWithTasks.add(task["day"]);
+      taskCount[task["day"]] += 1; // get task count for each day, need to divide by 7
+    });
+  });
+
+  // initially uncollapse days with tasks
+  let lists = document.getElementsByClassName("collapsible");
+  for (const dayBtn of lists) {
+    if (daysWithTasks.has(dayBtn.getElementsByTagName("span")[0].textContent)) {
+      dayBtn.click();
+    }
+  }
+  taskCount();
+}
+
+/**
+ * Takes in an array of tasks, converts it to a string, and then
+ * saves that string to 'tasks' in todoListDB and user database
+ * @param {Array<Object>} savedTasks An array of tasks
+ */
+function saveTasksToStorage(savedTasks) {
+  let userDB = JSON.parse(localStorage.getItem("user"));
+  let username = userDB.username;
+  let todoListDB = getTasksFromStorage();
+  for (let i = 0; i < todoListDB.length; i++) {
+    if (todoListDB[i].username == username) {
+      todoListDB[i]["tasks"] = savedTasks;
+      userDB["tasks"] = savedTasks;
+      localStorage.setItem("user", JSON.stringify(userDB));
+    }
+  }
+  localStorage.setItem("todoListDB", JSON.stringify(todoListDB));
 }
 
 /**
@@ -53,70 +185,196 @@ function addCollapsibleControls() {
  * Add event handler to all add buttons of each day's list. When user click add btn,
  * a new task div will appear
  */
-function addTasks() {
+function addTasks(task) {
   let addBtns = document.getElementsByClassName("addBtn");
   Array.from(addBtns).forEach((addBtn) => {
     addBtn.addEventListener("click", (event) => {
       // find corresponding sibling text element
       let taskBoard = addBtn.parentNode;
-      let newTask = document.createElement("div");
-      newTask.innerHTML = `<input type="checkbox">
-            <input type="text" name="taskName" class="input">
-            <i class="fa fa-trash icon deleteBtn"></i>
-            <i class="fas fa-edit icon editBtn"></i>
-            <button type="submit" class="confirmBtn">Confirm</button>`;
+      let newTask = document.createElement("task-card");
+      // get new task id, == Monday0,Tuesday0,......
+      let newTaskID =
+        taskBoard.id +
+        Math.floor(Math.random() * 99999) +
+        (Math.random() + 1).toString(36).substring(7);
+      // add <task-card> id = Monday0, Monday1,......
+      newTask.setAttribute("id", newTaskID);
+      if (task == null) {
+        task = {
+          day: taskBoard.parentNode.id,
+          taskID: newTaskID,
+          input: "",
+          checkBox: false,
+          confirmDisable: false,
+          inputDisable: false,
+        };
+      }
+      newTask.data = task;
       taskBoard.insertBefore(newTask, addBtn);
       // add function to icons of new task
-      addtaskFunction();
+      addtaskFunction(newTaskID);
     });
   });
 }
+
 /**
  * add delete, edit, confirm functionality to newly added task
  */
-function addtaskFunction() {
-  deleteTasks();
-  editTasks();
-  confirmTasks();
+function addtaskFunction(taskID) {
+  deleteTasks(taskID);
+  editTasks(taskID);
+  confirmTasks(taskID);
+  checkTask(taskID);
 }
 
 /**
  * give newest delete btn functionality to remove relevant task
+ * on click delete, will remove the task shadow dom and remove from
+ * localstorage.
  */
-function deleteTasks() {
-  let deleteBtns = document.getElementsByClassName("deleteBtn");
-  let deleteBtn = deleteBtns[deleteBtns.length - 1];
+function deleteTasks(taskID) {
+  let taskBlock = document.getElementById(taskID);
+  let shadowRoot = taskBlock.shadowRoot;
+  let deleteBtn =
+    shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
+  const dayIndex = {
+    Monday: 0,
+    Tuesday: 1,
+    Wednesday: 2,
+    Thursday: 3,
+    Friday: 4,
+    Saturday: 5,
+    Sunday: 6,
+  };
   deleteBtn.addEventListener("click", (event) => {
-    let currtask = deleteBtn.parentNode;
-    currtask.remove();
+    // get current localStorage
+    let user = JSON.parse(localStorage.getItem("user"));
+    let localTasks = user["tasks"];
+    // splice out the deleted task in localstorage
+    for (
+      let i = 0;
+      i < localTasks[dayIndex[taskBlock.parentNode.id]].length;
+      i++
+    ) {
+      if (
+        taskID === localTasks[dayIndex[taskBlock.parentNode.id]][i]["taskID"]
+      ) {
+        localTasks[dayIndex[taskBlock.parentNode.id]].splice(i, 1);
+      }
+    }
+
+    // saved modified tasks to localstorage
+    saveTasksToStorage(localTasks);
+    taskBlock.remove();
+    taskCount();
   });
 }
 
 /**
  * give newest edit btn functionality to edit relevant task input
+ * on click edit, will active input box and confirm button.
  */
-function editTasks() {
-  let editBtns = document.getElementsByClassName("editBtn");
-  let editBtn = editBtns[editBtns.length - 1];
+function editTasks(taskID) {
+  let taskBlock = document.getElementById(taskID);
+  let shadowRoot = taskBlock.shadowRoot;
+  let editBtn = shadowRoot.childNodes[0].getElementsByClassName("editBtn")[0];
+  let input = shadowRoot.childNodes[0].getElementsByTagName("input")[1];
+  let confirmBtn =
+    shadowRoot.childNodes[0].getElementsByClassName("confirmBtn")[0];
   editBtn.addEventListener("click", (event) => {
-    let currtask = editBtn.parentNode;
-    // find input btn
-    let input = currtask.querySelectorAll("input")[1];
-    let confirmBtn = currtask.querySelector("button");
     input.disabled = false;
     confirmBtn.disabled = false;
   });
 }
 
 /**
- * give newest confirm btn functionality to confirm and block user from change input
+ * check number of tasks marked done
+ * update new count to display
+ * update to localstorage
  */
-function confirmTasks() {
-  let confirmBtns = document.getElementsByClassName("confirmBtn");
-  let confirmBtn = confirmBtns[confirmBtns.length - 1];
+function checkTask(taskID) {
+  let taskBlock = document.getElementById(taskID);
+  let shadowRoot = taskBlock.shadowRoot;
+  let checkBox = shadowRoot.childNodes[0].getElementsByClassName("checkbox")[0];
+  const dayIndex = {
+    Monday: 0,
+    Tuesday: 1,
+    Wednesday: 2,
+    Thursday: 3,
+    Friday: 4,
+    Saturday: 5,
+    Sunday: 6,
+  };
+  checkBox.addEventListener("click", (event) => {
+    // get tasks from localstorage
+    let user = JSON.parse(localStorage.getItem("user"));
+    let localTasks = user["tasks"];
+    Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(
+      (task) => {
+        if (taskID === task["taskID"]) {
+          task["checkBox"] =
+            shadowRoot.childNodes[0].getElementsByTagName("input")[0].checked;
+        }
+      }
+    );
+    taskCount(); // update task count
+    saveTasksToStorage(localTasks); // save to localstorage
+  });
+}
+
+/**
+ * give newest confirm btn functionality to confirm and block user from change input
+ * on click confirm, will either update the new input in localstorage
+ * or create a new task if task does not already exist.
+ */
+function confirmTasks(taskID) {
+  let taskBlock = document.getElementById(taskID);
+  let shadowRoot = taskBlock.shadowRoot;
+  let confirmBtn =
+    shadowRoot.childNodes[0].getElementsByClassName("confirmBtn")[0];
+  let input = shadowRoot.childNodes[0].getElementsByTagName("input")[1];
+  const dayIndex = {
+    Monday: 0,
+    Tuesday: 1,
+    Wednesday: 2,
+    Thursday: 3,
+    Friday: 4,
+    Saturday: 5,
+    Sunday: 6,
+  };
   confirmBtn.addEventListener("click", (event) => {
-    let currtask = confirmBtn.parentNode;
-    let input = currtask.querySelectorAll("input")[1];
     input.disabled = true;
+    confirmBtn.disabled = true;
+    let taskObject = {};
+    taskObject = {
+      day: taskBlock.parentNode.id,
+      taskID: taskID,
+      input: input.value,
+      checkBox:
+        shadowRoot.childNodes[0].getElementsByTagName("input")[0].checked,
+      confirmDisable: true,
+      inputDisable: true,
+    };
+    // get tasks from localstorage
+    let user = JSON.parse(localStorage.getItem("user"));
+    let localTasks = user["tasks"];
+
+    let found = false;
+    Array.from(localTasks[dayIndex[taskBlock.parentNode.id]]).forEach(
+      (task) => {
+        if (taskID === task["taskID"]) {
+          task["input"] = input.value;
+          task["checkBox"] =
+            shadowRoot.childNodes[0].getElementsByTagName("input")[0].checked;
+          found = true;
+        }
+      }
+    );
+    // add new task to localstorage if task does not exist.
+    if (found === false) {
+      localTasks[dayIndex[taskBlock.parentNode.id]].push(taskObject);
+    }
+    saveTasksToStorage(localTasks); // save to localstorage
+    taskCount(); // update task count.
   });
 }
