@@ -55,9 +55,9 @@
   border-radius: 5px;
   transition: all 0.2s;
   border-color: #f8e1a6fc;
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px 25px 20px;
 }
 
@@ -132,7 +132,99 @@ h1 {
   margin: 15px 0px 15px;
 }
 
-img[alt=addTask]{
+img[alt="addTask"] {
   width: 15px;
   margin-left: 2px;
+}
+
+
+/* Progress bar style */
+svg {
+  filter: drop-shadow(0 0 10px rgb(0 0 0 / 0.4));
+}
+
+.circle-container {
+  fill: none;
+  stroke: white;
+  stroke-dasharray: 75 75;
+  stroke-linecap: round;
+}
+
+.circle-container__background {
+  fill: none;
+  stroke-dasharray: 75 75;
+  stroke-linecap: round;
+}
+
+.circle-container__progress {
+  fill: none;
+  stroke-linecap: round;
+  stroke: url(#gradient); 
+  stroke-dasharray: 0 100;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.stop1 {
+  stop-color: #e66465;
+}
+
+.stop2 {
+  stop-color: #9198e5;
+}
+
+#top-progbar-container{
+  width: 60%;
+  margin: auto;
+  margin-bottom: 25px;
+}
+
+#top-progress-bar{
+  background: #03324a;
+  border-radius: 13px;
+  height: 20px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 3px;
+}
+
+#top-progress{
+  content: "";
+  display: block;
+  background: #ffc635;
+  width: 10%;
+  height: 100%;
+  border-radius: 9px;
+}
+
+
+.progress-container {
+  position: absolute;
+  margin-left: 500px;
+  background: #03324a;
+  border-radius: 13px;
+  height: 20px;
+  width: 150px;
+  padding: 3px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .progress-container {
+    position: relative;
+    margin-left: 300px;
+    background: #03324a;
+    border-radius: 13px;
+    height: 20px;
+    width: 150px;
+    padding: 3px;
+  }
+}
+
+.progress {
+  content: "";
+  display: block;
+  background: #ffc021;
+  width: 0%;
+  height: 100%;
+  border-radius: 9px;
 }

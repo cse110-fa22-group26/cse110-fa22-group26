@@ -69,8 +69,28 @@ function taskCount() {
         (${taskCount[list.getElementsByTagName("span")[0].textContent]} Tasks,
         ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done)
         `;
-  });
 
+    list.getElementsByClassName("progress")[0].style.width =
+      (doneCount[list.getElementsByTagName("span")[0].textContent] /
+        taskCount[list.getElementsByTagName("span")[0].textContent]) *
+        100 +
+      "%";
+  });
+  let totalTasks = taskCount["Monday"] + taskCount["Tuesday"]+ taskCount["Wednesday"]+ taskCount["Thursday"]+ 
+                    taskCount["Friday"]+ taskCount["Saturday"]+ taskCount["Sunday"];
+  let totalDone = doneCount["Monday"] + doneCount["Tuesday"]+ doneCount["Wednesday"]+ doneCount["Thursday"]+ 
+                  doneCount["Friday"]+ doneCount["Saturday"]+ doneCount["Sunday"];
+  let progBar = document.getElementById("top-progress");
+  let progress = totalDone / totalTasks * 100;
+
+  progBar.style.width= progress + "%";
+  let progressTxt = document.getElementById('progTxt');
+  if(progress < 15) progressTxt.textContent = "A fresh new week! Start working!";
+  else if(progress < 30) progressTxt.textContent = "Doing Smth";
+  else if(progress < 50) progressTxt.textContent = "On Schedule!";
+  else if(progress < 63) progressTxt.textContent = "More than half way through!";
+  else if(progress < 100) progressTxt.textContent = "Almost there!";
+  else progressTxt.textContent = "ALL DONE!";
 }
 
 /**
