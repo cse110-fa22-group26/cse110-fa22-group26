@@ -1,8 +1,11 @@
-window.addEventListener("DOMContentLoaded", init);
+// signUp.js
 
+window.addEventListener("DOMContentLoaded", init);
+// when page loads, get user's info on sign up page
 function init() {
   getUserSignUpInfo();
 }
+
 /**
  * This function rertrieves the information the user inputs.
  */
