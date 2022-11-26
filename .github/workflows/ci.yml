@@ -3,8 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  code-validators:
-    name: code-validator
+  html-validator:
+    name: HTML-validator
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.2 # checkout the code
@@ -12,8 +12,12 @@ jobs:
         uses: Cyb3r-Jak3/html5validator-action@v0.6.1 
         with:
           root: ./source/
-    
-      - uses: actions/checkout@v3 # checkout the code
+  super-linters:
+    name: linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3 # checkout the code
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
@@ -22,6 +26,7 @@ jobs:
         uses: github/super-linter@v4
         env:
             VALIDATE_ALL_CODEBASE: false
+            FILTER_REGEX_INCLUDE: ./source/
             DEFAULT_BRANCH: main
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+  
