@@ -33,15 +33,6 @@ jobs:
     name: js doc
     runs-on: ubuntu-latest
     steps:
-    
-      - name: Wait on tests
-        uses: lewagon/wait-on-check-action@master
-        with:
-          ref: ${{ github.ref }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-          running-workflow-name: 'make-docs'
-          
       - name: Checkout current branch
         uses: actions/checkout@v2
 
