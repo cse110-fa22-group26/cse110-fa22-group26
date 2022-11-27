@@ -42,7 +42,6 @@ jobs:
            source_dir: ./source/
            recurse: true
            output_dir: ./docs
-           config_file: conf.json
            template: minami
            front_page: README.md
            
