@@ -108,7 +108,7 @@ function getDB() {
     return JSON.parse(db);
   } else {
     console.log("NO Database Found");
-    return {};
+    return [];
   }
 }
 
