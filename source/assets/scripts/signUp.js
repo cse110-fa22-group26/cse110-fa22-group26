@@ -3,13 +3,13 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
   getUserSignUpInfo();
 }
+
 /**
  * This function rertrieves the information the user inputs.
  */
 function getUserSignUpInfo() {
   // getting database
   const db = getDB();
-
   // find form
   let loginForm = document.querySelector("form");
   // when user click submit btn, check for records in localstorage
@@ -56,11 +56,20 @@ function getUserSignUpInfo() {
         };
 
         //create the new user object and put it in database
+        //TODO: line 61 seems to be causing an issue when signing up
+        
         db.push({
           username: userObj.username,
           password: userObj.password,
           tasks: [...userObj.tasks],
         });
+        
+        /*
+       db.username = userObj.username;
+       db.password = userObj.password;
+       db.tasks = [...userObj.tasks];
+       
+        */
         localStorage.setItem("todoListDB", JSON.stringify(db));
 
         // clear the form and errors
