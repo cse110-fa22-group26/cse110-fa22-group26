@@ -57,19 +57,19 @@ function getUserSignUpInfo() {
 
         //create the new user object and put it in database
         //TODO: line 61 seems to be causing an issue when signing up
-        /*
+        
         db.push({
           username: userObj.username,
           password: userObj.password,
           tasks: [...userObj.tasks],
         });
-*/
-       
+        
+        /*
        db.username = userObj.username;
        db.password = userObj.password;
        db.tasks = [...userObj.tasks];
        
-        
+        */
         localStorage.setItem("todoListDB", JSON.stringify(db));
 
         // clear the form and errors
