@@ -12,23 +12,6 @@ jobs:
         uses: Cyb3r-Jak3/html5validator-action@v0.6.1 
         with:
           root: ./source/
-  super-linters:
-    name: linter
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3 # checkout the code
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
-        
-      - name: Lint Code Base #https://github.com/marketplace/actions/super-linter
-        uses: github/super-linter@v4
-        env:
-            VALIDATE_ALL_CODEBASE: true
-            FILTER_REGEX_INCLUDE: ./source/
-            DEFAULT_BRANCH: main
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   
           
