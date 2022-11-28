@@ -10,9 +10,9 @@
   "scripts": {
     "test": "jest"
   },
+
   "jest": {
     "preset": "jest-puppeteer",
-    "verbose": true,
-    "testEnvironment": "jest-environment-jsdom"
+    "verbose": true
   }
 }
