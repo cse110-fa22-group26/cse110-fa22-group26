@@ -158,7 +158,7 @@ or expanded text element will be hidden.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line30">line 30</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -246,7 +246,7 @@ or expanded text element will be hidden.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line77">line 77</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line243">line 243</a>
     </li></ul></dd>
     
 
@@ -335,7 +335,236 @@ a new task div will appear
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line56">line 56</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line208">line 208</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addTasksToDocument"><span class="type-signature"></span>addTasksToDocument<span class="signature">(savedTasks)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Takes in an array of tasks and for each tasks creates a
+new <task-card> element, adds the tasks data to that card
+then appends that new task to it's coresponding days
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>savedTasks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An array of tasks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line115">line 115</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkTask"><span class="type-signature"></span>checkTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    check number of tasks marked done
+update new count to display
+update to localstorage
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line315">line 315</a>
     </li></ul></dd>
     
 
@@ -380,6 +609,8 @@ a new task div will appear
 
 <div class="description">
     give newest confirm btn functionality to confirm and block user from change input
+on click confirm, will either update the new input in localstorage
+or create a new task if task does not already exist.
 </div>
 
 
@@ -423,7 +654,7 @@ a new task div will appear
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line114">line 114</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line350">line 350</a>
     </li></ul></dd>
     
 
@@ -468,6 +699,8 @@ a new task div will appear
 
 <div class="description">
     give newest delete btn functionality to remove relevant task
+on click delete, will remove the task shadow dom and remove from
+localstorage.
 </div>
 
 
@@ -511,7 +744,7 @@ a new task div will appear
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line86">line 86</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line255">line 255</a>
     </li></ul></dd>
     
 
@@ -556,6 +789,7 @@ a new task div will appear
 
 <div class="description">
     give newest edit btn functionality to edit relevant task input
+on click edit, will active input box and confirm button.
 </div>
 
 
@@ -599,7 +833,7 @@ a new task div will appear
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line98">line 98</a>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line297">line 297</a>
     </li></ul></dd>
     
 
@@ -842,7 +1076,7 @@ error.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line99">line 99</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line105">line 105</a>
     </li></ul></dd>
     
 
@@ -883,6 +1117,116 @@ error.
     <dd>
         
 <span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getTasksFromStorage"><span class="type-signature"></span>getTasksFromStorage<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    load db from local storage
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array of users found in localStorage
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Object></span>
 
 
     </dd>
@@ -1041,7 +1385,234 @@ record is found
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line12">line 12</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveTasksToStorage"><span class="type-signature"></span>saveTasksToStorage<span class="signature">(savedTasks)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Takes in an array of tasks, converts it to a string, and then
+saves that string to 'tasks' in todoListDB and user database
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>savedTasks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An array of tasks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="taskCount"><span class="type-signature"></span>taskCount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    count number of tasks for each day
+add task count to each day button.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -1201,7 +1772,7 @@ record is found
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line115">line 115</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -1265,13 +1836,13 @@ record is found
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCollapsibleControls">addCollapsibleControls</a></li><li><a href="global.html#addtaskFunction">addtaskFunction</a></li><li><a href="global.html#addTasks">addTasks</a></li><li><a href="global.html#confirmTasks">confirmTasks</a></li><li><a href="global.html#deleteTasks">deleteTasks</a></li><li><a href="global.html#editTasks">editTasks</a></li><li><a href="global.html#findAndSetUsersDB">findAndSetUsersDB</a></li><li><a href="global.html#getDB">getDB</a></li><li><a href="global.html#getUserDB">getUserDB</a></li><li><a href="global.html#getUserSignUpInfo">getUserSignUpInfo</a></li><li><a href="global.html#usernameExists">usernameExists</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCollapsibleControls">addCollapsibleControls</a></li><li><a href="global.html#addtaskFunction">addtaskFunction</a></li><li><a href="global.html#addTasks">addTasks</a></li><li><a href="global.html#addTasksToDocument">addTasksToDocument</a></li><li><a href="global.html#checkTask">checkTask</a></li><li><a href="global.html#confirmTasks">confirmTasks</a></li><li><a href="global.html#deleteTasks">deleteTasks</a></li><li><a href="global.html#editTasks">editTasks</a></li><li><a href="global.html#findAndSetUsersDB">findAndSetUsersDB</a></li><li><a href="global.html#getDB">getDB</a></li><li><a href="global.html#getTasksFromStorage">getTasksFromStorage</a></li><li><a href="global.html#getUserDB">getUserDB</a></li><li><a href="global.html#getUserSignUpInfo">getUserSignUpInfo</a></li><li><a href="global.html#saveTasksToStorage">saveTasksToStorage</a></li><li><a href="global.html#taskCount">taskCount</a></li><li><a href="global.html#usernameExists">usernameExists</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sun Nov 27 2022 07:28:25 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Nov 28 2022 06:10:07 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
