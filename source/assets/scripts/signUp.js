@@ -1,5 +1,12 @@
+// Runs init() when page loads
 window.addEventListener("DOMContentLoaded", init);
 
+/**
+ * This function is responsible for the sign up functionality using
+ * the getUserSignUpInfo function, which relies on the getDB
+ * function and usernameExists function.
+ * 
+ */
 function init() {
   getUserSignUpInfo();
 }
