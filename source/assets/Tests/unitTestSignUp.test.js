@@ -45,11 +45,10 @@
 //     loginForm.click();
 //     expect(localStorage.length()).toBe(0);
 // });
-
-const puppeteer = require('puppeteer');
 describe('Check nothing is in database', () => {
     beforeAll(async () => {
-      // First, launch a blank page
+      console.log("loading");
+    // First, launch a blank page
     //   const browser = await puppeteer.launch({
     //     headless: false,
     //     ignoreHTTPSErrors: true,
@@ -63,6 +62,7 @@ describe('Check nothing is in database', () => {
     //   const page = pages[0];
       await page.goto('http://127.0.0.1:5501/source/signUp.html');
     });
+
     it('Sign up Page - Checking nothing is in database', async () => {
         const form = await page.$('form');
         const shadow = await form.getProperty("shadowRoot");
