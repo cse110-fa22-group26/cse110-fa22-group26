@@ -13,5 +13,34 @@ jobs:
         with:
           root: ./source/
 
+  codacy-analysis-cli:
+    name: Codacy Analysis CLI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
+  
+  js-doc:
+    name: js doc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v2
+
+      - name: Make Docs
+        uses: andstor/jsdoc-action@v1.2.0
+        with:
+          source_dir: ./source
+          output_dir: ./docs
+          recurse: true
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: ./docs # The folder the action should deploy.
   
           

@@ -96,6 +96,7 @@ function getUserSignUpInfo() {
   });
 }
 
+
 /**
  * This function is responsible for retrieving the information of all users who
  * have signed up and then parsing it if the database is populated; otherwise,

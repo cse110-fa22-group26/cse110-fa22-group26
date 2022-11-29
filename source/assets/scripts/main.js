@@ -28,8 +28,9 @@ function init() {
 }
 
 /**
- * count number of tasks for each day
- * add task count to each day button.
+ * Count number of tasks done and total task for each weekday list,
+ * it also works for progress bar and display different message for
+ * different progress user have.
  */
 function taskCount() {
   let addBtns = document.getElementsByClassName("addBtn");
@@ -94,8 +95,10 @@ function taskCount() {
 }
 
 /**
- * load db from local storage
- * @returns {Array<Object>} An array of users found in localStorage
+ * load to do list DB (users & their tasks) from the local storage
+ * 
+ * @returns {Array<Object>} An array of user object that contains
+ * their username, password, and tasks inside
  */
 function getTasksFromStorage() {
   //check if "todoListDB" exist
@@ -107,9 +110,12 @@ function getTasksFromStorage() {
 }
 
 /**
- * Takes in an array of tasks and for each tasks creates a
- * new <task-card> element, adds the tasks data to that card
- * then appends that new task to it's coresponding days
+ * Get array of tasks and add them to corresponding week day
+ * list as <task-card> objects. Takes in an array of tasks and
+ * for each tasks creates a new <task-card> element, adds the
+ * tasks data to that card then appends that new task to it's
+ * coresponding days
+ * 
  * @param {Array<Object>} savedTasks An array of tasks
  */
 function addTasksToDocument(savedTasks) {
@@ -156,8 +162,8 @@ function addTasksToDocument(savedTasks) {
 }
 
 /**
- * Takes in an array of tasks, converts it to a string, and then
- * saves that string to 'tasks' in todoListDB and user database
+ * This function saves the task to todoListDB in localStorage
+ * 
  * @param {Array<Object>} savedTasks An array of tasks
  */
 function saveTasksToStorage(savedTasks) {
@@ -203,9 +209,9 @@ function addCollapsibleControls() {
 
 /**
  * Add event handler to all add buttons of each day's list. When user click add btn,
- * a new task div will appear
+ * a new task-card object with full functionality will appear
  */
-function addTasks(task) {
+function addTasks() {
   let addBtns = document.getElementsByClassName("addBtn");
   Array.from(addBtns).forEach((addBtn) => {
     addBtn.addEventListener("click", (event) => {
@@ -219,16 +225,14 @@ function addTasks(task) {
         (Math.random() + 1).toString(36).substring(7);
       // add <task-card> id = Monday0, Monday1,......
       newTask.setAttribute("id", newTaskID);
-      if (task == null) {
-        task = {
-          day: taskBoard.parentNode.id,
-          taskID: newTaskID,
-          input: "",
-          checkBox: false,
-          confirmDisable: false,
-          inputDisable: false,
-        };
-      }
+      let task = {
+        day: taskBoard.parentNode.id,
+        taskID: newTaskID,
+        input: "",
+        checkBox: false,
+        confirmDisable: false,
+        inputDisable: false,
+      };
       newTask.data = task;
       taskBoard.insertBefore(newTask, addBtn);
       // add function to icons of new task
@@ -239,6 +243,8 @@ function addTasks(task) {
 
 /**
  * add delete, edit, confirm functionality to newly added task
+ * 
+ * @param {string} taskID a string that represents a specific task
  */
 function addtaskFunction(taskID) {
   deleteTasks(taskID);
@@ -251,6 +257,8 @@ function addtaskFunction(taskID) {
  * give newest delete btn functionality to remove relevant task
  * on click delete, will remove the task shadow dom and remove from
  * localstorage.
+ * 
+ * @param {string} taskID a string that represents a specific task
  */
 function deleteTasks(taskID) {
   let taskBlock = document.getElementById(taskID);
@@ -293,6 +301,8 @@ function deleteTasks(taskID) {
 /**
  * give newest edit btn functionality to edit relevant task input
  * on click edit, will active input box and confirm button.
+ * 
+ * @param {string} taskID a string that represents a specific task
  */
 function editTasks(taskID) {
   let taskBlock = document.getElementById(taskID);
@@ -308,9 +318,10 @@ function editTasks(taskID) {
 }
 
 /**
- * check number of tasks marked done
- * update new count to display
- * update to localstorage
+ * The function updates checkbox status of task and task count of tasks
+ * in this function whenever checkbox is clicked.
+ * 
+ * @param {string} taskID a string that represents a specific task
  */
 function checkTask(taskID) {
   let taskBlock = document.getElementById(taskID);
@@ -346,6 +357,8 @@ function checkTask(taskID) {
  * give newest confirm btn functionality to confirm and block user from change input
  * on click confirm, will either update the new input in localstorage
  * or create a new task if task does not already exist.
+ * 
+ * @param {string} taskID a string that represents a specific task
  */
 function confirmTasks(taskID) {
   let taskBlock = document.getElementById(taskID);
