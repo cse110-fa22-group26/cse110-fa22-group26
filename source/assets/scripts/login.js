@@ -1,17 +1,22 @@
 // login.js
 
-// Run the init() function when the page has loaded
+// Event listener runs the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
-// Starts the program, all function calls trace back here
+
+/**
+ * This function is responsible for starting the program and all function
+ * calls trace back here.
+ */
 function init() {
-  // when user enter their information and submit form
-  // save their relavant taskDB into storage if credential match
+  // After user submits form, save added tasks to local storage if credentials
+  // match existing account
   getUserDB();
 }
 
 /**
- * get credential from user input and save user's taskDB if relevant
- * record is found
+ * This function is responsible for retriveing a user's credential from
+ * user input and saving the user's taks if account exists in database by
+ * calling the findAndSetUsersDB function.
  */
 function getUserDB() {
   // find form
@@ -34,12 +39,12 @@ function getUserDB() {
 }
 
 /**
- * Find and save user's task DB if user's input credential match a record in
- * todolistDB. If can't find a match in record, hint user possible cause of
- * error.
+ * Given that a user's input credential matches a record in todolistDb, meaning 
+ * the user has created an account, this function will save the user's tasks to
+ * the database.
  * 
- * @param {string} username Input username
- * @param {string} password Input password
+ * @param string username The user's username
+ * @param string password The user's password
  */
 function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials
@@ -63,7 +68,7 @@ function findAndSetUsersDB(username, password) {
     if (found) {
       console.log("user found");
 
-      // on user found add user object with tasks array and username in local storage
+      // when user is found, add user object with tasks array and username to local storage
       localStorage.setItem(
         "user",
         JSON.stringify({ username: usrname, tasks: tasks })

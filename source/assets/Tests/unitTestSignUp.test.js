@@ -37,3 +37,38 @@
 //     if(pass === confPass) return localStorage.length > 0;
 // }
 
+// test('mismatching passwords', () => {
+//     let loginForm = document.querySelector("form");
+//     const user = document.getElementById('username').value = 'user';
+//     const pass = document.getElementById('password').value = '1234';
+//     const confPass = document.getElementById('confirmPassword').value = '123';
+//     loginForm.click();
+//     expect(localStorage.length()).toBe(0);
+// });
+
+//const puppeteer = require('puppeteer');
+// describe('Check nothing is in database', () => {
+//     beforeAll(async () => {
+//       // First, launch a blank page
+//     //   const browser = await puppeteer.launch({
+//     //     headless: false,
+//     //     ignoreHTTPSErrors: true,
+//     //     args: [
+//     //         '--no-sandbox', 
+//     //         '--disable-setuid-sandbox'
+//     //     ]
+//     // });
+//     //   //Second, go to Sign Up page
+//     //   const pages = await browser.pages();
+//     //   const page = pages[0];
+//       await page.goto('http://127.0.0.1:5501/source/signUp.html');
+//     });
+//     it('Sign up Page - Checking nothing is in database', async () => {
+//         const form = await page.$('form');
+//         const shadow = await form.getProperty("shadowRoot");
+//         //from shadow get input?
+//         //from input type into specific field?
+//         //expect(localStorage.length).toBe(0);
+//     }, 10000);
+//   });
+
