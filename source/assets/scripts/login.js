@@ -43,8 +43,8 @@ function getUserDB() {
  * the user has created an account, this function will save the user's tasks to
  * the database.
  * 
- * @param string username The user's username
- * @param string password The user's password
+ * @param {string} username The user's username
+ * @param {string} password The user's password
  */
 function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials

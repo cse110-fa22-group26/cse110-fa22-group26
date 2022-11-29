@@ -102,7 +102,7 @@ function getUserSignUpInfo() {
  * have signed up and then parsing it if the database is populated; otherwise,
  * an empty array is returned.
  * 
- * @returns {arr} - parsed array storing the information of all the users who 
+ * @returns {object[]} - parsed array storing the information of all the users who 
  * have signed up, if any; otherwise, as noted, an empty array is returned.
  */
 function getDB() {
