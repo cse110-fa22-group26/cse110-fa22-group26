@@ -1,11 +1,21 @@
+// Runs init() when page loads
 window.addEventListener("DOMContentLoaded", init);
 
+/**
+ * This function is responsible for the sign up functionality using
+ * the getUserSignUpInfo function, which relies on the getDB
+ * function and usernameExists function.
+ */
 function init() {
   getUserSignUpInfo();
 }
 
 /**
- * This function rertrieves the information the user inputs.
+ * This function is responsible for storing the information of a user who
+ * signed up, given that the user does not yet exist in the database. Specific
+ * functionalities include notifying the user if their passwords do not match,
+ * displaying that the user exists if they already signed up, and ultimately
+ * redirecting the user to their specific to-do list.
  */
 function getUserSignUpInfo() {
   // getting database
@@ -55,21 +65,12 @@ function getUserSignUpInfo() {
           tasks: [[], [], [], [], [], [], []],
         };
 
-        //create the new user object and put it in database
-        //TODO: line 61 seems to be causing an issue when signing up
-        
         db.push({
           username: userObj.username,
           password: userObj.password,
           tasks: [...userObj.tasks],
         });
-        
-        /*
-       db.username = userObj.username;
-       db.password = userObj.password;
-       db.tasks = [...userObj.tasks];
-       
-        */
+     
         localStorage.setItem("todoListDB", JSON.stringify(db));
 
         // clear the form and errors
@@ -95,13 +96,15 @@ function getUserSignUpInfo() {
   });
 }
 
-/** 
- * Function to get database from local storage
-  If it is already exist, return database in javascript object form
-  or return null indicaing nothing found.
 
- * @returns {object} - database "todoListDB" as a javascript object 
-**/
+/**
+ * This function is responsible for retrieving the information of all users who
+ * have signed up and then parsing it if the database is populated; otherwise,
+ * an empty array is returned.
+ * 
+ * @returns {arr} - parsed array storing the information of all the users who 
+ * have signed up, if any; otherwise, as noted, an empty array is returned.
+ */
 function getDB() {
   const db = localStorage.getItem("todoListDB");
   if (db) {
@@ -112,12 +115,15 @@ function getDB() {
   }
 }
 
+
 /**
- * Function checks for user existence in the database
+ * This function is responsible for checking if a user exists in the existing
+ * database.
  * 
- * @param {Object[]} db
- * @param {string} username
- * @returns {boolean} indicates if the user information is stored in the database
+ * @param {Object[]} db - all existing users who have created an account.
+ * @param {string} username - the username we are looking up in the current 
+ * database.
+ * @returns {boolean} - whether the user exists in the current database or not.
  */
 function usernameExists(db, username) {
   //populating username array
