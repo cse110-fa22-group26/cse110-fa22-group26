@@ -37,8 +37,9 @@ function getUserDB() {
  * Find and save user's task DB if user's input credential match a record in
  * todolistDB. If can't find a match in record, hint user possible cause of
  * error.
- * @param string username Input username
- * @param string password Input password
+ * 
+ * @param {string} username Input username
+ * @param {string} password Input password
  */
 function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials

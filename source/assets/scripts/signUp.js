@@ -100,6 +100,7 @@ function getUserSignUpInfo() {
   function should ensure the password's match
   ensure that username does not already exist. If it works,
   then save to local storage
+
  * @returns {object} - database 
 **/
 function getDB() {
@@ -114,9 +115,10 @@ function getDB() {
 
 /**
  * Function checks for user existence in the database
+ * 
  * @param {Object[]} db
  * @param {string} username
- * @returns {boolean}
+ * @returns {boolean} indicates if the user information is stored in the database
  */
 function usernameExists(db, username) {
   //populating username array
