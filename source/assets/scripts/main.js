@@ -208,14 +208,7 @@ function addCollapsibleControls() {
  * Add event handler to all add buttons of each day's list. When user click add btn,
  * a new task div will appear
  * 
- * @param {object{
- * day
- * taskID
- * input
- * checkBox
- * confirmDisable
- * inputDisable
- * }}task a task object with its corresponding properties
+ * @param {object}task a task object with its corresponding properties
  */
 function addTasks(task) {
   let addBtns = document.getElementsByClassName("addBtn");
