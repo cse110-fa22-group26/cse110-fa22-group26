@@ -5,7 +5,6 @@ window.addEventListener("DOMContentLoaded", init);
  * This function is responsible for the sign up functionality using
  * the getUserSignUpInfo function, which relies on the getDB
  * function and usernameExists function.
- * 
  */
 function init() {
   getUserSignUpInfo();
@@ -17,7 +16,6 @@ function init() {
  * functionalities include notifying the user if their passwords do not match,
  * displaying that the user exists if they already signed up, and ultimately
  * redirecting the user to their specific to-do list.
- * 
  */
 function getUserSignUpInfo() {
   // getting database
@@ -99,12 +97,12 @@ function getUserSignUpInfo() {
 }
 
 /**
- * This function is responsible for retrieving the information of all users who have
- * signed up and then parsing it if the database is populated; otherwise, an empty array is
- * returned.
+ * This function is responsible for retrieving the information of all users who
+ * have signed up and then parsing it if the database is populated; otherwise,
+ * an empty array is returned.
  * 
- * @returns {arr} - parsed array storing the information of all the users who have signed up,
- * if any; otherwise, as noted, an empty array is returned.
+ * @returns {arr} - parsed array storing the information of all the users who 
+ * have signed up, if any; otherwise, as noted, an empty array is returned.
  */
 function getDB() {
   const db = localStorage.getItem("todoListDB");
@@ -118,10 +116,12 @@ function getDB() {
 
 
 /**
- * This function is responsible for checking if a user exists in the existing database.
+ * This function is responsible for checking if a user exists in the existing
+ * database.
  * 
  * @param {Object[]} db - all existing users who have created an account.
- * @param {string} username - the username we are looking up in the current database.
+ * @param {string} username - the username we are looking up in the current 
+ * database.
  * @returns {boolean} - whether the user exists in the current database or not.
  */
 function usernameExists(db, username) {
