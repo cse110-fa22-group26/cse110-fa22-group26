@@ -96,12 +96,11 @@ function getUserSignUpInfo() {
 }
 
 /** 
- * we need a function to save user input to local storage
-  function should ensure the password's match
-  ensure that username does not already exist. If it works,
-  then save to local storage
+ * Function to get database from local storage
+  If it is already exist, return database in javascript object form
+  or return null indicaing nothing found.
 
- * @returns {object} - database 
+ * @returns {object} - database "todoListDB" as a javascript object 
 **/
 function getDB() {
   const db = localStorage.getItem("todoListDB");
