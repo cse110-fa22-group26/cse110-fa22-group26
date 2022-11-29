@@ -6,7 +6,6 @@ window.addEventListener("DOMContentLoaded", init);
 /**
  * This function is responsible for starting the program and all function
  * calls trace back here.
- * 
  */
 function init() {
   // After user submits form, save added tasks to local storage if credentials
@@ -18,7 +17,6 @@ function init() {
  * This function is responsible for retriveing a user's credential from
  * user input and saving the user's taks if account exists in database by
  * calling the findAndSetUsersDB function.
- * 
  */
 function getUserDB() {
   // find form
@@ -70,7 +68,7 @@ function findAndSetUsersDB(username, password) {
     if (found) {
       console.log("user found");
 
-      // on user found add user object with tasks array and username in local storage
+      // when user is found, add user object with tasks array and username to local storage
       localStorage.setItem(
         "user",
         JSON.stringify({ username: usrname, tasks: tasks })
