@@ -24,6 +24,6 @@ describe('Test planner app sign up page', () => {
         });
         console.log(text);
         expect(text).toBe("Passwords don't match!")
-        
+        // test localStorage here
       });
 });
