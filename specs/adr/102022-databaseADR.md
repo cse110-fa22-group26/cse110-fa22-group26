@@ -1,4 +1,4 @@
-# Using LocalStorage and JSON over IndexedDB
+# Using LocalStorage over JSON and IndexedDB
 
 - Status: accepted
 - Deciders: Sepehr Heravi, Weiwen Dong
@@ -16,11 +16,12 @@ How should we store user created content and preferences? Specifically, how shou
 ## Considered Options
 
 - IndexedDB
-- LocalStorage / JSON
+- LocalStorage 
+- JSON
 
 ## Decision Outcome
 
-Chosen option: LocalStorage and JSON, because it has the lowest barrier of entry while maintaining CRUD features. Additionally, guidance from the TA indicated they would favor an approach using localStorage and since most of the team members used it in the lab it was easier to choose this option.
+Chosen option: LocalStorage, because it has the lowest barrier of entry while maintaining CRUD features. Additionally, guidance from the TA indicated they would favor an approach using localStorage and since most of the team members used it in the lab it was easier to choose this option.
 
 ### Positive Consequences <!-- optional -->
 
@@ -50,7 +51,7 @@ Store all recipes (user and community) in a Firebase instance. Manage user authe
 - Good, because it is designed specifically for database
 - Bad, because not a lot of team members are familiar with this
 
-### LocalStorage / JSON
+### LocalStorage
 
 - Good, because easier to develop
 - Good, because more team members are familiar
