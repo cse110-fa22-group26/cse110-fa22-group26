@@ -106,7 +106,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(1);
   });
 
-  it(" Tuesday confirm button is not clicked , The task is saved to the second location in localStorage ", async () => {
+  it(" Tuesday confirm button is not clicked , The task is not saved to the second location in localStorage ", async () => {
     const lenIndex = 1;
 
     await page.$$eval(".addBtn", (elem) =>
