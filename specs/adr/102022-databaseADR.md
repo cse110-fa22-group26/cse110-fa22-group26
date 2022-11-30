@@ -17,7 +17,7 @@ How should we store user created content and preferences? Specifically, how shou
 
 - IndexedDB
 - LocalStorage 
-- JSON
+- Firebase
 
 ## Decision Outcome
 
@@ -38,7 +38,7 @@ Chosen option: LocalStorage, because it has the lowest barrier of entry while ma
 
 ### Firebase
 
-Store all recipes (user and community) in a Firebase instance. Manage user authentication with built-in Firebase methods <!-- optional -->
+Store all user data (user and community) in a Firebase instance. Manage user authentication with built-in Firebase methods <!-- optional -->
 
 - Good, because it is a dependable framework developed by Google
 - Good, because it has authentication built in
