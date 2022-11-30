@@ -89,7 +89,7 @@ function getUserSignUpInfo() {
         );
 
         // redirect to the new page
-        location.replace("homePage.html");
+       location.replace("homePage.html");
       }
     }
   });
