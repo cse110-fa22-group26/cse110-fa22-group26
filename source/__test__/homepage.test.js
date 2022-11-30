@@ -50,4 +50,29 @@ describe("Homepage Test", () => {
     const handle = await page.$$("task-card");
     expect(handle.length).toBe(7);
   });
+  
+  it("There should be 7 input boxes that you can enter ", async () => {
+    await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
+
+    var card = await page.$$(".task-board");
+    var values = [];
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var input = await ele.shadowRoot.querySelector('input[type="text"]');
+        input.value = "test";
+      });
+    }
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      var val = await ele.$eval("task-card", async (ele) => {
+        return await ele.shadowRoot.querySelector('input[type="text"]').value;
+      });
+      values.push(val);
+    }
+
+    expect(values.length).toBe(7);
+  });
 });
