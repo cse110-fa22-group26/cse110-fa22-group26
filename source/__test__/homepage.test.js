@@ -75,4 +75,214 @@ describe("Homepage Test", () => {
 
     expect(values.length).toBe(7);
   });
+
+  it(" Monday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
+    const lenIndex = 0;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 0) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Tuesday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
+    const lenIndex = 1;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 1) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Wednesday confirm button is clicked , The task is saved to the third location in localStorage ", async () => {
+    const lenIndex = 2;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 2) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Thursday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
+    const lenIndex = 3;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 3) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Friday confirm button is clicked , The task is saved to the  fifth location in localStorage ", async () => {
+    const lenIndex = 4;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 4) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Saturday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
+    const lenIndex = 5;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 5) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
+
+  it(" Sunday confirm button is clicked , The task is saved to the  seventh location in localStorage ", async () => {
+    const lenIndex = 6;
+
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 6) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.querySelector("button");
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(1);
+  });
 });
