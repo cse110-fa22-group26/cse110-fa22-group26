@@ -40,6 +40,7 @@ beforeAll(async () => {
 });
 
 describe("Homepage Test", () => {
+  // Add button tests
   it("   There should be 7 Add buttons", async () => {
     const handle = await page.$$(".addBtn");
     expect(handle.length).toBe(7);
@@ -76,6 +77,7 @@ describe("Homepage Test", () => {
     expect(values.length).toBe(7);
   });
 
+  // confirm button tests
   it(" Monday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
     const lenIndex = 0;
 
@@ -285,4 +287,59 @@ describe("Homepage Test", () => {
 
     expect(userInfo.tasks[lenIndex].length).toBe(1);
   });
+
+  // delete button tests
+  it(" Monday delete button is clicked , The task is deleted from the localStorage ", async () => {
+    const lenIndex = 0;
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
+      button.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[lenIndex].length).toBe(0);
+  });
+
+  // Edit button tests
+   it(" Sunday edit button is clicked , The input box is open", async () => {
+    const lenIndex = 6;
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[lenIndex];
+    const disable = await ele.$eval("task-card", async (el) => {
+      var button = await el.shadowRoot.childNodes[0].getElementsByClassName("editBtn")[0];
+      button.click();
+      var input = await el.shadowRoot.childNodes[0].getElementsByTagName("input")[1];
+      return input.disabled;
+    });
+    expect(disable).toBe(false);
+  });
+
+  // Checking to make sure that it remembers the deletion after we refresh the page
+  it(" Checking number of Monday tasks after reload ", async () => {
+    await page.reload();
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[0].length).toBe(0);
+  });
+
 });
