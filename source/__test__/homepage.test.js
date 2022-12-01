@@ -426,5 +426,66 @@ describe("Homepage Test", () => {
     expect(card.length).toBe(0);
   });
 
+  it("All confirm button clicked , the input is disable", async () => {
+    await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var input = await ele.shadowRoot.querySelector('input[type="text"]');
+        input.value = "test";
+
+        var add = await ele.shadowRoot.querySelector("button");
+        add.click();
+      });
+    }
+
+    const values = [];
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      var val = await ele.$eval("task-card", async (ele) => {
+        return await ele.shadowRoot
+          .querySelector('input[type="text"]')
+          .getAttribute("disabled");
+      });
+      values.push(val);
+    }
+    expect(values.length).toBe(7);
+  });
+
+  it("All edit icon can open the input box", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var edit = await ele.shadowRoot.querySelector(".editBtn");
+        edit.click();
+      });
+    }
+
+    const values = [];
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      var val = await ele.$eval("task-card", async (ele) => {
+        return await ele.shadowRoot
+          .querySelector('input[type="text"]')
+          .getAttribute("disabled");
+      });
+      values.push(val);
+    }
+    var isAllEdit = false;
+
+    values.forEach((second) => {
+      if (second !== null) {
+        isAllEdit = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+  });
 });
