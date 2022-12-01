@@ -1,8 +1,8 @@
 @font-face {
   /* imports Lato as page's font */
   font-family: "BIZUDPGothic";
-  src: url("/source/assets/fonts/BIZUDPGothic-Bold.ttf"),
-    url("/source/assets/fonts/BIZUDPGothic-Regular.ttf") format("truetype");
+  src: url("../fonts/BIZUDPGothic-Bold.ttf"),
+    url("../fonts/BIZUDPGothic-Bold.ttf") format("truetype");
 }
 
 * {
