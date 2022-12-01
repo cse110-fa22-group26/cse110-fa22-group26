@@ -581,4 +581,92 @@ describe("Homepage Test", () => {
 
     expect(userInfo.tasks[0][0].input).toBe("test-update");
   });
+  it("all task  is  checked ", async () => {
+    await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
+
+    var card = await page.$$(".task-board");
+    var values = [];
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var input = await ele.shadowRoot.querySelector('input[type="text"]');
+        input.value = "test";
+
+        var add = await ele.shadowRoot.querySelector("button");
+        add.click();
+
+        var checkbox = await ele.shadowRoot.querySelector(
+          'input[type="checkbox"]'
+        );
+        checkbox.click();
+      });
+    }
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      var val = await ele.$eval("task-card", async (ele) => {
+        return await ele.shadowRoot.querySelector('input[type="checkbox"]')
+          .checked;
+      });
+      values.push(val);
+    }
+
+    console.log("values -> :", values[0]);
+
+    var isAllChecked = true;
+
+    values.forEach((second) => {
+      if (second == false) {
+        isAllChecked = false;
+      }
+    });
+
+    expect(JSON.stringify([values.length, isAllChecked])).toBe(JSON.stringify([7,true]));
+  });
+
+  it("it still marked with checkbox after page refresh ", async () => {
+    const todoListDB = await page.evaluate(() => {
+      return Promise.resolve(localStorage.getItem("todoListDB"));
+    });
+
+    const user = await page.evaluate(() => {
+      return Promise.resolve(localStorage.getItem("user"));
+    });
+
+    await page.evaluateOnNewDocument(
+      (todoListDB, user) => {
+        window.localStorage.clear();
+
+        window.localStorage.setItem("todoListDB", todoListDB);
+        window.localStorage.setItem("user", user);
+      },
+      todoListDB,
+      user
+    );
+
+    await page.reload();
+
+    var card = await page.$$(".task-board");
+    var values = [];
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      var val = await ele.$eval("task-card", async (ele) => {
+        return await ele.shadowRoot.querySelector('input[type="checkbox"]')
+          .checked;
+      });
+      values.push(val);
+    }
+
+    var isAllChecked = true;
+
+    values.forEach((second) => {
+      if (second == false) {
+        isAllChecked = false;
+      }
+    });
+
+    expect(JSON.stringify([values.length, isAllChecked])).toBe(JSON.stringify([7,true]));
+  });
 });
