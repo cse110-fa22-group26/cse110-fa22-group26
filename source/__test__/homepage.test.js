@@ -342,4 +342,89 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[0].length).toBe(0);
   });
 
+  it("All delete icon can correctly delete certain task from ui", async () => {
+
+    await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
+
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var input = await ele.shadowRoot.querySelector('input[type="text"]');
+        input.value = "test";
+        var button = await ele.shadowRoot.querySelector("button");
+        button.click();
+      });
+    }
+
+    const list1 = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list1.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    var addLen = userInfo.tasks.reduce((previousValue, currentValue) => {
+      return currentValue.length + previousValue;
+    }, 0);
+
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var del = await ele.shadowRoot.querySelector(".deleteBtn");
+        del.click();
+      });
+    }
+
+    const list2 = await page.$$("task-card");
+
+    expect(list2.length).toBe(addLen-7);
+  });
+
+  it(" All delete icon can correctly delete certain task from localStorage, works also after refresh", async () => {
+    await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
+
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$eval("task-card", async (ele) => {
+        var input = await ele.shadowRoot.querySelector('input[type="text"]');
+        input.value = "test";
+
+        var add = await ele.shadowRoot.querySelector("button");
+        add.click();
+
+        var del = await ele.shadowRoot.querySelector(".deleteBtn");
+        del.click();
+      });
+    }
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    var addLen = userInfo.tasks.reduce((previousValue, currentValue) => {
+      return currentValue.length + previousValue;
+    }, 0);
+
+    expect(addLen).toBe(0);
+  });
+  it(" All delete clicked , works also after refresh", async () => {
+    await page.reload();
+
+    var card = await page.$$("task-card");
+
+    expect(card.length).toBe(0);
+  });
+
+
 });
