@@ -453,7 +453,17 @@ describe("Homepage Test", () => {
       });
       values.push(val);
     }
-    expect(values.length).toBe(7);
+
+    var isAllEdit = true;
+
+    values.forEach((second) => {
+      if (second == null) {
+        isAllEdit = false;
+      }
+    });
+
+    expect(isAllEdit).toBe(true);
+
   });
 
   it("All edit icon can open the input box", async () => {
