@@ -498,4 +498,87 @@ describe("Homepage Test", () => {
 
     expect(isAllEdit).toBe(false);
   });
+
+  it("The Monday confirm button is clicked - the task save in localStorage", async () => {
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e, index) => {
+        if (index === 0) {
+          e.click();
+        }
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    var ele = card[0];
+    await ele.$eval("task-card", async (el) => {
+      var input = await el.shadowRoot.querySelector('input[type="text"]');
+      input.value = "test";
+
+      var add = await el.shadowRoot.querySelector("button");
+      add.click();
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[0].length).toBe(1);
+  });
+  it(" If The Monday confirm button is clicked , task is updated to in localStorage", async () => {
+    var card = await page.$$(".task-board");
+
+    var ele = card[0];
+    await ele.$eval("task-card", async (el) => {
+      var edit = await el.shadowRoot.querySelector(".editBtn");
+      edit.click();
+
+      var input = await el.shadowRoot.querySelector('input[type="text"]');
+      input.value = "test-update";
+
+      var add = await el.shadowRoot.querySelector("button");
+      add.click();
+    });
+
+    var taskID = await page.$eval("task-card", (elem) => elem.id);
+    console.log("taskID -> :", taskID);
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[0][0].input).toBe("test-update");
+  });
+
+  it(" If The Monday confirm button is not clicked , task is not updated to in localStorage", async () => {
+    var card = await page.$$(".task-board");
+
+    var ele = card[0];
+    await ele.$eval("task-card", async (el) => {
+      var edit = await el.shadowRoot.querySelector(".editBtn");
+      edit.click();
+
+      var input = await el.shadowRoot.querySelector('input[type="text"]');
+      input.value = "test-update-again";
+
+    });
+
+    const list = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem("todoListDB"));
+    });
+
+    var userInfo = list.find((item) => item.username === "test1") || {
+      tasks: [],
+    };
+
+    expect(userInfo.tasks[0][0].input).toBe("test-update");
+  });
 });
