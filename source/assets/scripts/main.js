@@ -1,4 +1,35 @@
 // main.js
+// global variables
+// used to record total number of task in each weekday list
+const taskCount = {
+  Monday: 0,
+  Tuesday: 0,
+  Wednesday: 0,
+  Thursday: 0,
+  Friday: 0,
+  Saturday: 0,
+  Sunday: 0,
+};
+// used to record number of task done in each weekday list
+const doneCount = {
+  Monday: 0,
+  Tuesday: 0,
+  Wednesday: 0,
+  Thursday: 0,
+  Friday: 0,
+  Saturday: 0,
+  Sunday: 0,
+};
+// used to map each weekday list with index to its stoage place in 2D array db
+const dayIndex = {
+  Monday: 0,
+  Tuesday: 1,
+  Wednesday: 2,
+  Thursday: 3,
+  Friday: 4,
+  Saturday: 5,
+  Sunday: 6,
+};
 
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
@@ -28,75 +59,79 @@ function init() {
 }
 
 /**
- * Count number of tasks done and total task for each weekday list,
- * it also works for progress bar and display different message for
- * different progress user have.
+ * Present current number of tasks done and total task for each weekday list.
+ * It works for both text and progress bar on the weekday list title,
+ * and also display different message for different progress user have
+ * on the entire progress bar.
  */
-function taskCount() {
-  let addBtns = document.getElementsByClassName("addBtn");
-  const taskCount = {
-    Monday: 0,
-    Tuesday: 0,
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-    Saturday: 0,
-    Sunday: 0,
-  };
-  const doneCount = {
-    Monday: 0,
-    Tuesday: 0,
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-    Saturday: 0,
-    Sunday: 0,
-  };
-  Array.from(addBtns).forEach((btn) => {
-    taskCount[btn.parentNode.id] = btn.parentNode.childElementCount - 1;
-    let day = btn.parentNode;
-    let taskCard = day.getElementsByTagName("task-card");
-    Array.from(taskCard).forEach((ts) => {
-      let shadowRoot = ts.shadowRoot;
-      let checked = shadowRoot.childNodes[0].querySelectorAll(
-        "input[type=checkbox]:checked"
-      );
-      if (checked[0]) doneCount[btn.parentNode.id]++;
-    });
-  });
+function countTasks() {
+  // find all weekday list title bar
   let lists = document.getElementsByClassName("collapsible");
   Array.from(lists).forEach((list) => {
+    // update weekday bar text with current number of task done & total task
     list.getElementsByTagName("span")[1].textContent = ` 
         (${taskCount[list.getElementsByTagName("span")[0].textContent]} Tasks,
         ${doneCount[list.getElementsByTagName("span")[0].textContent]} Done)
         `;
-
-    list.getElementsByClassName("progress")[0].style.width =
-      (doneCount[list.getElementsByTagName("span")[0].textContent] /
-        taskCount[list.getElementsByTagName("span")[0].textContent]) *
-        100 +
-      "%";
+    // if task count / total task is 0/0
+    if (
+      taskCount[list.getElementsByTagName("span")[0].textContent] == 0 &&
+      doneCount[list.getElementsByTagName("span")[0].textContent] == 0
+    ) {
+      list.getElementsByClassName("progress")[0].style.width = 0 + "%";
+    } else {
+      // update progress bar with percent of current number of task done / total task
+      list.getElementsByClassName("progress")[0].style.width =
+        (doneCount[list.getElementsByTagName("span")[0].textContent] /
+          taskCount[list.getElementsByTagName("span")[0].textContent]) *
+          100 +
+        "%";
+    }
   });
-  let totalTasks = taskCount["Monday"] + taskCount["Tuesday"]+ taskCount["Wednesday"]+ taskCount["Thursday"]+ 
-                    taskCount["Friday"]+ taskCount["Saturday"]+ taskCount["Sunday"];
-  let totalDone = doneCount["Monday"] + doneCount["Tuesday"]+ doneCount["Wednesday"]+ doneCount["Thursday"]+ 
-                  doneCount["Friday"]+ doneCount["Saturday"]+ doneCount["Sunday"];
+  // calculate total number of tasks
+  let totalTasks =
+    taskCount["Monday"] +
+    taskCount["Tuesday"] +
+    taskCount["Wednesday"] +
+    taskCount["Thursday"] +
+    taskCount["Friday"] +
+    taskCount["Saturday"] +
+    taskCount["Sunday"];
+  // calculate total number of task done
+  let totalDone =
+    doneCount["Monday"] +
+    doneCount["Tuesday"] +
+    doneCount["Wednesday"] +
+    doneCount["Thursday"] +
+    doneCount["Friday"] +
+    doneCount["Saturday"] +
+    doneCount["Sunday"];
+  // update entire progress bar with current percentage of done/total
   let progBar = document.getElementById("top-progress");
-  let progress = totalDone / totalTasks * 100;
-
-  progBar.style.width= progress + "%";
-  let progressTxt = document.getElementById('progTxt');
-  if(progress < 15) progressTxt.textContent = "A fresh new week! Start working!";
-  else if(progress < 30) progressTxt.textContent = "Doing Smth";
-  else if(progress < 50) progressTxt.textContent = "On Schedule!";
-  else if(progress < 63) progressTxt.textContent = "More than half way through!";
-  else if(progress < 100) progressTxt.textContent = "Almost there!";
+  let progress = (totalDone / totalTasks) * 100;
+  // if total done and task 0, reset progress bar
+  if (totalDone == 0 & totalTasks == 0){
+    progBar.style.width = 0 + "%";
+  }
+  else{
+    progBar.style.width = progress + "%";
+  }
+  
+  // display different text messages for user based on their progress
+  let progressTxt = document.getElementById("progTxt");
+  if (progress < 15)
+    progressTxt.textContent = "A fresh new week! Start working!";
+  else if (progress < 30) progressTxt.textContent = "Doing Smth";
+  else if (progress < 50) progressTxt.textContent = "On Schedule!";
+  else if (progress < 63)
+    progressTxt.textContent = "More than half way through!";
+  else if (progress < 100) progressTxt.textContent = "Almost there!";
   else progressTxt.textContent = "ALL DONE!";
 }
 
 /**
  * load to do list DB (users & their tasks) from the local storage
- * 
+ *
  * @returns {Array<Object>} An array of user object that contains
  * their username, password, and tasks inside
  */
@@ -115,21 +150,13 @@ function getTasksFromStorage() {
  * for each tasks creates a new <task-card> element, adds the
  * tasks data to that card then appends that new task to it's
  * coresponding days
- * 
+ *
  * @param {Array<Object>} savedTasks An array of tasks
  */
 function addTasksToDocument(savedTasks) {
   // if no saved tasks return.
   if (savedTasks.length === 0) return;
-  const dayIndex = {
-    Monday: 0,
-    Tuesday: 1,
-    Wednesday: 2,
-    Thursday: 3,
-    Friday: 4,
-    Saturday: 5,
-    Sunday: 6,
-  };
+
   let addBtns = document.getElementsByClassName("addBtn");
   const daysWithTasks = new Set();
   Array.from(addBtns).forEach((addBtn) => {
@@ -145,9 +172,13 @@ function addTasksToDocument(savedTasks) {
         taskBoard.insertBefore(newTask, addBtn);
         // add function to icons of new task
         addtaskFunction(newTaskID);
+        // add doneCount based on tasks' data
+        if (task["checkBox"]) {
+          doneCount[task["day"]]++;
+        }
       }
       daysWithTasks.add(task["day"]);
-      taskCount[task["day"]] += 1; // get task count for each day, need to divide by 7
+      taskCount[task["day"]] += 1; // get task count for each day
     });
   });
 
@@ -158,12 +189,12 @@ function addTasksToDocument(savedTasks) {
       dayBtn.click();
     }
   }
-  taskCount();
+  countTasks();
 }
 
 /**
  * This function saves the task to todoListDB in localStorage
- * 
+ *
  * @param {Array<Object>} savedTasks An array of tasks
  */
 function saveTasksToStorage(savedTasks) {
@@ -243,7 +274,7 @@ function addTasks() {
 
 /**
  * add delete, edit, confirm functionality to newly added task
- * 
+ *
  * @param {string} taskID a string that represents a specific task
  */
 function addtaskFunction(taskID) {
@@ -257,7 +288,7 @@ function addtaskFunction(taskID) {
  * give newest delete btn functionality to remove relevant task
  * on click delete, will remove the task shadow dom and remove from
  * localstorage.
- * 
+ *
  * @param {string} taskID a string that represents a specific task
  */
 function deleteTasks(taskID) {
@@ -265,15 +296,6 @@ function deleteTasks(taskID) {
   let shadowRoot = taskBlock.shadowRoot;
   let deleteBtn =
     shadowRoot.childNodes[0].getElementsByClassName("deleteBtn")[0];
-  const dayIndex = {
-    Monday: 0,
-    Tuesday: 1,
-    Wednesday: 2,
-    Thursday: 3,
-    Friday: 4,
-    Saturday: 5,
-    Sunday: 6,
-  };
   deleteBtn.addEventListener("click", (event) => {
     // get current localStorage
     let user = JSON.parse(localStorage.getItem("user"));
@@ -287,21 +309,28 @@ function deleteTasks(taskID) {
       if (
         taskID === localTasks[dayIndex[taskBlock.parentNode.id]][i]["taskID"]
       ) {
+        // update done count if necessary
+        if (localTasks[dayIndex[taskBlock.parentNode.id]][i]["checkBox"]) {
+          doneCount[taskBlock.parentNode.id]--;
+        }
         localTasks[dayIndex[taskBlock.parentNode.id]].splice(i, 1);
       }
     }
 
     // saved modified tasks to localstorage
     saveTasksToStorage(localTasks);
+    // update task count by -1
+    taskCount[taskBlock.parentNode.id]--;
+
     taskBlock.remove();
-    taskCount();
+    countTasks();
   });
 }
 
 /**
  * give newest edit btn functionality to edit relevant task input
  * on click edit, will active input box and confirm button.
- * 
+ *
  * @param {string} taskID a string that represents a specific task
  */
 function editTasks(taskID) {
@@ -320,22 +349,13 @@ function editTasks(taskID) {
 /**
  * The function updates checkbox status of task and task count of tasks
  * in this function whenever checkbox is clicked.
- * 
+ *
  * @param {string} taskID a string that represents a specific task
  */
 function checkTask(taskID) {
   let taskBlock = document.getElementById(taskID);
   let shadowRoot = taskBlock.shadowRoot;
   let checkBox = shadowRoot.childNodes[0].getElementsByClassName("checkbox")[0];
-  const dayIndex = {
-    Monday: 0,
-    Tuesday: 1,
-    Wednesday: 2,
-    Thursday: 3,
-    Friday: 4,
-    Saturday: 5,
-    Sunday: 6,
-  };
   checkBox.addEventListener("click", (event) => {
     // get tasks from localstorage
     let user = JSON.parse(localStorage.getItem("user"));
@@ -345,10 +365,16 @@ function checkTask(taskID) {
         if (taskID === task["taskID"]) {
           task["checkBox"] =
             shadowRoot.childNodes[0].getElementsByTagName("input")[0].checked;
+          // update done count based on checkbox status
+          if (task["checkBox"]) {
+            doneCount[taskBlock.parentNode.id]++;
+          } else {
+            doneCount[taskBlock.parentNode.id]--;
+          }
         }
       }
     );
-    taskCount(); // update task count
+    countTasks(); // update task count
     saveTasksToStorage(localTasks); // save to localstorage
   });
 }
@@ -357,7 +383,7 @@ function checkTask(taskID) {
  * give newest confirm btn functionality to confirm and block user from change input
  * on click confirm, will either update the new input in localstorage
  * or create a new task if task does not already exist.
- * 
+ *
  * @param {string} taskID a string that represents a specific task
  */
 function confirmTasks(taskID) {
@@ -366,15 +392,7 @@ function confirmTasks(taskID) {
   let confirmBtn =
     shadowRoot.childNodes[0].getElementsByClassName("confirmBtn")[0];
   let input = shadowRoot.childNodes[0].getElementsByTagName("input")[1];
-  const dayIndex = {
-    Monday: 0,
-    Tuesday: 1,
-    Wednesday: 2,
-    Thursday: 3,
-    Friday: 4,
-    Saturday: 5,
-    Sunday: 6,
-  };
+
   confirmBtn.addEventListener("click", (event) => {
     input.disabled = true;
     confirmBtn.disabled = true;
@@ -406,8 +424,9 @@ function confirmTasks(taskID) {
     // add new task to localstorage if task does not exist.
     if (found === false) {
       localTasks[dayIndex[taskBlock.parentNode.id]].push(taskObject);
+      taskCount[taskBlock.parentNode.id]++;
     }
     saveTasksToStorage(localTasks); // save to localstorage
-    taskCount(); // update task count.
+    countTasks(); // update task count message
   });
 }
