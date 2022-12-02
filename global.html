@@ -1115,7 +1115,7 @@ on click edit, will active input box and confirm button.
     
 
     
-    <h4 class="name" id="findAndSetUsersDB"><span class="type-signature"></span>findAndSetUsersDB<span class="signature">(string, string)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="findAndSetUsersDB"><span class="type-signature"></span>findAndSetUsersDB<span class="signature">(username, password)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1161,10 +1161,15 @@ the database.
 
         <tr>
             
-                <td class="name"><code>string</code></td>
+                <td class="name"><code>username</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
             
             </td>
 
@@ -1172,17 +1177,22 @@ the database.
 
             
 
-            <td class="description last">username The user's username</td>
+            <td class="description last">The user's username</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>string</code></td>
+                <td class="name"><code>password</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
             
             </td>
 
@@ -1190,7 +1200,7 @@ the database.
 
             
 
-            <td class="description last">password The user's password</td>
+            <td class="description last">The user's password</td>
         </tr>
 
     
@@ -1267,7 +1277,7 @@ the database.
     
 
     
-    <h4 class="name" id="getDB"><span class="type-signature"></span>getDB<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="getDB"><span class="type-signature"></span>getDB<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;object>}</span></h4>
     
 
     
@@ -1275,9 +1285,9 @@ the database.
 
 
 <div class="description">
-    Function to get database from local storage
-  If it is already exist, return database in javascript object form
-  or return null indicaing nothing found.
+    This function is responsible for retrieving the information of all users who
+have signed up and then parsing it if the database is populated; otherwise,
+an empty array is returned.
 </div>
 
 
@@ -1321,7 +1331,7 @@ the database.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line105">line 105</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -1350,7 +1360,8 @@ the database.
 
         
 <div class="param-desc">
-    - database "todoListDB" as a javascript object
+    - parsed array storing the information of all the users who 
+have signed up, if any; otherwise, as noted, an empty array is returned.
 </div>
 
 
@@ -1361,7 +1372,7 @@ the database.
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">Array.&lt;object></span>
 
 
     </dd>
@@ -1588,7 +1599,11 @@ calling the findAndSetUsersDB function.
 
 
 <div class="description">
-    This function rertrieves the information the user inputs.
+    This function is responsible for storing the information of a user who
+signed up, given that the user does not yet exist in the database. Specific
+functionalities include notifying the user if their passwords do not match,
+displaying that the user exists if they already signed up, and ultimately
+redirecting the user to their specific to-do list.
 </div>
 
 
@@ -1632,7 +1647,7 @@ calling the findAndSetUsersDB function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line10">line 10</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -1722,6 +1737,96 @@ calls trace back here.
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="login.js.html">login.js</a>, <a href="login.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="init"><span class="type-signature"></span>init<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function is responsible for the sign up functionality using
+the getUserSignUpInfo function, which relies on the getDB
+function and usernameExists function.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -1992,7 +2097,8 @@ different progress user have.
 
 
 <div class="description">
-    Function checks for user existence in the database
+    This function is responsible for checking if a user exists in the existing
+database.
 </div>
 
 
@@ -2044,7 +2150,7 @@ different progress user have.
 
             
 
-            <td class="description last"></td>
+            <td class="description last">all existing users who have created an account.</td>
         </tr>
 
     
@@ -2067,7 +2173,8 @@ different progress user have.
 
             
 
-            <td class="description last"></td>
+            <td class="description last">the username we are looking up in the current 
+database.</td>
         </tr>
 
     
@@ -2108,7 +2215,7 @@ different progress user have.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line122">line 122</a>
+        <a href="signUp.js.html">signUp.js</a>, <a href="signUp.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -2137,7 +2244,7 @@ different progress user have.
 
         
 <div class="param-desc">
-    indicates if the user information is stored in the database
+    - whether the user exists in the current database or not.
 </div>
 
 
@@ -2182,7 +2289,7 @@ different progress user have.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Dec 01 2022 10:31:34 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Dec 02 2022 01:32:29 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
