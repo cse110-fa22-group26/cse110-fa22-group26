@@ -46,13 +46,13 @@ describe("Homepage Test", () => {
     expect(handle.length).toBe(7);
   });
 
-  it(" All Add button can correctly add task under all weekday list ", async () => {
+  it("All Add button can correctly add task under all weekday list", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
     const handle = await page.$$("task-card");
     expect(handle.length).toBe(7);
   });
   
-  it("There should be 7 input boxes that you can enter ", async () => {
+  it("There should be 7 input boxes that you can enter", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
     var card = await page.$$(".task-board");
@@ -78,7 +78,7 @@ describe("Homepage Test", () => {
   });
 
   // confirm button tests
-  it(" Monday confirm button is clicked , The task is saved to the first location in localStorage ", async () => {
+  it("Monday confirm button is clicked, the task is saved to the first location in localStorage", async () => {
     const lenIndex = 0;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -108,7 +108,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(1);
   });
 
-  it(" Tuesday confirm button is not clicked , The task is not saved to the second location in localStorage ", async () => {
+  it("Tuesday confirm button is not clicked, the task is not saved to the second location in localStorage", async () => {
     const lenIndex = 1;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -138,7 +138,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(0);
   });
 
-  it(" Wednesday confirm button is clicked , The task is saved to the third location in localStorage ", async () => {
+  it("Wednesday confirm button is clicked, the task is saved to the third location in localStorage", async () => {
     const lenIndex = 2;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -168,7 +168,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(1);
   });
 
-  it(" Thursday confirm button is not clicked , The task is not saved to the fourth location in localStorage ", async () => {
+  it("Thursday confirm button is not clicked, the task is not saved to the fourth location in localStorage", async () => {
     const lenIndex = 3;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -198,7 +198,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(0);
   });
 
-  it(" Friday confirm button is clicked , The task is saved to the  fifth location in localStorage ", async () => {
+  it("Friday confirm button is clicked, the task is saved to the fifth location in localStorage", async () => {
     const lenIndex = 4;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -228,7 +228,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(1);
   });
 
-  it(" Saturday confirm button is not clicked , The task is not saved to the sixth location in localStorage ", async () => {
+  it("Saturday confirm button is not clicked, the task is not saved to the sixth location in localStorage", async () => {
     const lenIndex = 5;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -258,7 +258,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[lenIndex].length).toBe(0);
   });
 
-  it(" Sunday confirm button is clicked , The task is saved to the  seventh location in localStorage ", async () => {
+  it("Sunday confirm button is clicked, the task is saved to the seventh location in localStorage", async () => {
     const lenIndex = 6;
 
     await page.$$eval(".addBtn", (elem) =>
@@ -289,7 +289,7 @@ describe("Homepage Test", () => {
   });
 
   // delete button tests
-  it(" Monday delete button is clicked , The task is deleted from the localStorage ", async () => {
+  it("Monday delete button is clicked, the task is deleted from the localStorage ", async () => {
     const lenIndex = 0;
 
     var card = await page.$$(".task-board");
@@ -312,7 +312,7 @@ describe("Homepage Test", () => {
   });
 
   // Edit button tests
-   it(" Sunday edit button is clicked , The input box is open", async () => {
+   it("Sunday edit button is clicked, the input box is open", async () => {
     const lenIndex = 6;
 
     var card = await page.$$(".task-board");
@@ -328,7 +328,7 @@ describe("Homepage Test", () => {
   });
 
   // Checking to make sure that it remembers the deletion after we refresh the page
-  it(" Checking number of Monday tasks after reload ", async () => {
+  it("Checking number of Monday tasks after reload", async () => {
     await page.reload();
 
     const list = await page.evaluate(() => {
@@ -385,7 +385,7 @@ describe("Homepage Test", () => {
     expect(list2.length).toBe(addLen-7);
   });
 
-  it(" All delete icon can correctly delete certain task from localStorage, works also after refresh", async () => {
+  it("All delete icon can correctly delete certain task from localStorage, works also after refresh", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
     var card = await page.$$(".task-board");
@@ -418,7 +418,8 @@ describe("Homepage Test", () => {
 
     expect(addLen).toBe(0);
   });
-  it(" All delete clicked , works also after refresh", async () => {
+
+  it("All delete clicked, works also after refresh", async () => {
     await page.reload();
 
     var card = await page.$$("task-card");
@@ -426,7 +427,7 @@ describe("Homepage Test", () => {
     expect(card.length).toBe(0);
   });
 
-  it("All confirm button clicked , the input is disable", async () => {
+  it("All confirm button clicked, the input box is disabled", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
     var card = await page.$$(".task-board");
@@ -499,7 +500,7 @@ describe("Homepage Test", () => {
     expect(isAllEdit).toBe(false);
   });
 
-  it("The Monday confirm button is clicked - the task save in localStorage", async () => {
+  it("The Monday confirm button is clicked - the task is saved in localStorage", async () => {
     await page.$$eval(".addBtn", (elem) =>
       elem.forEach((e, index) => {
         if (index === 0) {
@@ -529,7 +530,8 @@ describe("Homepage Test", () => {
 
     expect(userInfo.tasks[0].length).toBe(1);
   });
-  it(" If The Monday confirm button is clicked , task is updated to in localStorage", async () => {
+
+  it("If the Monday confirm button is clicked, task is updated in localStorage", async () => {
     var card = await page.$$(".task-board");
 
     var ele = card[0];
@@ -558,7 +560,7 @@ describe("Homepage Test", () => {
     expect(userInfo.tasks[0][0].input).toBe("test-update");
   });
 
-  it(" If The Monday confirm button is not clicked , task is not updated to in localStorage", async () => {
+  it("If the Monday confirm button is not clicked, task is not updated in localStorage", async () => {
     var card = await page.$$(".task-board");
 
     var ele = card[0];
@@ -581,7 +583,8 @@ describe("Homepage Test", () => {
 
     expect(userInfo.tasks[0][0].input).toBe("test-update");
   });
-  it("all task  is  checked ", async () => {
+
+  it("all task is checked", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
     var card = await page.$$(".task-board");
@@ -625,7 +628,7 @@ describe("Homepage Test", () => {
     expect(JSON.stringify([values.length, isAllChecked])).toBe(JSON.stringify([7,true]));
   });
 
-  it("it still marked with checkbox after page refresh ", async () => {
+  it("it still marked with checkbox after page refresh", async () => {
     const todoListDB = await page.evaluate(() => {
       return Promise.resolve(localStorage.getItem("todoListDB"));
     });
