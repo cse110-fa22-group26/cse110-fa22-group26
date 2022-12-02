@@ -36,7 +36,7 @@ beforeAll(async () => {
 
   await page.setViewport({ width, height });
 
-  await page.goto("http://127.0.0.1:5501/source/homePage.html");
+  await page.goto("https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/homePage.html");
 });
 
 describe("Homepage Test", () => {
