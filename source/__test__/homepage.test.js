@@ -385,7 +385,7 @@ describe("Homepage Test", () => {
     expect(list2.length).toBe(addLen-7);
   });
 
-  it("All delete icon can correctly delete certain task from localStorage, works also after refresh", async () => {
+  it("All delete icon can correctly delete certain task from localStorage", async () => {
     await page.$$eval(".addBtn", (elem) => elem.forEach((e) => e.click()));
 
     var card = await page.$$(".task-board");
