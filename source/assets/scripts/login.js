@@ -70,8 +70,6 @@ function findAndSetUsersDB(username, password) {
     }
 
     if (found) {
-      console.log("user found");
-
       // when user is found, add user object with tasks array and username to local storage
       localStorage.setItem(
         "user",
@@ -83,7 +81,7 @@ function findAndSetUsersDB(username, password) {
     } else {
       if (!userFound) {
         const checkPass = document.querySelector(".warning-username");
-        const usr = document.getElementById('username')
+        const usr = document.getElementById("username");
 
         checkPass.textContent = "Username does not exist";
         usr.addEventListener("keypress", (event) => {
@@ -92,7 +90,7 @@ function findAndSetUsersDB(username, password) {
         });
       } else {
         const checkPass = document.querySelector(".warning-password");
-        const pass = document.getElementById('password')
+        const pass = document.getElementById("password");
         checkPass.textContent = "Incorrect Password";
         pass.addEventListener("keypress", (event) => {
           //clears warning when user types
@@ -101,6 +99,13 @@ function findAndSetUsersDB(username, password) {
       }
     }
   } else {
-    console.log("no db");
+    const checkPass = document.querySelector(".warning-username");
+    const usr = document.getElementById("username");
+
+    checkPass.textContent = "Username does not exist";
+    usr.addEventListener("keypress", (event) => {
+      //clears warning when user types
+      checkPass.textContent = "";
+    });
   }
 }
