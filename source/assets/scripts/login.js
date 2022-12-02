@@ -39,10 +39,10 @@ function getUserDB() {
 }
 
 /**
- * Given that a user's input credential matches a record in todolistDb, meaning 
+ * Given that a user's input credential matches a record in todolistDb, meaning
  * the user has created an account, this function will save the user's tasks to
  * the database.
- * 
+ *
  * @param {string} username The user's username
  * @param {string} password The user's password
  */
@@ -50,11 +50,15 @@ function findAndSetUsersDB(username, password) {
   // get todoListDB from localstorage to check credentials
   let found = false;
   let usrname = "";
+  let userFound = false;
   let tasks = [];
   const todoListDB = localStorage.getItem("todoListDB");
   if (todoListDB) {
     const db = JSON.parse(todoListDB);
     for (let i = 0; i < db.length; i++) {
+      if (db[i].username === username) {
+        userFound = true;
+      }
       if (db[i].username === username && db[i].password === password) {
         found = true;
 
@@ -77,7 +81,24 @@ function findAndSetUsersDB(username, password) {
       // redirect to the new page
       location.replace("homePage.html");
     } else {
-      console.log("user not found");
+      if (!userFound) {
+        const checkPass = document.querySelector(".warning-username");
+        const usr = document.getElementById('username')
+
+        checkPass.textContent = "Username does not exist";
+        usr.addEventListener("keypress", (event) => {
+          //clears warning when user types
+          checkPass.textContent = "";
+        });
+      } else {
+        const checkPass = document.querySelector(".warning-password");
+        const pass = document.getElementById('password')
+        checkPass.textContent = "Incorrect Password";
+        pass.addEventListener("keypress", (event) => {
+          //clears warning when user types
+          checkPass.textContent = "";
+        });
+      }
     }
   } else {
     console.log("no db");
