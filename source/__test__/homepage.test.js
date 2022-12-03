@@ -547,7 +547,6 @@ describe("Homepage Test", () => {
     });
 
     var taskID = await page.$eval("task-card", (elem) => elem.id);
-    console.log("taskID -> :", taskID);
 
     const list = await page.evaluate(() => {
       return JSON.parse(localStorage.getItem("todoListDB"));
@@ -614,9 +613,6 @@ describe("Homepage Test", () => {
       });
       values.push(val);
     }
-
-    console.log("values -> :", values[0]);
-
     var isAllChecked = true;
 
     values.forEach((second) => {
@@ -671,6 +667,111 @@ describe("Homepage Test", () => {
     });
 
     expect(JSON.stringify([values.length, isAllChecked])).toBe(JSON.stringify([7,true]));
+  });
+
+  it("Test whether the collapsible of Monday can be expanded and folded", async () => {
+    const expand = await page.$eval("#Monday", (el) =>
+      el.classList.contains("expand")
+    );
+
+    if (expand) {
+      await page.$eval(".collapsible", (el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Monday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Monday can be expanded and folded", async () => {
+    const shrink = await page.$eval("#Monday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      await page.$eval(".collapsible", (el) => el.click());
+    }
+
+    const expand = await page.$eval("#Monday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
+  });
+
+  it("Test whether the collapsible of Tuesday can be expanded and folded", async () => {
+    const lenIndex = 1;
+    const expand = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("expand")
+    );
+    console.log(expand)
+    if (expand) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Tuesday can be expanded and folded", async () => {
+    const lenIndex = 1;
+    const shrink = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const expand = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
+  });
+
+  it("Test whether the collapsible of Sunday can be expanded and folded", async () => {
+    const lenIndex = 6
+    const expand = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("expand")
+    );
+
+    if (expand) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Sunday can be expanded and folded", async () => {
+    const lenIndex = 6
+    const shrink = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const expand = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
   });
 
   it("When all tasks are completed, the progress bar should be 100% ", async () => {
