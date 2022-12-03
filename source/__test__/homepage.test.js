@@ -41,7 +41,7 @@ beforeAll(async () => {
 
 describe("Homepage Test", () => {
   // Add button tests
-  it("   There should be 7 Add buttons", async () => {
+  it("There should be 7 Add buttons", async () => {
     const handle = await page.$$(".addBtn");
     expect(handle.length).toBe(7);
   });
