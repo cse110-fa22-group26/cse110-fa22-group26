@@ -705,7 +705,7 @@ describe("Homepage Test", () => {
     const expand = await page.$eval("#Tuesday", (el) =>
       el.classList.contains("expand")
     );
-    console.log(expand)
+
     if (expand) {
       let eles = await page.$$(".collapsible");
       let ele = eles[lenIndex];
