@@ -41,7 +41,7 @@ beforeAll(async () => {
 
 describe("Homepage Test", () => {
   // Add button tests
-  it("   There should be 7 Add buttons", async () => {
+  it("There should be 7 Add buttons", async () => {
     const handle = await page.$$(".addBtn");
     expect(handle.length).toBe(7);
   });
@@ -936,7 +936,7 @@ describe("Homepage Test", () => {
   });
 
   //   100%
-  it("When deleting the last two tasks of each day,should have a total of 14 tasks and  all progress bars should be 100%", async () => {
+  it("When deleting the last two tasks of each day,should have a total of 14 tasks and all progress bars should be 100%", async () => {
     var card = await page.$$(".task-board");
 
     for (let i = 0; i < card.length; i++) {
