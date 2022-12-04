@@ -926,6 +926,7 @@ describe("Homepage Test", () => {
       }
     });
 
+    // When multiple confirmed tasks' checkbox is clicked, done count in weekday list title increase by same amount
     texts.forEach((second) => {
       if (second !== "(4Tasks,2Done)") {
         isHalf = true;
@@ -1114,4 +1115,61 @@ describe("Homepage Test", () => {
     expect(isHalf).toBe(false);
   });
   
+  it("When confirmed task's checkbox is unclicked, done count in weekday list title decreases by same amount", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index == 0) {
+            var checkbox = second.shadowRoot.querySelector(
+              'input[type="checkbox"]'
+            );
+            checkbox.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("0%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(7);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "0%") {
+        isAllEdit = true;
+      }
+    });
+
+    texts.forEach((second) => {
+      if (second !== "(1Tasks,0Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
 });
