@@ -1051,6 +1051,67 @@ describe("Homepage Test", () => {
     expect(isHalf).toBe(false);
   });
   
-  
+  it("When we edit and confirm existing task again, total task count & done count does not change", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index == 0) {
+            var edit = second.shadowRoot.querySelector(".editBtn");
+            edit.click();
+
+            var input = second.shadowRoot.querySelector('input[type="text"]');
+            input.value = "test-update";
+
+            var add = second.shadowRoot.querySelector("button");
+            add.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("100%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(7);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "100%") {
+        isAllEdit = true;
+      }
+    });
+
+    texts.forEach((second) => {
+      if (second !== "(1Tasks,1Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
   
 });
