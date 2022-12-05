@@ -24,8 +24,7 @@ describe('Test planner app welcome page', () => {
               ])
             );
         });
-        //TODO: must switch url before submitting
-        await page.goto('http://127.0.0.1:5501/source/welcomePage.html');
+        await page.goto('https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/welcomePage.html');
     });
 
     //Given that user has not yet signed up, warning message must be displayed
@@ -72,7 +71,7 @@ describe('Test planner app welcome page', () => {
       // If user exists, they should be redirected to homepage
       it('user exist, so no warning is displayed', async () => {
         await page.reload();
-        const correctPage = "http://127.0.0.1:5501/source/homePage.html";
+        const correctPage = "https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/homePage.html";
         await page.waitForSelector('input[name=username]');
         await page.$eval('input[name=username]', el => el.value = 'userOne');
 
