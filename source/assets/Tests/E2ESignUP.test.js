@@ -3,7 +3,7 @@ const { Browser, default: puppeteer } = require("puppeteer");
 describe('Test planner app sign up page', () => {
     // visit the homepage 
     beforeAll(async () => {
-      await page.goto('http://127.0.0.1:5501/source/signUp.html');
+      await page.goto('https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/signUp.html');
     });
 
     // Check to make sure that nothing is added to local storage if passwords don't match
@@ -124,9 +124,4 @@ describe('Test planner app sign up page', () => {
         //the exact credentials, the number of users should remain the same
         expect(currNumUsers).toBe(numUsersAfterSubmit);
       }, 10000);
-
-      /*
-      Tasks to test: User's with different usernames but same password and vice versa
-      */
-      
 });
