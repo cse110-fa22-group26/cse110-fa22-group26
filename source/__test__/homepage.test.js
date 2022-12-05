@@ -41,7 +41,7 @@ beforeAll(async () => {
 
 describe("Homepage Test", () => {
   // Add button tests
-  it("   There should be 7 Add buttons", async () => {
+  it("There should be 7 Add buttons", async () => {
     const handle = await page.$$(".addBtn");
     expect(handle.length).toBe(7);
   });
@@ -547,7 +547,6 @@ describe("Homepage Test", () => {
     });
 
     var taskID = await page.$eval("task-card", (elem) => elem.id);
-    console.log("taskID -> :", taskID);
 
     const list = await page.evaluate(() => {
       return JSON.parse(localStorage.getItem("todoListDB"));
@@ -614,9 +613,6 @@ describe("Homepage Test", () => {
       });
       values.push(val);
     }
-
-    console.log("values -> :", values[0]);
-
     var isAllChecked = true;
 
     values.forEach((second) => {
@@ -671,5 +667,509 @@ describe("Homepage Test", () => {
     });
 
     expect(JSON.stringify([values.length, isAllChecked])).toBe(JSON.stringify([7,true]));
+  });
+
+  it("Test whether the collapsible of Monday can be expanded and folded", async () => {
+    const expand = await page.$eval("#Monday", (el) =>
+      el.classList.contains("expand")
+    );
+
+    if (expand) {
+      await page.$eval(".collapsible", (el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Monday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Monday can be expanded and folded", async () => {
+    const shrink = await page.$eval("#Monday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      await page.$eval(".collapsible", (el) => el.click());
+    }
+
+    const expand = await page.$eval("#Monday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
+  });
+
+  it("Test whether the collapsible of Tuesday can be expanded and folded", async () => {
+    const lenIndex = 1;
+    const expand = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("expand")
+    );
+
+    if (expand) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Tuesday can be expanded and folded", async () => {
+    const lenIndex = 1;
+    const shrink = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const expand = await page.$eval("#Tuesday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
+  });
+
+  it("Test whether the collapsible of Sunday can be expanded and folded", async () => {
+    const lenIndex = 6
+    const expand = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("expand")
+    );
+
+    if (expand) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const shrink = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    expect(shrink).toBe(true);
+  });
+
+  it("Test whether the collapsible of Sunday can be expanded and folded", async () => {
+    const lenIndex = 6
+    const shrink = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("shrink")
+    );
+
+    if (shrink) {
+      let eles = await page.$$(".collapsible");
+      let ele = eles[lenIndex];
+      await ele.evaluate((el) => el.click());
+    }
+
+    const expand = await page.$eval("#Sunday", (el) =>
+      el.classList.contains("expand")
+    );
+    expect(expand).toBe(true);
+  });
+
+  it("When all tasks are completed, the progress bar should be 100% ", async () => {
+    let style = await page.$eval("#top-progress", (el) =>
+      el.getAttribute("style")
+    );
+    expect(style).toBe("width: 100%;");
+  });
+
+  it("After all data is initialized and refreshed ", async () => {
+    await page.evaluateOnNewDocument(function () {
+      window.localStorage.clear();
+
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          username: "test1",
+          tasks: [[], [], [], [], [], [], []],
+        })
+      );
+      window.localStorage.setItem(
+        "todoListDB",
+        JSON.stringify([
+          {
+            username: "test1",
+            password: "123",
+            tasks: [[], [], [], [], [], [], []],
+          },
+        ])
+      );
+    });
+    await page.reload();
+
+    let width = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(width).toBe("0%");
+
+    var card = await page.$$("task-card");
+    expect(card.length).toBe(0);
+  });
+
+  // 0%
+  it("Create four tasks per day and you should have a total of 28 tasks and all progress bars should be 0%", async () => {
+    await page.$$eval(".addBtn", (elem) =>
+      elem.forEach((e) => {
+        e.click();
+        e.click();
+        e.click();
+        e.click();
+      })
+    );
+
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach(async (second, index) => {
+          var add = await second.shadowRoot.querySelector("button");
+          add.click();
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("0%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(28);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "0%") {
+        isAllEdit = true;
+      }
+    });
+
+    // When confirm is clicked for new tasks added, total task count in weekday list title increase by the number of tasks added
+    texts.forEach((second) => {
+      if (second !== "(4Tasks,0Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
+
+  //   50%
+  it("With the first two tasks completed each day, all progress bars should be 50%", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index < 2) {
+            var checkbox = second.shadowRoot.querySelector(
+              'input[type="checkbox"]'
+            );
+            checkbox.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("50%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(28);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "50%") {
+        isAllEdit = true;
+      }
+    });
+
+    // When multiple confirmed tasks' checkbox is clicked, done count in weekday list title increase by same amount
+    texts.forEach((second) => {
+      if (second !== "(4Tasks,2Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
+
+  //   100%
+  it("When deleting the last two tasks of each day,should have a total of 14 tasks and all progress bars should be 100%", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index >= 2) {
+            var del = second.shadowRoot.querySelector(".deleteBtn");
+            del.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("100%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(14);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "100%") {
+        isAllEdit = true;
+      }
+    });
+    // When confirmed undone task is deleted, total task count went down by its amount
+    texts.forEach((second) => {
+      if (second !== "(2Tasks,2Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
+
+  // When deleting the last two tasks of each day,should have a total of 7 tasks and all progress bars should be 100%
+  it("When confirmed done task is deleted, total task count & done task count went done by its amount", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index == 1) {
+            var del = second.shadowRoot.querySelector(".deleteBtn");
+            del.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("100%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(7);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "100%") {
+        isAllEdit = true;
+      }
+    });
+
+    texts.forEach((second) => {
+      if (second !== "(1Tasks,1Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
+  
+  it("When we edit and confirm existing task again, total task count & done count does not change", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index == 0) {
+            var edit = second.shadowRoot.querySelector(".editBtn");
+            edit.click();
+
+            var input = second.shadowRoot.querySelector('input[type="text"]');
+            input.value = "test-update";
+
+            var add = second.shadowRoot.querySelector("button");
+            add.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("100%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(7);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "100%") {
+        isAllEdit = true;
+      }
+    });
+
+    texts.forEach((second) => {
+      if (second !== "(1Tasks,1Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
+  });
+  
+  it("When confirmed task's checkbox is unclicked, done count in weekday list title decreases by same amount", async () => {
+    var card = await page.$$(".task-board");
+
+    for (let i = 0; i < card.length; i++) {
+      var ele = card[i];
+      await ele.$$eval("task-card", async (ele) => {
+        ele.forEach((second, index) => {
+          if (index == 0) {
+            var checkbox = second.shadowRoot.querySelector(
+              'input[type="checkbox"]'
+            );
+            checkbox.click();
+          }
+        });
+      });
+    }
+
+    let bigWidth = await page.$eval("#top-progress", (el) => el.style.width);
+    expect(bigWidth).toBe("0%");
+
+    var shadow = await page.$$("task-card");
+    expect(shadow.length).toBe(7);
+
+    const subProgress = await page.$$(".collapsible");
+    const values = [];
+    const texts = [];
+    for (let i = 0; i < subProgress.length; i++) {
+      var ele = subProgress[i];
+      var width = await ele.$eval(".progress", async (ele) => {
+        return await ele.style.width;
+      });
+
+      var text = await ele.$$eval("span", async (ele) => {
+        return await ele[1].textContent.replace(/[\s\n]/gi, "");
+      });
+
+      values.push(width);
+      texts.push(text);
+    }
+    var isAllEdit = false;
+    var isHalf = false;
+
+    values.forEach((second) => {
+      if (second !== "0%") {
+        isAllEdit = true;
+      }
+    });
+
+    texts.forEach((second) => {
+      if (second !== "(1Tasks,0Done)") {
+        isHalf = true;
+      }
+    });
+
+    expect(isAllEdit).toBe(false);
+    expect(isHalf).toBe(false);
   });
 });
