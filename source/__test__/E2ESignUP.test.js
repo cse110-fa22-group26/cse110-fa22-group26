@@ -9,6 +9,10 @@ describe('Test planner app sign up page', () => {
     // Check to make sure that nothing is added to local storage if passwords don't match
      it('password unmatch, no new user adds to localStorage', async () => {
          console.log(`new user input form`);
+         const prevlist = await page.evaluate(() => {
+             return JSON.parse(localStorage.getItem("todoListDB"));
+         });
+         let prevlength = await prevlist.length;
          await page.waitForSelector('input[name=username]');
          await page.$eval('input[name=username]', el => el.value = 'banana');
 
@@ -19,11 +23,13 @@ describe('Test planner app sign up page', () => {
          await page.$eval('input[name=confirmPassword]', el => el.value = '12');
 
          await page.click('button[type="submit"]');
-         let arr = await page.evaluate(() => {
-           return localStorage.getItem('username');
+         const list = await page.evaluate(() => {
+             return JSON.parse(localStorage.getItem("todoListDB"));
          });
-         expect(arr).toBe(null);       
-       });
+         let length = await list.length;
+         // db's length does not change
+         expect(length).toBe(prevlength);    
+     },10000);
 
       // Check to make sure that 'Passwords don't match!' is displayed if user enters
       // two different passwords
