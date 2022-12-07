@@ -26,11 +26,13 @@ jobs:
     name: Run Jest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Run Jest
-      # You may pin to the exact commit or the version.
-      # uses: stefanoeb/jest-action@f9bb23f509cde20ee9b494f0496d1d3323861cc4
-        uses: stefanoeb/jest-action@1.0.4
+      - uses: actions/checkout@v2
+      - name: Test using Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm test
   
   js-doc:
     name: js doc
