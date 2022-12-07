@@ -22,6 +22,8 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
           
       # install the dependencies
+      - name: install modules
+        run: npm install
       - name: install dependencies
         run: npm ci --ignore-scripts
 
