@@ -1,3 +1,14 @@
+const ci = Boolean(process.env.CI || false);
+baseOptions = {
+   launch: {
+     headless: false,
+     slowMo: 25,
+   },
+   server: {
+       command: 'npm run start',
+       port: 9999
+   }
+ };
 
 const ciPipelineOptions = {
     launch: {
@@ -11,10 +22,7 @@ const ciPipelineOptions = {
           '--disable-gpu'
               ]
     },
-    server: {
-        command: 'npm run start',
-        port: 9999
-      }
+    server: baseOptions.server
 }
 
-module.exports = ciPipelineOptions;
+module.exports = ci ? ciPipelineOptions : baseOptions;
