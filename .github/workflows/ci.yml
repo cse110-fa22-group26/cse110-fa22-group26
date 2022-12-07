@@ -30,9 +30,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
             node-version: 16
+      - run: npm init
       - run: npm install
-      - run: npm i jest
-      - run: npm install puppeteer@latest --save-dev --verbose
+      - run: npm audit fix --force
       - run: npm test
   
   js-doc:
