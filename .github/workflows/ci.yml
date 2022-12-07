@@ -26,11 +26,10 @@ jobs:
     name: Run Jest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "12"
+           node-version: 16           
 
       # Speed up subsequent runs with caching
       - name: Cache node modules
