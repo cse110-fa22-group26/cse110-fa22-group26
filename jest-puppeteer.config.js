@@ -1,12 +1,3 @@
-// get environment varable
-const ci = Boolean(process.env.CI || false);
-
-const baseOptions = {
-    server: {
-        command: 'npm run start',
-        port: 9999
-      }
-}
 
 const ciPipelineOptions = {
     launch: {
@@ -20,7 +11,7 @@ const ciPipelineOptions = {
           '--disable-gpu'
               ]
     },
-    server: baseOptions.server
+    server: 5501
 }
 
-module.exports = ci ? ciPipelineOptions : baseOptions;
+module.exports = ciPipelineOptions;
