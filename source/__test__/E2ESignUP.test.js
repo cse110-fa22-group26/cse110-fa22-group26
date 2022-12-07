@@ -1,4 +1,3 @@
-const { Browser, default: puppeteer } = require("puppeteer");
 
 describe('Test planner app sign up page', () => {
     // visit the homepage 
