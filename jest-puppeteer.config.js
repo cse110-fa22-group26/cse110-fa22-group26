@@ -11,7 +11,10 @@ const ciPipelineOptions = {
           '--disable-gpu'
               ]
     },
-    server: 5501
+    server: {
+        command: 'npm run start',
+        port: 9999
+      }
 }
 
 module.exports = ciPipelineOptions;
