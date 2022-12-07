@@ -31,7 +31,8 @@ jobs:
         with:
             node-version: 16
       - run: npm install
-      - run: npm ci
+      - run: npm i jest
+      - run: npm install puppeteer@latest --save-dev --verbose
       - run: npm test
   
   js-doc:
