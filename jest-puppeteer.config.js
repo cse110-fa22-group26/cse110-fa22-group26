@@ -4,6 +4,5 @@ module.exports = {
     slowMo: 25,
     ignoreDefaultArgs: ["--disable-extensions"],
     args: ["--no-sandbox"],
-    executablePath: "chrome.exe"
   }
 };
