@@ -25,8 +25,13 @@ jobs:
   jest:
     name: Run Jest
     runs-on: ubuntu-latest
+    container: lironavon/docker-puppeteer-container:14.16.0
+    env:
+      CI: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+        with:
+           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v3
         with:
            node-version: 16           
