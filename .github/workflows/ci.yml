@@ -23,35 +23,27 @@ jobs:
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
         
-  jest:
-    name: Run Jest
-    runs-on: ubuntu-20.04
-    container: lironavon/docker-puppeteer-container:14.16.0
-    env:
-      CI: true
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v3
-        with:
-           node-version: 16           
-
-      # Speed up subsequent runs with caching
-      - name: cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: node_modules-${{ hashFiles('**/package-lock.json')}}
-
-      # Install required deps for action
-      - name: Install Dependencies
-        run:  npm i --ignore-scripts
-
-      # Finally, run our tests
-      - name: Run the tests
-        run: npm test
-  
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test
+        env:
+          CI: true
+          
   js-doc:
     name: js doc
     runs-on: ubuntu-latest
