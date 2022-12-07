@@ -1,6 +1,7 @@
+const { Browser, default: puppeteer } = require("puppeteer");
 
 describe('Test planner app sign up page', () => {
-    // visit the homepage 
+    // visit the sign up page 
     beforeAll(async () => {
       await page.goto('https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/signUp.html');
     });
@@ -11,7 +12,8 @@ describe('Test planner app sign up page', () => {
          const prevlist = await page.evaluate(() => {
              return JSON.parse(localStorage.getItem("todoListDB"));
          });
-         let prevlength = await prevlist.length;
+
+         let prevlength = await prevlist != null? prevlist.length : 0;
          await page.waitForSelector('input[name=username]');
          await page.$eval('input[name=username]', el => el.value = 'banana');
 
