@@ -7,16 +7,10 @@ baseOptions = {
  };
 const ciPipelineOptions = {
   launch: {
-    executablePath: '/usr/bin/google-chrome-stable',
     headless: true,
-    args: [
-      '--ignore-certificate-errors',
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu'
-    ]
-  },
-  plugins: ["istanbul"]
+    ignoreDefaultArgs: ["--disable-extensions"],
+    args: ["--no-sandbox"],
+    executablePath: "chrome.exe"
+  }
 }
 module.exports = ci ? ciPipelineOptions : baseOptions;
