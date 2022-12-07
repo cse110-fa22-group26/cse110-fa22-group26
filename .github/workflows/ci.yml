@@ -39,9 +39,9 @@ jobs:
       # Speed up subsequent runs with caching
       - name: cache dependencies
         uses: actions/cache@v2
-          with:
-            path: '**/node_modules'
-            key: node_modules-${{ hashFiles('**/package-lock.json')}}
+        with:
+          path: '**/node_modules'
+          key: node_modules-${{ hashFiles('**/package-lock.json')}}
 
       # Install required deps for action
       - name: Install Dependencies
