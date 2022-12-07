@@ -22,6 +22,7 @@ jobs:
 
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
+        
   jest:
     name: Run Jest
     runs-on: ubuntu-20.04
@@ -45,7 +46,7 @@ jobs:
 
       # Install required deps for action
       - name: Install Dependencies
-        run:  npm ci --ignore-scripts
+        run:  npm i --ignore-scripts
 
       # Finally, run our tests
       - name: Run the tests
