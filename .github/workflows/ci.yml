@@ -26,11 +26,12 @@ jobs:
     name: Jest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.2
       - name: Run Tests
         run: |
-          npm install --save-dev jest
+          npm install jest
           npm install puppeteer
+          npm audit fix --force
           npm test
   
   js-doc:
