@@ -1,16 +1,9 @@
-const ci = Boolean(process.env.CI || false);
-baseOptions = {
-   launch: {
-     headless: false,
-     slowMo: 25,
-   }
- };
-const ciPipelineOptions = {
+module.exports = {
   launch: {
-    headless: true,
+    headless: process.env.CI === "true",
+    slowMo: 25,
     ignoreDefaultArgs: ["--disable-extensions"],
     args: ["--no-sandbox"],
     executablePath: "chrome.exe"
   }
-}
-module.exports = ci ? ciPipelineOptions : baseOptions;
+};
