@@ -24,7 +24,7 @@ jobs:
         uses: codacy/codacy-analysis-cli-action@master
   jest:
     name: Run Jest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: lironavon/docker-puppeteer-container:14.16.0
     env:
       CI: true
@@ -52,7 +52,7 @@ jobs:
 
       # Install required deps for action
       - name: Install Dependencies
-        run: npm install
+        run:  npm ci --ignore-scripts
 
       # Finally, run our tests
       - name: Run the tests
