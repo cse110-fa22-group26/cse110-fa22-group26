@@ -1,32 +1,39 @@
-const puppeteer = require("puppeteer");
-let browser;
-let page;
+const { Browser, default: puppeteer } = require("puppeteer");
+
+beforeAll(async () => {
+  const width = 1000;
+  const height = 950;
+
+  await page.evaluateOnNewDocument(function () {
+    window.localStorage.clear();
+
+    window.localStorage.setItem(
+      "user",
+      JSON.stringify({
+        username: "test1",
+        tasks: [[], [], [], [], [], [], []],
+      })
+    );
+    window.localStorage.setItem(
+      "todoListDB",
+      JSON.stringify([
+        {
+          username: "test1",
+          password: "123",
+          tasks: [[], [], [], [], [], [], []],
+        },
+      ])
+    );
+  });
+
+  await page.setViewport({ width, height });
+
+  await page.goto("https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/homePage.html");
+});
 
 describe("Homepage Test", () => {
-  beforeAll(async () => {
-    const width = 1000;
-    const height = 950;
-    if (process.env.CI) {
-      browser = await puppeteer.launch({
-        executablePath: "/usr/bin/google-chrome-stable",
-        headless: true,
-        args: [
-          "--ignore-certificate-errors",
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-accelerated-2d-canvas",
-          "--disable-gpu",
-        ],
-      });
-    } else {
-      browser = await puppeteer.launch();
-    }
-
-    page = await browser.newPage();
-
     await page.evaluateOnNewDocument(function () {
       window.localStorage.clear();
-
       window.localStorage.setItem(
         "user",
         JSON.stringify({
@@ -45,9 +52,7 @@ describe("Homepage Test", () => {
         ])
       );
     });
-
     await page.setViewport({ width, height });
-
     await page.goto(
       "https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/homePage.html"
     );
