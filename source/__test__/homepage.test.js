@@ -1,7 +1,7 @@
 const { Browser, default: puppeteer } = require("puppeteer");
 
 beforeAll(async () => {
-  const width = 1000;
+  const width = 1300;
   const height = 950;
 
   await page.evaluateOnNewDocument(function () {

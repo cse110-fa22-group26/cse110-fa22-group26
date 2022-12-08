@@ -7,12 +7,11 @@ describe('Test planner app sign up page', () => {
     });
 
     // Check to make sure that nothing is added to local storage if passwords don't match
-     it('password unmatch, no new user adds to localStorage', async () => {
+      it('password unmatch, no new user adds to localStorage', async () => {
          console.log(`new user input form`);
          const prevlist = await page.evaluate(() => {
-             return JSON.parse(localStorage.getItem("todoListDB"));
+          return JSON.parse(localStorage.getItem("todoListDB"));
          });
-
          let prevlength = await prevlist != null? prevlist.length : 0;
          await page.waitForSelector('input[name=username]');
          await page.$eval('input[name=username]', el => el.value = 'banana');
@@ -27,11 +26,9 @@ describe('Test planner app sign up page', () => {
          const list = await page.evaluate(() => {
              return JSON.parse(localStorage.getItem("todoListDB"));
          });
-         if(list){
-          let length = await list.length;
+          let length = await list != null? list.length : 0
           // db's length does not change
-          expect(length).toBe(prevlength); 
-         }
+          expect(length).toBe(prevlength);   
      },10000);
 
       // Check to make sure that 'Passwords don't match!' is displayed if user enters
