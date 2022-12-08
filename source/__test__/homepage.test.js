@@ -1,16 +1,8 @@
-const puppeteer = require("puppeteer");
-let browser;
-let page;
-
-let isOpen = false;
+const { Browser, default: puppeteer } = require("puppeteer");
 
 beforeAll(async () => {
-  const width = 1000;
+  const width = 1300;
   const height = 950;
-
-  browser = await puppeteer.launch(isOpen ? option : {});
-
-  page = await browser.newPage();
 
   await page.evaluateOnNewDocument(function () {
     window.localStorage.clear();
