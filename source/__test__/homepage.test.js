@@ -5,7 +5,23 @@ let page;
 beforeAll(async () => {
   const width = 1000;
   const height = 950;
-  browser = await puppeteer.launch();
+  if (process.env.CI) {
+    browser = await puppeteer.launch({
+      launch: {
+        executablePath: "/usr/bin/google-chrome-stable",
+        headless: true,
+        args: [
+          "--ignore-certificate-errors",
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-accelerated-2d-canvas",
+          "--disable-gpu",
+        ],
+      },
+    });
+  } else {
+    browser = await puppeteer.launch();
+  }
   page = await browser.newPage();
   
   await page.evaluateOnNewDocument(function () {
