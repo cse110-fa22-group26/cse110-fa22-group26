@@ -11,7 +11,7 @@
   "scripts": {
     "start": "parcel source/welcomePage.html --port 9999",
     "build": "parcel build source/welcomePage.html",
-    "test": "jest",
+    "test": "jest --runInBand",
     "coverage": "nyc npm run test"
   }
 }

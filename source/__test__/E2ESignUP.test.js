@@ -27,9 +27,11 @@ describe('Test planner app sign up page', () => {
          const list = await page.evaluate(() => {
              return JSON.parse(localStorage.getItem("todoListDB"));
          });
-         let length = await list.length;
-         // db's length does not change
-         expect(length).toBe(prevlength);    
+         if(list){
+          let length = await list.length;
+          // db's length does not change
+          expect(length).toBe(prevlength); 
+         }
      },10000);
 
       // Check to make sure that 'Passwords don't match!' is displayed if user enters
