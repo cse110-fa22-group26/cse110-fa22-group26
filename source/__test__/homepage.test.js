@@ -32,31 +32,6 @@ beforeAll(async () => {
 });
 
 describe("Homepage Test", () => {
-    await page.evaluateOnNewDocument(function () {
-      window.localStorage.clear();
-      window.localStorage.setItem(
-        "user",
-        JSON.stringify({
-          username: "test1",
-          tasks: [[], [], [], [], [], [], []],
-        })
-      );
-      window.localStorage.setItem(
-        "todoListDB",
-        JSON.stringify([
-          {
-            username: "test1",
-            password: "123",
-            tasks: [[], [], [], [], [], [], []],
-          },
-        ])
-      );
-    });
-    await page.setViewport({ width, height });
-    await page.goto(
-      "https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/homePage.html"
-    );
-  });
   // Add button tests
   it("There should be 7 Add buttons", async () => {
     const handle = await page.$$(".addBtn");
