@@ -7,17 +7,15 @@ beforeAll(async () => {
   const height = 950;
   if (process.env.CI) {
     browser = await puppeteer.launch({
-      launch: {
-        executablePath: "/usr/bin/google-chrome-stable",
-        headless: true,
-        args: [
-          "--ignore-certificate-errors",
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-accelerated-2d-canvas",
-          "--disable-gpu",
-        ],
-      },
+      executablePath: "/usr/bin/google-chrome-stable",
+      headless: true,
+      args: [
+        "--ignore-certificate-errors",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-accelerated-2d-canvas",
+        "--disable-gpu",
+      ],
     });
   } else {
     browser = await puppeteer.launch();
