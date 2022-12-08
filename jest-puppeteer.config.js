@@ -4,10 +4,6 @@ baseOptions = {
      headless: false,
      slowMo: 25,
    },
-   server: {
-       command: 'npm run start',
-       port: 9999
-   }
  };
 
 const ciPipelineOptions = {
