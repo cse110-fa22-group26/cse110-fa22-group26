@@ -1,9 +1,13 @@
-const { Browser, default: puppeteer } = require("puppeteer");
+const puppeteer = require("puppeteer");
+let browser;
+let page;
 
 beforeAll(async () => {
   const width = 1000;
   const height = 950;
-
+  browser = await puppeteer.launch();
+  page = await browser.newPage();
+  
   await page.evaluateOnNewDocument(function () {
     window.localStorage.clear();
 
