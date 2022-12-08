@@ -1,7 +1,7 @@
 const { Browser, default: puppeteer } = require("puppeteer");
 
 describe('Test planner app sign up page', () => {
-    // visit the homepage 
+    // visit the sign up page 
     beforeAll(async () => {
       await page.goto('https://cse110-fa22-group26.github.io/cse110-fa22-group26/source/signUp.html');
     });
@@ -26,11 +26,9 @@ describe('Test planner app sign up page', () => {
          const list = await page.evaluate(() => {
              return JSON.parse(localStorage.getItem("todoListDB"));
          });
-         if(list) {
           let length = await list != null? list.length : 0
           // db's length does not change
-          expect(length).toBe(prevlength);
-         }    
+          expect(length).toBe(prevlength);   
      },10000);
 
       // Check to make sure that 'Passwords don't match!' is displayed if user enters
