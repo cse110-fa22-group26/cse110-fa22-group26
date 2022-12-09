@@ -322,7 +322,9 @@ function deleteTasks(taskID) {
     // saved modified tasks to localstorage
     saveTasksToStorage(localTasks);
     // update task count by -1
+    if(taskCount[taskBlock.parentNode.id]!= 0){
     taskCount[taskBlock.parentNode.id]--;
+    }
 
     taskBlock.remove();
     countTasks();
