@@ -1,5 +1,7 @@
 // main.js
 // global variables
+
+//taskcount
 // used to record total number of task in each weekday list
 const taskCount = {
   Monday: 0,
